@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Historic Buildings</h:title>
+    <!--model lists user interface tabgroups, tabs and content of tabs-->
+    <model>
+      <instance>
+        <faims id="historic_buildings">
+          <style>
+            <orientation>
+              <orientation/>
+            </orientation>
+            <even>
+              <layout_weight/>
+            </even>
+          </style>
+          <user>
+            <usertab>
+              <users/>
+            </usertab>
+          </user>
+          <!--control tabgroup that contains button to manipulate entities: load, list, create-->
+          <control>
+            <building>
+              <newBuilding/>
+              <buildingList/>
+            </building>
+          </control>
+          <!--list of tabgroups for entities-->
+          <!--ArchEnt / Record Type: BUILDING-->
+          <Building>
+            <Building>
+              <Cornerblock/> <!-- yes/no-->
+              <Street_address/> <!-- This + postcode as ID -->
+              <Suburb/>
+              <Postcode/>
+              <Timestamp/>
+              <Original_purpose/>
+              <Change_of_purpose/> <!--Radio button yes/no/not observed-->
+              <Alterations/> <!--Radio button yes/no/not observed NOTE: This impacts 12-->
+              <Scale/>
+              <Percentage_of_grounds/>
+              <Qualities/>
+              <Plan/>
+              <Plan_sketch/>
+              <Add_plan_sketch/>
+              <View_attached/>
+              <Orientation_of_facade/>
+              <Original_facade_faces/>
+              <Verandah/> <!--Radio button yes/no, default to NO, if yes, show tab Verandah-->
+              <Photo/>
+              <Take_photo/>
+              <Comments/>
+              <Associated_features/>
+              <Update/>
+            </Building>
+            <Roof>
+              <Roof_form/>
+              <Number_of_gables/>
+              <Number_of_gablets/>
+              <Gable_detail_bargeboard/>
+              <Finial/>
+              <Gable_form/>
+              <Number_of_chimneys/>
+              <Chimney_form/>
+              <Chimney_orientation/>
+              <Chimney_decorative_detail/>
+              <Update/>
+            </Roof>
+            <Verandah> <!-- hidden initially-->
+              <Number_of_verandahs/>
+              <Number_of_porticos/>
+              <Location/>
+              <Status/>
+              <Roof_form/>
+              <Decorative_detail/>
+              <Verandah_posts/>
+              <Update/>
+            </Verandah>
+            <Components>
+              <Wall_materials/>
+              <Wall_rendering/>
+              <Wall_timber/>
+              <Wall_brick_masonry/>
+              <Wall_quoins/>
+              <Window_sash/>
+              <Number_of_sashes/>
+              <Widnow_casement/>
+              <Number_of_casements/>
+              <Window_bay/>
+              <Window_bay_form/>
+              <Number_of_bays/>
+              <Window_dormer/>
+              <Number_of_dormers/>
+              <Window_originality_check/>
+              <Widnow_number_of_replacements/>
+              <Window_arch_lintel/>
+              <Window_window_head/>
+              <Window_decorative_detail/>
+              <Window_glazing/>
+              <Door_number_single/>
+              <Door_number_french/>
+              <Door_lintel_arch/>
+              <Door_lintel_form/>
+              <Door_form/>
+              <Door_decorative_detail/>
+              <Door_glazing/>
+              <Door_glazing_detail/>
+              <Update/>
+            </Components>
+            <Summary_data>
+              <Archeological_materials/>
+              <Heritage_listed/>
+              <Substantially_original/>
+              <Alteration/> <!--This will be a new tabgroup, making relationships between alterations and buildings-->
+              <New_alteration/>
+              <Remove_alteration/>
+              <Who_paid_construction/>
+              <Payer_profession/>
+              <Architect/>
+              <Association_historical_figures/>
+              <Association_historial_events/>
+              <Sources/>
+              <Update/>
+            </Summary_data>
+            <Dates>
+              <Dates/> <!--This will be a new tabgroup, making relationships between alterations and buildings-->
+              <New_date/>
+              <Remove_date/>
+              <Best_fit_date_of_construction/>
+              <Date_of_alterations/>
+            </Dates>
+          </Building>
+
+          <!--Alteration will be a relationship-->
+          <Alteration>
+            <Alteration>
+              <Alteration/>
+              <Description/>
+              <Update/>
+              <Update_and_new/>
+              <Remove/>
+            </Alteration>
+          </Alteration>
+
+          <!--Date will be a relationship-->
+
+          <Date>
+            <Date>
+              <Date/>
+              <Description/>
+              <Update/>
+              <Update_and_new/>
+              <Remove/>
+            </Date>
+          </Date>
+
+        </faims>
+      </instance>
+
+
+      <!--list of numeric and blocktext(memo) attributes(fields)
+      <bind nodeset="/faims/Grave/Marker/Total_height" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Plinth/Plinth_height" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Plinth/Plinth_depth" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Headstone_height" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Headstone_width" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Headstone_depth" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Fence_height" type="decimal"/>
+      <bind nodeset="/faims/Grave/Marker/Other_items" type="string"/>
+      <bind nodeset="/faims/Grave/Motif/Motif_details" type="string"/>
+      <bind nodeset="/faims/Grave/Inscription/Inscription" type="string"/>
+      <bind nodeset="/faims/Grave/Plots/Total_number_of_internments" type="decimal"/>
+      <bind nodeset="/faims/Grave/Plots/Total_number_of_headstones" type="decimal"/>
+      -->
+    </model>
+  </h:head>
