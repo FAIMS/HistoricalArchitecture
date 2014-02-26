@@ -23,58 +23,30 @@
               <users/>
             </usertab>
           </user>
-          <!--control tabgroup that contains button to manipulate entities: load, list, create-->
           <control>
-            <buttonholder>
-              <Building/>
-            </buttonholder>
-            <map>
-              <map/>
-              <mapContainer>
-                <child0>
-                  <zoomGPS/>
-                </child0>
-                <child1>
-                  <clear/>
-                </child1>
-                <child2>
-                  <create/>
-                </child2>
-              </mapContainer>
-            </map>
-            <data>
+            <building>
+              <newBuilding/>
               <BuildingList/>
-              <BuildingLoad/>
-            </data>
-            <gps>
-              <connectexternal/>
-              <connectinternal/>
-              <startsync/>
-              <stopsync/>
-              <startTimeLog/>
-              <startDistanceLog/>
-              <stopTrackLog/>
-            </gps>
+            </building>
           </control>
           <!--list of tabgroups for entities-->
           <!--ArchEnt / Record Type: BUILDING-->
           <Building>
-            <Building_GeneralInformation/>
-            <Building_Building>
+            <Building>
               <Cornerstone/>
-              <Street_Address/>
+              <Street_address/>
               <Suburb/>
               <Postcode/>
               <Date/>
-              <Original_Purpose/>
+              <Original_purpose/>
               <Change_of_purpose/>
               <Alterations/>
               <Scale/>
-              <Percenage_of_grounds/>
+              <Percentage_of_grounds/>
               <Qualities/>
               <Plan/>
-              <Plan_Sketch/>
-              <attachPlan_Sketch/>
+              <Plan_sketch/>
+              <attachPlan_sketch/>
               <Orientation_of_facade/>
               <Orientation_facade_faces/>
               <Verandah/>
@@ -86,8 +58,9 @@
               <Outbuildings/>
               <Problems_with_recording/>
               <viewattached/>
-            </Building_Building>
-            <Building_Roof>
+              <Update/>
+            </Building>
+            <Roof>
               <Roof_form/>
               <Number_of_gables/>
               <Number_of_gablets/>
@@ -98,8 +71,9 @@
               <Chimney_form/>
               <Chimney_orientation/>
               <Chimney_decorative_detail/>
-            </Building_Roof>
-            <Building_Verandah>
+              <Update/>
+            </Roof>
+            <Verandah>
               <Number_of_verandahs/>
               <Number_of_porticos/>
               <Location/>
@@ -107,37 +81,39 @@
               <Verandah_roof_form/>
               <Verandah_decorative_detail/>
               <Verandah_posts/>
-            </Building_Verandah>
-            <Building_Components>
+              <Update/>
+            </Verandah>
+            <Components>
               <Wall_material/>
               <Wall_brick/>
               <Wall_masonry/>
               <Wall_quoins/>
-              <Window_Sash/>
+              <Window_sash/>
               <Number_of_sashes/>
               <Window_Casement/>
               <Number_of_casements/>
-              <Window_Bay/>
+              <Window_bay/>
               <Number_of_bays/>
-              <Bay_torm/>
+              <Bay_form/>
               <Window_dormer/>
               <Number_of_dormers/>
               <Replacements/>
               <Total_number_of_replacement_windows/>
-              <Window_Arch_Lintel/>
+              <Window_arch_lintel/>
               <Window_head/>
               <Window_decorative_detail/>
               <Window_glazing/>
               <Door_single/>
               <Door_french/>
               <Door_lintel_arch/>
-              <Lintel_form/>
+              <Door_lintel_form/>
               <Door_form/>
               <Door_decorative_details/>
               <Door_glazing/>
               <Door_glazing_detail/>
-            </Building_Components>
-            <Building_Summary_Data>
+              <Update/>
+            </Components>
+            <Summary_data>
               <Archaeological_materials/>
               <Heritage_listed/>
               <Substantially_original/>
@@ -147,32 +123,32 @@
               <Association_historical_figures/>
               <Association_historical_events/>
               <Sources/>
-            </Building_Summary_Data>
-            <Building_Dates>
+              <Update/>
+            </Summary_data>
+            <Dates>
               <Best_fit_date_of_construction/>
               <Date_of_alterations/>
               <Update/>
-              <Delete/>
-            </Building_Dates>
+            </Dates>
           </Building>
         </faims>
       </instance>
       <!--list of numeric and blocktext(memo) attributes(fields)-->
-      <bind nodeset="/faims/Building/Building_Building/Postcode" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Building/Percenage_of_grounds" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Building/Comments" type="string"/>
-      <bind nodeset="/faims/Building/Building_Roof/Number_of_gables" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Roof/Number_of_gablets" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Roof/Number_of_chimneys" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Verandah/Number_of_verandahs" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Verandah/Number_of_porticos" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Number_of_sashes" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Number_of_casements" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Number_of_bays" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Number_of_dormers" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Total_number_of_replacement_windows" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Door_single" type="decimal"/>
-      <bind nodeset="/faims/Building/Building_Components/Door_french" type="decimal"/>
+      <bind nodeset="/faims/Building/Building/Postcode" type="decimal"/>
+      <bind nodeset="/faims/Building/Building/Percenage_of_grounds" type="decimal"/>
+      <bind nodeset="/faims/Building/Building/Comments" type="string"/>
+      <bind nodeset="/faims/Building/Roof/Number_of_gables" type="decimal"/>
+      <bind nodeset="/faims/Building/Roof/Number_of_gablets" type="decimal"/>
+      <bind nodeset="/faims/Building/Roof/Number_of_chimneys" type="decimal"/>
+      <bind nodeset="/faims/Building/Verandah/Number_of_verandahs" type="decimal"/>
+      <bind nodeset="/faims/Building/Verandah/Number_of_porticos" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Number_of_sashes" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Number_of_casements" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Number_of_bays" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Number_of_dormers" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Total_number_of_replacement_windows" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Door_single" type="decimal"/>
+      <bind nodeset="/faims/Building/Components/Door_french" type="decimal"/>
     </model>
   </h:head>
   <h:body>
@@ -206,76 +182,26 @@
       </group>
     </group>
     <group ref="control">
-      <label>Maps and Controls</label>
-      <group faims_scrollable="false" ref="map">
-        <label>Map</label>
-        <input faims_certainty="false" faims_map="true" ref="map">
-          <label/>
-        </input>
-      </group>
-      <group faims_style="orientation" ref="mapContainer">
-        <label/>
-        <group faims_style="even" ref="child0">
-          <label/>
-          <trigger ref="zoomGPS">
-            <label>CenterMe</label>
-          </trigger>
-        </group>
-        <group faims_style="even" ref="child1">
-          <label/>
-          <trigger ref="clear">
-            <label>Remove</label>
-          </trigger>
-        </group>
-        <group faims_style="even" ref="child2">
-          <label/>
-          <trigger ref="create">
-            <label>Create</label>
-          </trigger>
-        </group>
-      </group>
-    </group>
-    <group ref="data" faims_scrollable="false">
-      <label>Saved Features</label>
-      <select1 faims_annotation="false" faims_certainty="false" ref="RS_FeatureList" appearance="compact">
-        <label>Saved Remote Sensing Features</label>
-        <item>
-          <label>placeholder</label>
-          <value>placeholder</value>
-        </item>
-      </select1>
-    </group>
-    <group ref="gps">
       <label>Control</label>
-      <trigger ref="connectexternal">
-        <label>Connect To External GPS</label>
-      </trigger>
-      <trigger ref="connectinternal">
-        <label>Connect To Internal GPS</label>
-      </trigger>
-      <trigger ref="startsync">
-        <label>Start Synching</label>
-      </trigger>
-      <trigger ref="stopsync">
-        <label>Stop Synching</label>
-      </trigger>
-      <trigger ref="startTimeLog">
-        <label>Start Time Log</label>
-      </trigger>
-      <trigger ref="startDistanceLog">
-        <label>Start Distance Log</label>
-      </trigger>
-      <trigger ref="stopTrackLog">
-        <label>Stop Track Log</label>
-      </trigger>
+      <group ref="building" faims_scrollable="false">
+        <label>Buildings</label>
+        <trigger ref="newBuilding">
+          <label>New Building</label>
+        </trigger>
+        <select1 faims_annotation="false" faims_certainty="false" ref="BuildingList" appearance="compact">
+          <label>Buildings:</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
     </group>
+
     <!--BUILDING-->
     <group ref="Building" faims_archent_type="Building">
       <label>{Building}</label>
-      <group ref="Building_GeneralInformation">
-        <label>{Building}</label>
-      </group>
-      <group ref="Building_Building">
+      <group ref="Building">
         <label>{Building}</label>
         <!--We would like to see Radiogroup-->
         <select1 ref="Cornerstone" faims_attribute_name="Cornerstone" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
@@ -285,7 +211,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Street_Address" faims_attribute_name="Street Address" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Street_address" faims_attribute_name="Street Address" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Street_Address}</label>
         </input>
         <input ref="Suburb" faims_attribute_name="Suburb" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
@@ -298,7 +224,7 @@
           <label>{Date_of_Recording}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Original_Purpose" faims_attribute_name="Original_Purpose" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Original_purpose" faims_attribute_name="Original purpose" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Original_Purpose}</label>
           <item>
             <label>placeholder</label>
@@ -329,7 +255,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Percenage_of_grounds" faims_attribute_name="Percenage of grounds" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Percentage_of_grounds" faims_attribute_name="Percentage of grounds" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Percentage_of_Grounds}</label>
         </input>
         <!--We would like to see Radiogroup-->
@@ -343,14 +269,14 @@
         <input ref="Plan" faims_attribute_name="Plan" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Plan}</label>
         </input>
-        <select ref="Plan_Sketch" faims_attribute_name="Plan Sketch" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Plan_sketch" faims_attribute_name="Plan sketch" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
           <label>{Plan_Sketch}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachPlan_Sketch">
+        <trigger ref="attachPlan_sketch">
           <label>Attach File</label>
         </trigger>
         <!--We would like to see Dropdown-->
@@ -420,8 +346,11 @@
         <trigger ref="viewattached">
           <label>View Attached Files</label>
         </trigger>
+        <trigger ref="Update">
+          <label>{Save.Record}</label>
+        </trigger>
       </group>
-      <group ref="Building_Roof">
+      <group ref="Roof">
         <label>{Roof}</label>
         <input ref="Roof_form" faims_attribute_name="Roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Roof_Form}</label>
@@ -473,8 +402,11 @@
             <value>placeholder</value>
           </item>
         </select>
+        <trigger ref="Update">
+          <label>{Save.Record}</label>
+        </trigger>
       </group>
-      <group ref="Building_Verandah">
+      <group ref="Verandah">
         <label>{Verandah}</label>
         <input ref="Number_of_verandahs" faims_attribute_name="Number of verandahs" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Number_of_Verandahs}</label>
@@ -518,7 +450,7 @@
           </item>
         </select1>
       </group>
-      <group ref="Building_Components">
+      <group ref="Components">
         <label>{Components}</label>
         <!--We would like to see Dropdown-->
         <select1 ref="Wall_material" faims_attribute_name="Wall material" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
@@ -538,7 +470,7 @@
           <label>{Wall_Quoins}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Window_Sash" faims_attribute_name="Window Sash" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Window_sash" faims_attribute_name="Window sash" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_Sash}</label>
           <item>
             <label>placeholder</label>
@@ -549,7 +481,7 @@
           <label>{Number_of_sashes}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Window_Casement" faims_attribute_name="Window Casement" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Window_casement" faims_attribute_name="Window casement" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_Casement}</label>
           <item>
             <label>placeholder</label>
@@ -560,7 +492,7 @@
           <label>{Number_of_casements}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Window_Bay" faims_attribute_name="Window Bay" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Window_bay" faims_attribute_name="Window bay" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_Bay}</label>
           <item>
             <label>placeholder</label>
@@ -571,7 +503,7 @@
           <label>{Number_of_bays}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Bay_torm" faims_attribute_name="Bay torm" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Bay_form" faims_attribute_name="Bay form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Bay_form}</label>
           <item>
             <label>placeholder</label>
@@ -601,7 +533,7 @@
           <label>{Total_number_of_replacement_windows}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Window_Arch_Lintel" faims_attribute_name="Window Arch/Lintel" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Window_arch_lintel" faims_attribute_name="Window arch/lintel" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_Arch/Lintel}</label>
           <item>
             <label>placeholder</label>
@@ -676,12 +608,15 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <trigger ref="Update">
+          <label>{Save.Record}</label>
+        </trigger>
       </group>
-      <group ref="Building_Summary_Data">
+      <group ref="Summary_data">
         <label>{Summary_Data}</label>
         <!--We would like to see Radiogroup-->
         <select1 ref="Archaeological_materials" faims_attribute_name="Archaeological materials" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_building_likely_to_have_archaeological_material/deposits?}</label>
+          <label>{Is_likely_to_have_archaeological_material/deposits?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -689,7 +624,7 @@
         </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Heritage_listed" faims_attribute_name="Heritage listed" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_building_heritage_listed?}</label>
+          <label>{Is_heritage_listed?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -697,7 +632,7 @@
         </select1>
         <!--We would like to see Radiogroup-->
         <select1 ref="Substantially_original" faims_attribute_name="Substantially original" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_building_substantially_original?}</label>
+          <label>{Is_substantially_original?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -722,7 +657,7 @@
           <label>{Sources}</label>
         </input>
       </group>
-      <group ref="Building_Dates">
+      <group ref="Dates">
         <label>{Dates}</label>
         <input ref="Best_fit_date_of_construction" faims_attribute_name="Best fit date of construction" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Best_Fit_Date_of_Construction}</label>
@@ -732,9 +667,6 @@
         </input>
         <trigger ref="Update">
           <label>{Save.Record}</label>
-        </trigger>
-        <trigger ref="Delete">
-          <label>{Delete.Record}</label>
         </trigger>
       </group>
     </group>
