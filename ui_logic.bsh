@@ -99,7 +99,6 @@ loadBuildingAttributes() {
     populateDropDown("Building/Summary_data/Heritage_listed", makeVocab("Heritage listed"));
     populateRadioGroup("Building/Summary_data/Substantially_original", makeVocab("Substantially original"));
     // populateCheckBoxGroup("Cemetery/Cemetery_Admin/Denomination", makeVocab("Denomination"));
-    
 }
 
 // updateAllCemetery(){
