@@ -90,7 +90,7 @@
               <Wall_quoins/>
               <Window_sash/>
               <Number_of_sashes/>
-              <Window_Casement/>
+              <Window_casement/>
               <Number_of_casements/>
               <Window_bay/>
               <Number_of_bays/>
@@ -131,6 +131,29 @@
               <Update/>
             </Dates>
           </Building>
+          <!--Alteration will be a relationship-->
+          <Alteration>
+            <Alteration>
+              <Alteration/>
+              <Description/>
+              <Update/>
+              <Update_and_new/>
+              <Remove/>
+            </Alteration>
+          </Alteration>
+
+          <!--Date will be a relationship-->
+
+          <Date>
+            <Date>
+              <Date_type/>
+              <Date/>
+              <Description/>
+              <Update/>
+              <Update_and_new/>
+              <Remove/>
+            </Date>
+          </Date>
         </faims>
       </instance>
       <!--list of numeric and blocktext(memo) attributes(fields)-->
@@ -149,6 +172,8 @@
       <bind nodeset="/faims/Building/Components/Total_number_of_replacement_windows" type="decimal"/>
       <bind nodeset="/faims/Building/Components/Door_single" type="decimal"/>
       <bind nodeset="/faims/Building/Components/Door_french" type="decimal"/>
+      <bind nodeset="/faims/Alteration/Alteration/Description" type="string"/>
+      <bind nodeset="/faims/Date/Date/Description" type="string"/>
     </model>
   </h:head>
   <h:body>
@@ -182,7 +207,7 @@
       </group>
     </group>
     <group ref="control">
-      <label>Control</label>
+      <label>Historical Architectures</label>
       <group ref="building" faims_scrollable="false">
         <label>Buildings</label>
         <trigger ref="newBuilding">
@@ -211,7 +236,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Street_address" faims_attribute_name="Street Address" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Street_address" faims_attribute_name="Street Address" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Street_Address}</label>
         </input>
         <input ref="Suburb" faims_attribute_name="Suburb" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
@@ -270,14 +295,14 @@
           <label>{Plan}</label>
         </input>
         <select ref="Plan_sketch" faims_attribute_name="Plan sketch" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
-          <label>{Plan_Sketch}</label>
+          <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
         <trigger ref="attachPlan_sketch">
-          <label>Attach File</label>
+          <label>Attach Sketch of Plan</label>
         </trigger>
         <!--We would like to see Dropdown-->
         <select1 ref="Orientation_of_facade" faims_attribute_name="Orientation of facade" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
@@ -316,8 +341,7 @@
         <input ref="Comments" faims_attribute_name="Comments" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Comments}</label>
         </input>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Forecourt_space" faims_attribute_name="Forecourt space" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Forecourt_space" faims_attribute_name="Forecourt space" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Forecourt_Space}</label>
           <item>
             <label>placeholder</label>
@@ -395,13 +419,13 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select ref="Chimney_decorative_detail" faims_attribute_name="Chimney decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Chimney_decorative_detail" faims_attribute_name="Chimney decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Decorative_Detail}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
-        </select>
+        </select1>
         <trigger ref="Update">
           <label>{Save.Record}</label>
         </trigger>
@@ -449,6 +473,9 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <trigger ref="Update">
+          <label>{Save.Record}</label>
+        </trigger>
       </group>
       <group ref="Components">
         <label>{Components}</label>
@@ -522,7 +549,7 @@
           <label>{Number_of_dormers}</label>
         </input>
         <!--We would like to see Radiogroup-->
-        <select1 ref="Replacements" faims_attribute_name="Replacements" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Replacements" faims_attribute_name="Replacements" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Replacements}</label>
           <item>
             <label>placeholder</label>
@@ -574,7 +601,7 @@
           </item>
         </select1>
         <!--We would like to see Dropdown-->
-        <select1 ref="Lintel_form" faims_attribute_name="Lintel form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Door_lintel_form" faims_attribute_name="Door lintel form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Door_Lintel_Form}</label>
           <item>
             <label>placeholder</label>
@@ -616,7 +643,7 @@
         <label>{Summary_Data}</label>
         <!--We would like to see Radiogroup-->
         <select1 ref="Archaeological_materials" faims_attribute_name="Archaeological materials" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_likely_to_have_archaeological_material/deposits?}</label>
+          <label>{Is_building_likely_to_have_archaeological_material/deposits?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -624,7 +651,7 @@
         </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Heritage_listed" faims_attribute_name="Heritage listed" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_heritage_listed?}</label>
+          <label>{Is_building_heritage_listed?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -632,7 +659,7 @@
         </select1>
         <!--We would like to see Radiogroup-->
         <select1 ref="Substantially_original" faims_attribute_name="Substantially original" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_substantially_original?}</label>
+          <label>{Is_building_substantially_original?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -656,6 +683,9 @@
         <input ref="Sources" faims_attribute_name="Sources" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Sources}</label>
         </input>
+        <trigger ref="Update">
+          <label>{Save.Record}</label>
+        </trigger>
       </group>
       <group ref="Dates">
         <label>{Dates}</label>
@@ -667,6 +697,65 @@
         </input>
         <trigger ref="Update">
           <label>{Save.Record}</label>
+        </trigger>
+      </group>
+    </group>
+
+    <!--ALTERATION-->
+    <group ref="Alteration" faims_rel_type="Alteration">
+      <label>Alteration</label>
+      <group ref="Alteration">
+        <label>Alteration</label>
+        <!--We would like to see Radiogroup-->
+        <select1 ref="Alteration" faims_attribute_name="Alteration" faims_certainty="false" faims_attribute_type="vocab" faims_read_only="false">
+          <label>Alteration</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Description" faims_attribute_name="Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+          <label>Description</label>
+        </input>
+        <trigger ref="Update">
+          <label>Save Alteration </label>
+        </trigger>
+        <trigger ref="Update_and_new">
+          <label>Save Alteration and New</label>
+        </trigger>
+        <trigger ref="Remove">
+          <label>Remove Alteration</label>
+        </trigger>
+      </group>
+    </group>
+
+    <!--DATE-->
+    <group ref="Date" faims_rel_type="Date">
+      <label>Dates</label>
+      <group ref="Date">
+        <label>Dates</label>
+        <!--We would like to see Radiogroup-->
+        <select1 ref="Date_type" faims_attribute_name="Date type" faims_certainty="false" faims_attribute_type="vocab" faims_read_only="false">
+          <label>Date Type</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Date" faims_attribute_name="Date" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+          <label>Date</label>
+        </input>
+        <input ref="Description" faims_attribute_name="Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+          <label>Description</label>
+        </input>
+        <trigger ref="Update">
+          <label>Save Date</label>
+        </trigger>
+        <trigger ref="Update_and_new">
+          <label>Save Date and New</label>
+        </trigger>
+        <trigger ref="Remove">
+          <label>Remove Date</label>
         </trigger>
       </group>
     </group>

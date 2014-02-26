@@ -348,8 +348,8 @@
     <property type="float" name="Number of bays">
       <description>Number of bays</description>
     </property>
-    <property type="enum" name="Bay torm">
-      <description>Bay torm</description>
+    <property type="enum" name="Bay form">
+      <description>Bay form</description>
       <lookup>
         <term HeuristID="0-3460" StandardCode="">{Facetted}<description/></term>
         <term HeuristID="0-3461" StandardCode="">{In_upper_storey_only_(oriel_window)}<description/></term>
@@ -428,8 +428,8 @@
         <term HeuristID="0-3498" StandardCode="">{Stone}<description/><term HeuristID="0-3501" StandardCode="">{Rendered}<description/></term><term HeuristID="0-3502" StandardCode="">{Unrendered}<description/></term></term>
       </lookup>
     </property>
-    <property type="enum" name="Lintel form">
-      <description>Lintel form</description>
+    <property type="enum" name="Door lintel form">
+      <description>Door lintel form</description>
       <lookup>
         <term HeuristID="0-3509" StandardCode="">{Gothic_arch}<description/></term>
         <term HeuristID="0-3510" StandardCode="">{Other_(specify)}<description/></term>
