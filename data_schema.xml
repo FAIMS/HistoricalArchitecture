@@ -27,7 +27,7 @@
   <RelationshipElement name="Date" type="bidirectional">
     <description>Describes an important date regarding </description>
     <property name="Date type" type="enum">
-      <description>Denomination of cemetery</description>
+      <description> These are any and all stylistic dates that you have been able to obtain by looking at the various elements that make up the building.  Some of these may be more precise than others; in many situations you may not be able to come up with any good dates at all just by looking at style (but see also ‘Major Architectural Influences’ below).  If you found dates for construction or alteration from other sources, then include all of this information here.</description>
       <lookup>
       <term>Date obtained from roof form<description>Date obtained from roof form</description></term>
       <term>Date obtained from window arches<description>Date obtained from window arches</description></term>
@@ -64,13 +64,13 @@
       </lookup>
     </property>
     <property type="freetext" name="Street Address" isIdentifier="true">
-      <description>Street Address</description>
+      <description>Please note the suburb and postcode if you know it.</description>
     </property>
     <property type="freetext" name="Suburb">
-      <description>Suburb</description>
+      <description>Please note the suburb and postcode if you know it</description>
     </property>
     <property type="float" name="Postcode">
-      <description>Postcode</description>
+      <description>Please note the suburb and postcode if you know it</description>
     </property>
     <property type="date" name="Date">
       <description>Enter a date either as a simple calendar date or through the temporal object popup (for complex/uncertain dates)</description>
@@ -110,17 +110,17 @@
       </lookup>
     </property>
     <property type="float" name="Percentage of grounds">
-      <description>Percentage of grounds</description>
+      <description>The grounds is the block of land on which the building is constructed.  This asks you to estimate how large the building is in relation to the block it is built on, e.g. is the block twice as large as the building, or is the building so large that it takes up most of its block?  Write this estimate as a percentage, e.g. if the block is twice as large, write 50% (the building is half the size of the grounds).  If the block and building are nearly the same size, write 90% (the block is only 10% larger than the building).</description>
     </property>
     <property type="enum" name="Qualities">
       <description>Qualities</description>
       <lookup>
-        <term HeuristID="0-3318" StandardCode="">{Asymmetry}<description/></term>
-        <term HeuristID="0-3317" StandardCode="">{Symmetry}<description/></term>
+        <term HeuristID="0-3318" StandardCode="">{Asymmetry}<description>The quality of exact balance of all parts of a design on each side of a centre line. </description></term>
+        <term HeuristID="0-3317" StandardCode="">{Symmetry}<description>The absence of symmetry, though not necessarily of balance.</description></term>
       </lookup>
     </property>
     <property type="freetext" name="Plan">
-      <description>Plan</description>
+      <description>Note which façade you are recording.  In most cases the façade will be the ‘front’, or public entry to the building.  Some buildings may have more than one ‘front’, in which case you will have to choose which façade to record.  Indicate on the plan where the ‘front’, or the façade you have chosen is located.</description>
       <lookup>
         <term pictureURL="files/data/gallery/Plan/Square.png"><description>Plan</description></term>
         <term pictureURL="files/data/gallery/Plan/Rectangle.png"><description>Plan</description></term>
@@ -156,7 +156,7 @@
       </lookup>
     </property>
     <property type="enum" name="Verandah">
-      <description>Verandah</description>
+      <description>An open area attached to a building, with a roof supported by the building on one side and posts or columns on the other.</description>
       <lookup>
         <term HeuristID="0-3299" StandardCode="No">{No}<description>No</description></term>
         <term HeuristID="0-3298" StandardCode="Yes">{Yes}<description>Yes</description></term>
@@ -200,7 +200,7 @@
       <description>Problems with recording</description>
     </property>
     <property type="freetext" name="Roof form">
-      <description>Roof form</description>
+      <description>Note that in some cases it may be difficult if not impossible to tell and ‘M’ roof from a well roof from ground level.  Just do the best you can.</description>
       <lookup>
         <term pictureURL="files/data/gallery/Roof/Gable.png"><description>Roof</description></term>
         <term pictureURL="files/data/gallery/Roof/HalfGabled.png"><description>Roof</description></term>
@@ -275,19 +275,19 @@
     <property type="enum" name="Chimney decorative detail">
       <description>Chimney decorative detail</description>
       <lookup>
-        <term HeuristID="0-3400" StandardCode="">{Chimney_pot}<description/></term>
-        <term HeuristID="0-3401" StandardCode="">{Moulding}<description/></term>
-        <term HeuristID="0-3402" StandardCode="">{Roughcast}<description/></term>
-        <term HeuristID="0-3398" StandardCode="">{Simple_corbel}<description/></term>
-        <term HeuristID="0-3403" StandardCode="">{Stepped_corbel}<description/></term>
-        <term HeuristID="0-3399" StandardCode="">{Strapwork}<description/></term>
+        <term HeuristID="0-3400" StandardCode="">{Chimney_pot}<description>Protective covering over the top of a chimney</description></term>
+        <term HeuristID="0-3401" StandardCode="">{Moulding}<description>Protective covering over the top of a chimney</description></term>
+        <term HeuristID="0-3402" StandardCode="">{Roughcast}<description>Protective covering over the top of a chimney</description></term>
+        <term HeuristID="0-3398" StandardCode="">{Simple_corbel}<description>Projecting course of masonry to throw off the weather</description></term>
+        <term HeuristID="0-3403" StandardCode="">{Stepped_corbel}<description>Projecting course of masonry to throw off the weather</description></term>
+        <term HeuristID="0-3399" StandardCode="">{Strapwork}<description>Compositions of vertical and horizontal bands of projecting brickwork.</description></term>
       </lookup>
     </property>
     <property type="float" name="Number of verandahs">
       <description>Number of verandahs</description>
     </property>
     <property type="float" name="Number of porticos">
-      <description>Number of porticos</description>
+      <description>A porch supported by columns and open on at least one side.  Often a portico has a pediment a and forms the central part of a façade.</description>
     </property>
     <property type="enum" name="Location">
       <description>Location</description>
@@ -306,12 +306,12 @@
     <property type="freetext" name="Verandah roof form">
       <description>Verandah Roof Form</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Veranda Roof Form/Concave.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Veranda Roof Form/Convex.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Veranda Roof Form/Sshaped.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Veranda Roof Form/Bullnose.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Veranda Roof Form/Single.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Veranda Roof Form/Other.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Concave.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Convex.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Sshaped.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Bullnose.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Single.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Other.png"><description>Verandah</description></term>
       </lookup>
     </property>
     <property type="enum" name="Verandah decorative detail">
@@ -345,8 +345,7 @@
           <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square tapered.png"><description>Verandah Posts</description></term>
           <term pictureURL="files/data/gallery/Verandah Posts/Timber/Turned c1905.png"><description>Verandah Posts</description></term>
         </term>
-        <term HeuristID="0-3423" StandardCode="">{Wrought_iron}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Wrought iron.png"><description>Verandah Posts</description></term>
+        <term pictureURL="files/dat/gallery/Verandah Posts/Wrought iron.png" HeuristID="0-3423" StandardCode="">{Wrought_iron}<description>Decorative iron work that is produced by twisting or bending it into a pattern.</description>
         </term>
       </lookup>
     </property>
@@ -357,13 +356,13 @@
         <term HeuristID="0-3449" StandardCode="">{Clapboard}<description>abutting boards</description></term>
         <term HeuristID="0-3433" StandardCode="">{Combination}<description/></term>
         <term HeuristID="0-3431" StandardCode="">{Corrugated_iron}<description/></term>
-        <term HeuristID="0-3428" StandardCode="">{Rendered_(or_uncertain)}<description/><term HeuristID="0-3444" StandardCode="">{Roughcast}<description>plaster or mortar with pebbles/gravel used to give a rough texture</description></term><term HeuristID="0-3442" StandardCode="">{Scored_ashlar}<description>lines engraved to resemble stonework</description></term><term HeuristID="0-3446" StandardCode="">{Stucco/cement_render}<description>or any other kind of render</description></term></term>
+        <term HeuristID="0-3428" StandardCode="">{Rendered_(or_uncertain)}<description/><term HeuristID="0-3444" StandardCode="">{Roughcast}<description>Plaster or mortar with pebbles/gravel used to give a rough texture to a wall.</description></term><term HeuristID="0-3442" StandardCode="">{Scored_ashlar}<description>lines engraved to resemble stonework</description></term><term HeuristID="0-3446" StandardCode="">{Stucco/cement_render}<description>or any other kind of render</description></term></term>
         <term HeuristID="0-3430" StandardCode="">{Stone}<description/></term>
         <term HeuristID="0-3432" StandardCode="">{Timber}<description/><term HeuristID="0-3448" StandardCode="">{Weatherboard}<description> overlapping boards</description></term></term>
       </lookup>
     </property>
     <property type="freetext" name="Wall brick">
-      <description>Wall brick</description>
+      <description>Are recognised by the pattern of stretchers (brick sides) and headers (brick ends) that can be seen on the face of a wall.</description>
       <lookup>
         <term pictureURL="files/data/gallery/Walls/Brick Masonry/Colonial.png"><description>Brick Walls</description></term>
         <term pictureURL="files/data/gallery/Walls/Brick Masonry/English.png"><description>Brick Walls</description></term>
@@ -372,7 +371,7 @@
       </lookup>
     </property>
     <property type="freetext" name="Wall masonry">
-      <description>Wall masonry</description>
+      <description>The method of overlapping bricks or stones to form a wall. </description>
       <lookup>
         <term pictureURL="files/data/gallery/Walls/Stone Masonry/Ashlar.png"><description>Stone Walls</description></term>
         <term pictureURL="files/data/gallery/Walls/Stone Masonry/Irregular.png"><description>Stone Walls</description></term>
@@ -384,7 +383,7 @@
       </lookup>
     </property>
     <property type="freetext" name="Wall quoins">
-      <description>Wall quoins</description>
+      <description>Corner stones at the angles of a building.</description>
       <lookup>
         <term pictureURL="files/data/gallery/Walls/Quoin/Alternate patterned.png"><description>Quoin Walls</description></term>
         <term pictureURL="files/data/gallery/Walls/Quoin/Alternate picked.png"><description>Quoin Walls</description></term>
@@ -513,7 +512,7 @@
       <lookup>
         <term HeuristID="0-3476" StandardCode="">{Bracketted_sill}<description/></term>
         <term HeuristID="0-3475" StandardCode="">{Keystone}<description/></term>
-        <term HeuristID="0-3474" StandardCode="">{Label_mould}<description/></term>
+        <term HeuristID="0-3474" StandardCode="">{Label_mould}<description>Projecting moulding across the top of a doorway or window</description></term>
         <term HeuristID="0-3478" StandardCode="">{Louvred_shutters}<description/></term>
         <term HeuristID="0-3473" StandardCode="">{None}<description/></term>
         <term HeuristID="0-3480" StandardCode="">{Other_(specify)}<description/></term>
@@ -576,32 +575,34 @@
     <property type="enum" name="Door glazing">
       <description>Door glazing</description>
       <lookup>
-        <term HeuristID="0-3521" StandardCode="">{Fanlight_(pane_above_door)}<description/></term>
-        <term HeuristID="0-3519" StandardCode="">{Glazed_panels_in_door}<description/></term>
+        <term HeuristID="0-3521" StandardCode="">{Fanlight_(pane_above_door)}<description>Window incorporated into a doorcase above the door</description></term>
+        <term HeuristID="0-3519" StandardCode="">{Glazed_panels_in_door}<description>Colonial buildings usually had clear glass panes, Gothic-style (1850) and later buildings began to use solid panes of glass as margin panes (narrow panes of glass beside the main panes) in stair and feature windows.  Painted, embossed and etched glass began to be used after this time.</description></term>
         <term HeuristID="0-3518" StandardCode="">{None}<description/></term>
-        <term HeuristID="0-3520" StandardCode="">{Sidelights_(narrow_panes_on_either_side_of_door)}<description/></term>
+        <term HeuristID="0-3520" StandardCode="">{Sidelights_(narrow_panes_on_either_side_of_door)}<description>Glazed part of a doorway at the side of the door and below the fanlight</description></term>
       </lookup>
     </property>
     <property type="enum" name="Door glazing detail">
-      <description>Door glazing detail</description>
+      <description>Colonial buildings usually had clear glass panes, Gothic-style (1850) and later buildings began to use solid panes of glass as margin panes (narrow panes of glass beside the main panes) in stair and feature windows.  Painted, embossed and etched glass began to be used after this time.
+Plain glazing means clear, see-through glass.</description>
       <lookup>
         <term HeuristID="0-3489" StandardCode="">{Clear}<description/></term>
-        <term HeuristID="0-3491" StandardCode="">{Etched}<description/></term>
-        <term HeuristID="0-3490" StandardCode="">{Leadlight}<description/></term>
-        <term HeuristID="0-3494" StandardCode="">{Ripple_glass}<description/></term>
-        <term HeuristID="0-3493" StandardCode="">{Stained_glass_(figurative_panels)}<description/></term>
-        <term HeuristID="0-3492" StandardCode="">{Stained_glass_(single_panes)}<description/></term>
+        <term HeuristID="0-3491" StandardCode="">{Etched}<description> Patterns produced by acid-etching designs into clear glass and then grinding the remainder of the surface with a stone. </description></term>
+        <term HeuristID="0-3490" StandardCode="">{Leadlight}<description>Thin strips of leading separating individual panes of clear or frosted glass.  In Tudor revival buildings, for example, the small panes are often diamond-shaped and separated by strips of lead.</description></term>
+        <term HeuristID="0-3494" StandardCode="">{Ripple_glass}<description>Thicker glass moulded into wavelike ripples.</description></term>
+        <term HeuristID="0-3493" StandardCode="">{Stained_glass_(figurative_panels)}<description>Glass that has had colour added to the pane.  Can be a single solid pane of colour, or incorporated into a geometrical or figurative design.  Note that some sources also refer to this as ‘leadlight’.</description></term>
+        <term HeuristID="0-3492" StandardCode="">{Stained_glass_(single_panes)}<description>Glass that has had colour added to the pane.  Can be a single solid pane of colour, or incorporated into a geometrical or figurative design.  Note that some sources also refer to this as ‘leadlight’.</description></term>
       </lookup>
     </property>
     <property type="enum" name="Archaeological materials">
-      <description>Archaeological materials</description>
+      <description>This is your assessment of the likelihood that good subsurface deposits may still exist in situ.  You will base this on the extent of ground disturbance to the block, the age of the building (structures built after 1880 are more likely to have been part of municipal rubbish disposal systems (i.e. public dumps), rather than disposing of rubbish in back yard deposits.  Very early rubbish disposal practices tended to bury rubbish in small pits in the back yard), and whether you think there are likely to be good excavate-able deposits (remember that pit toilets and wells usually contain the best and stratified material).  For more information on rubbish disposal practices in 19th century Adelaide, see ‘Turner’s Paddock and Historic Rubbish Disposal in Adelaide’:
+http://ehlt.flinders.edu.au/archaeology/department/research/</description>
       <lookup>
         <term HeuristID="0-3299" StandardCode="No">{No}<description>No</description></term>
         <term HeuristID="0-3298" StandardCode="Yes">{Yes}<description>Yes</description></term>
       </lookup>
     </property>
     <property type="enum" name="Heritage listed">
-      <description>Heritage listed</description>
+      <description>Check the online databases and any other sources, and make sure you note the level of its listing if possible.  Local governments, like city councils, often keep their own records, separate to the State government.</description>
       <lookup>
         <term HeuristID="0-3526" StandardCode="">{No}<description/></term>
         <term HeuristID="0-3527" StandardCode="">{Yes}<description/><term HeuristID="0-3530" StandardCode="">{Local_listing}<description/></term><term HeuristID="0-3528" StandardCode="">{National/Commonwealth_listing}<description/></term><term HeuristID="0-3529" StandardCode="">{State_listing}<description/></term></term>

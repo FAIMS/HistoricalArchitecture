@@ -8,9 +8,13 @@ setFileSyncEnabled(true);
 onEvent("control", "show", "refreshBuildings()");
 onEvent("control", "show", "loadBuildingAttributes()");
 
-/*** ArchEnt: Cemetery ***/
+/*** ArchEnt: Building ***/
 onEvent("control/building/BuildingList", "click", "loadBuilding()");
 onEvent("control/building/newBuilding", "click", "newBuilding()");
+
+onEvent("Building", "show", "hideTabs()");
+onEvent("Building/Building/Alterations", "click", "showAlterations()");
+onEvent("Building/Building/Verandah", "click", "showVerandah()");
 
 onEvent("Building/Building/Update", "click", "saveBuilding()");
 onEvent("Building/Roof/Update", "click", "saveBuilding()");
@@ -26,12 +30,35 @@ onEvent("Building/Building/viewattached", "click", "viewArchEntAttachedFiles(bui
 
 String building_id = null;
 
+hideTabs() {
+    cancelTab("Building/Alterations", false);
+    cancelTab("Building/Verandah", false);
+    showAlterations();
+    showVerandah();
+}
+
+showAlterations(){
+    Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Alterations")+"';");   
+    String alteration = values.get(0);
+    if(alteration.equals("{Yes}")) {
+        showTab("Building/Alterations");
+    }
+}
+
+showVerandah(){
+    Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Verandah")+"';");
+    String verandah = values.get(0);
+    if(verandah.equals("{Yes}")) {
+        showTab("Building/Verandah");
+    }
+}
+
 refreshBuildings() {
     populateList("control/building/BuildingList", fetchEntityList("Building"));
 }
 
 newBuilding(){
-    building_id = null;
+        building_id = null;
     newTabGroup("Building");
 }
 loadBuilding() {
@@ -59,12 +86,12 @@ loadBuildingAttributes() {
     populateRadioGroup("Building/Building/Cornerstone", makeVocab("Cornerstone"));
     populateDropDown("Building/Building/Original_purpose", makeVocab("Original purpose"));
     populateRadioGroup("Building/Building/Change_of_purpose", makeVocab("Change of purpose"));
-    populateRadioGroup("Building/Building/Alterations", makeVocab("Alterations"));
+    populateDropDown("Building/Building/Alterations", makeVocab("Alterations"));
     populateRadioGroup("Building/Building/Scale", makeVocab("Scale"));
     populateRadioGroup("Building/Building/Qualities", makeVocab("Qualities"));
     populateDropDown("Building/Building/Orientation_of_facade", makeVocab("Orientation of facade"));
     populateDropDown("Building/Building/Orientation_facade_faces", makeVocab("Orientation facade faces"));
-    populateRadioGroup("Building/Building/Verandah", makeVocab("Verandah"));
+    populateDropDown("Building/Building/Verandah", makeVocab("Verandah"));
     populateDropDown("Building/Building/Forecourt_space", makeVocab("Forecourt space"));
     populateDropDown("Building/Building/Forecourt_decoration", makeVocab("Forecourt decoration"));
     populateDropDown("Building/Building/Outbuildings", makeVocab("Outbuildings"));

@@ -125,10 +125,16 @@
               <Sources/>
               <Update/>
             </Summary_data>
+            <Alterations>
+              <newAlteration/>
+              <AlterationList/>
+            </Alterations>
             <Dates>
               <Best_fit_date_of_construction/>
               <Date_of_alterations/>
               <Update/>
+              <newDate/>
+              <DateList/>
             </Dates>
           </Building>
           <!--Alteration will be a relationship-->
@@ -265,7 +271,7 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select1 ref="Alterations" faims_attribute_name="Alterations" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Alterations" faims_attribute_name="Alterations" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Alterations}</label>
           <item>
             <label>placeholder</label>
@@ -325,7 +331,7 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select1 ref="Verandah" faims_attribute_name="Verandah" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Verandah" faims_attribute_name="Verandah" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Verandah}</label>
           <item>
             <label>placeholder</label>
@@ -723,7 +729,20 @@
           <label>{Save.Record}</label>
         </trigger>
       </group>
-      <group ref="Dates">
+      <group ref="Alterations" faims_scrollable="false">
+        <label>Alterations</label>
+        <trigger ref="newAlteration">
+          <label>New Alteration</label>
+        </trigger>
+        <select1 faims_annotation="false" faims_certainty="false" ref="AlterationList" appearance="compact">
+          <label>Alterations:</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="Dates" faims_scrollable="false">
         <label>{Dates}</label>
         <input ref="Best_fit_date_of_construction" faims_attribute_name="Best fit date of construction" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
           <label>{Best_Fit_Date_of_Construction}</label>
@@ -734,6 +753,16 @@
         <trigger ref="Update">
           <label>{Save.Record}</label>
         </trigger>
+        <trigger ref="newDate">
+          <label>New Date</label>
+        </trigger>
+        <select1 faims_annotation="false" faims_certainty="false" ref="DateList" appearance="compact">
+          <label>Dates:</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
       </group>
     </group>
 
