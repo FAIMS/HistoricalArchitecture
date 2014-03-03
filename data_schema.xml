@@ -26,7 +26,7 @@
   <!--DATE-->
   <RelationshipElement name="Date" type="bidirectional">
     <description>Describes an important date regarding </description>
-    <property name="Date type" type="enum">
+    <property name="Date" type="enum" isIdentifier="true">
       <description> These are any and all stylistic dates that you have been able to obtain by looking at the various elements that make up the building.  Some of these may be more precise than others; in many situations you may not be able to come up with any good dates at all just by looking at style (but see also ‘Major Architectural Influences’ below).  If you found dates for construction or alteration from other sources, then include all of this information here.</description>
       <lookup>
       <term>Date obtained from roof form<description>Date obtained from roof form</description></term>
@@ -42,9 +42,6 @@
       <term>Date obtained from windows<description>Date obtained from windows</description></term>
       <term>Any other dateable features<description>Any other dateable features</description></term>
       </lookup>
-    </property>
-    <property name="Date" type="freetext" isIdentifier="true">
-      <description>Date</description>
     </property>
     <property name="Description" type="freetext">
       <description>Description of significant date</description>

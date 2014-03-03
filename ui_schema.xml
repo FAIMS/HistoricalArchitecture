@@ -152,7 +152,6 @@
 
           <Date>
             <Date>
-              <Date_type/>
               <Date/>
               <Description/>
               <Update/>
@@ -800,16 +799,13 @@
       <group ref="Date">
         <label>Dates</label>
         <!--We would like to see Radiogroup-->
-        <select1 ref="Date_type" faims_attribute_name="Date type" faims_certainty="false" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Date" faims_attribute_name="Date" faims_certainty="false" faims_attribute_type="vocab" faims_read_only="false">
           <label>Date Type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Date" faims_attribute_name="Date" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
-          <label>Date</label>
-        </input>
         <input ref="Description" faims_attribute_name="Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
           <label>Description</label>
         </input>

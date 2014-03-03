@@ -7,6 +7,7 @@ setFileSyncEnabled(true);
 /*** control ***/
 onEvent("control", "show", "refreshBuildings()");
 onEvent("control", "show", "loadBuildingAttributes()");
+onEvent("control", "show", "loadDateAttributes()");
 
 /*** ArchEnt: Building ***/
 onEvent("control/building/BuildingList", "click", "loadBuilding()");
@@ -22,36 +23,15 @@ onEvent("Building/Verandah/Update", "click", "saveBuilding()");
 onEvent("Building/Components/Update", "click", "saveBuilding()");
 onEvent("Building/Summary_data/Update", "click", "saveBuilding()");
 onEvent("Building/Dates/Update", "click", "saveBuilding()");
+onEvent("Building/Dates/newDate", "click", "newDate()");
+onEvent("Building/Dates/DateList", "click", "loadDate()");
 
-// onEvent("Cemetery/Cemetery_Graves", "show", "updateAllCemetery()");
+onEvent("Building/Building/Dates", "show", "updateAllBuilding()");
 onEvent("Building/Building/attachPhoto", "click", "attachPictureTo(\"Building/Building/Photo\")");
 onEvent("Building/Building/attachPlan_sketch", "click", "attachFileTo(\"Building/Building/Plan_sketch\")");
 onEvent("Building/Building/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
 
 String building_id = null;
-
-hideTabs() {
-    cancelTab("Building/Alterations", false);
-    cancelTab("Building/Verandah", false);
-    showAlterations();
-    showVerandah();
-}
-
-showAlterations(){
-    Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Alterations")+"';");   
-    String alteration = values.get(0);
-    if(alteration.equals("{Yes}")) {
-        showTab("Building/Alterations");
-    }
-}
-
-showVerandah(){
-    Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Verandah")+"';");
-    String verandah = values.get(0);
-    if(verandah.equals("{Yes}")) {
-        showTab("Building/Verandah");
-    }
-}
 
 refreshBuildings() {
     populateList("control/building/BuildingList", fetchEntityList("Building"));
@@ -136,33 +116,96 @@ loadBuildingAttributes() {
     populateRadioGroup("Building/Summary_data/Archaeological_materials", makeVocab("Archaeological materials"));
     populateDropDown("Building/Summary_data/Heritage_listed", makeVocab("Heritage listed"));
     populateRadioGroup("Building/Summary_data/Substantially_original", makeVocab("Substantially original"));
-    // populateCheckBoxGroup("Cemetery/Cemetery_Admin/Denomination", makeVocab("Denomination"));
 }
 
-// updateAllCemetery(){
-//     if (!isNull(cemetery_id)){
-//         gravesInCemetery = fetchAll("select uuid, aenttypename || ': ' || group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
-//         "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
-//         "            FROM latestNonDeletedArchentIdentifiers\n"+
-//         "           WHERE aenttypename = 'Grave'\n"+
-//         "             AND uuid in (select uuid\n"+
-//         "                            FROM latestNonDeletedAentReln\n"+
-//         "                           where relationshipid in (select relationshipid\n"+
-//         "                                                      FROM latestNonDeletedAentReln\n"+
-//         "                                                      JOIN relationship using (relationshipid)\n"+
-//         "                                                      JOIN relntype using (relntypeid)\n"+
-//         "                                                     where uuid = "+cemetery_id+"\n"+
-//         "                                                       and relntypeName = 'CemeteryGrave')\n"+
-//         "                             and uuid != "+cemetery_id+")\n"+
-//         "        ORDER BY uuid, attributename ASC)\n"+
-//         "group by uuid\n"+
-//         "order by valuetimestamp desc, uuid, attributename;");
-//         populateList("Cemetery/Cemetery_Graves/GraveList",  gravesInCemetery);
-//     } else {
-//         Object empty = fetchAll("select '', '';");
-//         populateList("Cemetery/Cemetery_Graves/GraveList",  empty);
-//     }
-// }
+loadDateAttributes() {
+    populateDropDown("Date/Date/Date", makeVocab("Date"));
+}
+
+hideTabs() {
+    cancelTab("Building/Alterations", false);
+    cancelTab("Building/Verandah", false);
+    showAlterations();
+    showVerandah();
+}
+
+showAlterations(){
+    Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Alterations")+"';");   
+    String alteration = values.get(0);
+    if(alteration.equals("{Yes}")) {
+        showTab("Building/Alterations");
+    }
+}
+
+showVerandah(){
+    Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Verandah")+"';");
+    String verandah = values.get(0);
+    if(verandah.equals("{Yes}")) {
+        showTab("Building/Verandah");
+    }
+}
+updateAllBuilding(){
+    if (!isNull(building_id)){
+        buildingDates = fetchAll("select uuid, aenttypename || ': ' || group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+        "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+        "            FROM latestNonDeletedArchentIdentifiers\n"+
+        "           WHERE aenttypename = 'Grave'\n"+
+        "             AND uuid in (select uuid\n"+
+        "                            FROM latestNonDeletedAentReln\n"+
+        "                           where relationshipid in (select relationshipid\n"+
+        "                                                      FROM latestNonDeletedAentReln\n"+
+        "                                                      JOIN relationship using (relationshipid)\n"+
+        "                                                      JOIN relntype using (relntypeid)\n"+
+        "                                                     where uuid = "+building_id+"\n"+
+        "                                                       and relntypeName = 'CemeteryGrave')\n"+
+        "                             and uuid != "+building_id+")\n"+
+        "        ORDER BY uuid, attributename ASC)\n"+
+        "group by uuid\n"+
+        "order by valuetimestamp desc, uuid, attributename;");
+        populateList("Building/Dates/DateList", buildingDates);
+    } else {
+        Object empty = fetchAll("select '', '';");
+        populateList("Building/Dates/DateList",  empty);
+    }
+}
+
+/*** RelnEnt: Date ***/
+onEvent("Date/Date/Update", "click", "saveDate()");
+
+String date_id = null;
+
+newDate(){
+    date_id = null;
+    newTabGroup("Date");
+}
+loadDate() {
+    date_id = getListItemValue();
+    loadDateFrom(date_id);
+}
+loadDateFrom(entid) {
+    date_id = entid;
+    if (isNull(entid)) return;
+    showTabGroup("Date", entid);
+}
+
+saveDate() {
+    if (isNull(getFieldValue("Date/Date/Date"))) { 
+        showWarning("Validation Error", "Cannot save Date without Date type.");
+        return;
+    }
+
+    // List attributes = createAttributeList();
+    // attributes.add(createEntityAttribute("Date", getFieldValue("Date/Date/Date"), null, null, null));
+    // attributes.add(createEntityAttribute("Description", getFieldValue("Date/Date/Description"), null, null, null));
+    
+    // String rel_id = saveRel(null, "Date", null, attributes);
+    if(!isNull(building_id)){
+        saveTabGroup("Date", date_id, null, null, "date_id = getLastSavedRecordId();addReln(building_id, date_id, null);");    
+    } else {
+        showToast("No building ID");
+        return;
+    }
+}
 
 // MISC FUNCTIONS    
 
