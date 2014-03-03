@@ -122,18 +122,16 @@
     <property type="freetext" name="Plan">
       <description>Plan</description>
       <lookup>
+        <term pictureURL="files/data/gallery/Plan/Square.png"><description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Rectangle.png"><description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Lshape.png"><description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Ushape.png"><description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Tshape.png"><description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Combi.png"><description>Plan</description></term>
       </lookup>
     </property>
     <property type="file" name="Plan sketch">
       <description>Plan Sketch</description>
-      <lookup>
-        <term picturURL="files/data/Plan/Square.png"><description>Plan</description></term>
-        <term picturURL="files/data/Plan/Rectangle.png"><description>Plan</description></term>
-        <term picturURL="files/data/Plan/Lshape.png"><description>Plan</description></term>
-        <term picturURL="files/data/Plan/Ushape.png"><description>Plan</description></term>
-        <term picturURL="files/data/Plan/Tshape.png"><description>Plan</description></term>
-        <term picturURL="files/data/Plan/Combi.png"><description>Plan</description></term>
-      </lookup>
     </property>
     <property type="enum" name="Orientation of facade">
       <description>Orientation of facade</description>
@@ -204,17 +202,17 @@
     <property type="freetext" name="Roof form">
       <description>Roof form</description>
       <lookup>
-        <term picturURL="files/data/Roof/Gable.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/HalfGabled.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/Mansard.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/Hipped.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/HalfHip.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/Skillion.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/Flat.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/Butterfly.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/Bellcast.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/MRoof.png"><description>Roof</description></term>
-        <term picturURL="files/data/Roof/WellRoof.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Gable.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/HalfGabled.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Mansard.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Hipped.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/HalfHip.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Skillion.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Flat.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Butterfly.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Bellcast.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/MRoof.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/WellRoof.png"><description>Roof</description></term>
       </lookup>
     </property>
     <property type="float" name="Number of gables">
@@ -235,24 +233,24 @@
       <description>Finial</description>
       <lookup>
         <term HeuristID="0-3364" StandardCode="">{None}<description/></term>
-        <term HeuristID="0-3365" StandardCode="">{Yes}<description/>
-          <term pictureURL="files/data/Finial/Ball.png" HeuristID="0-3369" StandardCode="">{Ball_or_Spike_&amp;_Ball_(1900_-_1911)}<description/></term>
-          <term pictureURL="files/data/Finial/GooseNeck.png" HeuristID="0-3370" StandardCode="">{Goose_neck_(1908_-_1920)}<description/></term>
-          <term pictureURL="files/data/Finial/Spiked.png" HeuristID="0-3366" StandardCode="">{Spiked_(1890-1905)}<description/></term>
+        <term pictureURL="files/data/gallery/Finial/montage.png" HeuristID="0-3365" StandardCode="">{Yes}<description/>
+          <term pictureURL="files/data/gallery/Finial/Ball.png" HeuristID="0-3369" StandardCode="">{Ball_or_Spike_and_Ball_(1900_-_1911)}<description/></term>
+          <term pictureURL="files/data/gallery/Finial/GooseNeck.png" HeuristID="0-3370" StandardCode="">{Goose_neck_(1908_-_1920)}<description/></term>
+          <term pictureURL="files/data/gallery/Finial/Spiked.png" HeuristID="0-3366" StandardCode="">{Spiked_(1890-1905)}<description/></term>
         </term>
       </lookup>
     </property>
     <property type="freetext" name="Gable form">
       <description>Gable form</description>
       <lookup>
-        <term pictureURL="files/data/Gableform/Plain.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/Dutch or curvilinear.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/Battened.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/Bracket.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/FrettedBargeboard.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/HalfTimber.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/Shingled.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/Gableform/RoughCast.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Plain.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Dutch or curvilinear.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Battened.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Bracket.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/FrettedBargeboard.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/HalfTimber.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Shingled.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/RoughCast.png"><description>Gable form</description></term>
       </lookup>
     </property>
     <property type="float" name="Number of chimneys">
@@ -308,12 +306,12 @@
     <property type="freetext" name="Verandah roof form">
       <description>Verandah Roof Form</description>
       <lookup>
-        <term pictureURL="files/data/Veranda Roof Form/Concave.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/Veranda Roof Form/Convex.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/Veranda Roof Form/Sshaped.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/Veranda Roof Form/Bullnose.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/Veranda Roof Form/Single.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/Veranda Roof Form/Other.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Veranda Roof Form/Concave.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Veranda Roof Form/Convex.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Veranda Roof Form/Sshaped.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Veranda Roof Form/Bullnose.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Veranda Roof Form/Single.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Veranda Roof Form/Other.png"><description>Verandah</description></term>
       </lookup>
     </property>
     <property type="enum" name="Verandah decorative detail">
@@ -328,12 +326,28 @@
     <property type="enum" name="Verandah posts">
       <description>Verandah posts</description>
       <lookup>
-        <term HeuristID="0-3425" StandardCode="">{Brick}<description/></term>
-        <term HeuristID="0-3422" StandardCode="">{Cast_iron}<description/></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/montage.png" HeuristID="0-3425" StandardCode="">{Brick}<description/>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png"><description>Verandah Posts</description></term>
+        </term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Cast/montage.png" HeuristID="0-3422" StandardCode="">{Cast_iron}<description/>
+          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Flat c1870.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Round and classical c1890.png"><description>Verandah Posts</description></term>
+        </term>
         <term HeuristID="0-3426" StandardCode="">{Combination}<description/></term>
         <term HeuristID="0-3424" StandardCode="">{Stone}<description/></term>
-        <term HeuristID="0-3421" StandardCode="">{Timber}<description/></term>
-        <term HeuristID="0-3423" StandardCode="">{Wrought_iron}<description/></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/montage.png" HeuristID="0-3421" StandardCode="">{Timber}<description/>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Half turned half square c1895.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square chamfered.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square panelled c1850.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square plain.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square tapered.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Turned c1905.png"><description>Verandah Posts</description></term>
+        </term>
+        <term HeuristID="0-3423" StandardCode="">{Wrought_iron}<description/>
+          <term pictureURL="files/data/gallery/Verandah Posts/Wrought iron.png"><description>Verandah Posts</description></term>
+        </term>
       </lookup>
     </property>
     <property type="enum" name="Wall material">
@@ -351,32 +365,32 @@
     <property type="freetext" name="Wall brick">
       <description>Wall brick</description>
       <lookup>
-        <term pictureURL="files/data/Walls/Brick Masonry/Colonial.png"><description>Brick Walls</description></term>
-        <term pictureURL="files/data/Walls/Brick Masonry/English.png"><description>Brick Walls</description></term>
-        <term pictureURL="files/data/Walls/Brick Masonry/Flemish.png"><description>Brick Walls</description></term>
-        <term pictureURL="files/data/Walls/Brick Masonry/Stretcher.png"><description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Colonial.png"><description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/English.png"><description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Flemish.png"><description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Stretcher.png"><description>Brick Walls</description></term>
       </lookup>
     </property>
     <property type="freetext" name="Wall masonry">
       <description>Wall masonry</description>
       <lookup>
-        <term pictureURL="files/data/Walls/Stone Masonry/Ashlar.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/Walls/Stone Masonry/Irregular.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/Walls/Stone Masonry/Random coursed.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/Walls/Stone Masonry/Random.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/Walls/Stone Masonry/Regular.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/Walls/Stone Masonry/Square random coursed.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/Walls/Stone Masonry/Square random.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Ashlar.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Irregular.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Random coursed.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Random.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Regular.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Square random coursed.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Square random.png"><description>Stone Walls</description></term>
       </lookup>
     </property>
     <property type="freetext" name="Wall quoins">
       <description>Wall quoins</description>
       <lookup>
-        <term pictureURL="files/data/Walls/Quoin/Alternate patterned.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/Walls/Quoin/Aternate picked.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/Walls/Quoin/Brick.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/Walls/Quoin/Patterned.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/Walls/Quoin/Smooth rendered.png"><description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Alternate patterned.png"><description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Alternate picked.png"><description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Brick.png"><description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Patterned.png"><description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Smooth rendered.png"><description>Quoin Walls</description></term>
       </lookup>
     </property>
     <property type="enum" name="Window sash">
@@ -447,21 +461,51 @@
     <property type="float" name="Total number of replacement windows">
       <description>Total number of replacement windows</description>
     </property>
-    <property type="enum" name="Window arch/lintel">
+    <property type="enum" name="Window arch lintel">
       <description>Window Arch/Lintel</description>
       <lookup>
-        <term HeuristID="0-3468" StandardCode="">{Brick}<description/><term HeuristID="0-3470" StandardCode="">{Rendered}<description/></term><term HeuristID="0-3471" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/></term></term>
+        <term HeuristID="0-3468" StandardCode="">{Brick}<description/>
+          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3470" StandardCode="">{Rendered}<description/>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+          </term>
+          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3471" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+          </term>
+        </term>
         <term HeuristID="0-3467" StandardCode="">{NONE}<description/></term>
-        <term HeuristID="0-3469" StandardCode="">{Stone}<description/><term HeuristID="0-3503" StandardCode="">{Rendered}<description/></term><term HeuristID="0-3504" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/></term></term>
+        <term HeuristID="0-3469" StandardCode="">{Stone}<description/>
+          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3503" StandardCode="">{Rendered}<description/>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+          </term>
+          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3504" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+          </term>
+        </term>
       </lookup>
     </property>
     <property type="freetext" name="Window head">
       <description>Window head</description>
       <lookup>
-        <term pictureURL="files/data/WindowHead/Gothic.png"><description>Window Head</description></term>
-        <term pictureURL="files/data/WindowHead/SemiCircular.png"><description>Window Head</description></term>
-        <term pictureURL="files/data/WindowHead/Shallow.png"><description>Window Head</description></term>
-        <term pictureURL="files/data/WindowHead/Square.png"><description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/Gothic.png"><description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/SemiCircular.png"><description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/Shallow.png"><description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/Square.png"><description>Window Head</description></term>
       </lookup>
     </property>
     <property type="enum" name="Window decorative detail">
@@ -508,15 +552,15 @@
         <term HeuristID="0-3510" StandardCode="">{Other_(specify)}<description/></term>
         <term HeuristID="0-3508" StandardCode="">{Semi-circular}<description/></term>
         <term HeuristID="0-3507" StandardCode="">{Shallow_arch}<description/></term>
-        <term HeuristID="0-3506" StandardCode="">{Solid_block_(or_rendered_&amp;_uncertain)}<description/></term>
+        <term HeuristID="0-3506" StandardCode="">{Solid_block_(or_rendered_and_uncertain)}<description/></term>
       </lookup>
     </property>
     <property type="freetext" name="Door form">
       <description>Door form</description>
       <lookup>
-        <term pictureURL="files/data/Door/Colonial.png"><description>Door</description></term>
-        <term pictureURL="files/data/Door/HighWaist.png"><description>Door</description></term>
-        <term pictureURL="files/data/Door/Victorian.png"><description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/Colonial.png"><description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/HighWaist.png"><description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/Victorian.png"><description>Door</description></term>
       </lookup>
     </property>
     <property type="enum" name="Door decorative details">
@@ -526,7 +570,7 @@
         <term HeuristID="0-3516" StandardCode="">{Other_(specify)}<description/></term>
         <term HeuristID="0-3514" StandardCode="">{Semi-circular}<description/></term>
         <term HeuristID="0-3513" StandardCode="">{Shallow_arch}<description/></term>
-        <term HeuristID="0-3512" StandardCode="">{Solid_block_(or_rendered_&amp;_uncertain)}<description/></term>
+        <term HeuristID="0-3512" StandardCode="">{Solid_block_(or_rendered_and_uncertain)}<description/></term>
       </lookup>
     </property>
     <property type="enum" name="Door glazing">

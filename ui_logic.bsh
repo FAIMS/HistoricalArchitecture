@@ -68,33 +68,44 @@ loadBuildingAttributes() {
     populateDropDown("Building/Building/Forecourt_space", makeVocab("Forecourt space"));
     populateDropDown("Building/Building/Forecourt_decoration", makeVocab("Forecourt decoration"));
     populateDropDown("Building/Building/Outbuildings", makeVocab("Outbuildings"));
+    populatePictureGallery("Building/Building/Plan", makePictureGallery("Plan"));
 
     populateRadioGroup("Building/Roof/Gable_detail_bargeboard", makeVocab("Gable detail bargeboard"));
-    populateDropDown("Building/Roof/Finial", makeVocab("Finial"));
+    populatePictureGallery("Building/Roof/Gable_form", makePictureGallery("Gable form"));
+    populateHierarchicalPictureGallery("Building/Roof/Finial", "Finial");
     populateDropDown("Building/Roof/Chimney_orientation", makeVocab("Chimney orientation"));
     populateDropDown("Building/Roof/Chimney_decorative_detail", makeVocab("Chimney decorative detail"));
+    populatePictureGallery("Building/Roof/Roof_form", makePictureGallery("Roof form"));
 
-		populateRadioGroup("Building/Verandah/Location", makeVocab("Location"));
-		populateRadioGroup("Building/Verandah/Verandah_status", makeVocab("Verandah status"));
-		populateDropDown("Building/Verandah/Verandah_decorative_detail", makeVocab("Verandah decorative detail"));
-		populateDropDown("Building/Verandah/Verandah_posts", makeVocab("Verandah posts"));
+    populateRadioGroup("Building/Verandah/Location", makeVocab("Location"));
+    populateRadioGroup("Building/Verandah/Verandah_status", makeVocab("Verandah status"));
+    populateDropDown("Building/Verandah/Verandah_decorative_detail", makeVocab("Verandah decorative detail"));
+    populateHierarchicalPictureGallery("Building/Verandah/Verandah_posts", "Verandah posts");
+    populatePictureGallery("Building/Verandah/Verandah_roof_form", makePictureGallery("Verandah roof form"));
 
-		populateDropDown("Building/Components/Wall_material", makeVocab("Wall material"));		
-		populateDropDown("Building/Components/Window_sash", makeVocab("Window sash"));
-		populateDropDown("Building/Components/Window_casement", makeVocab("Window casement"));
-		populateDropDown("Building/Components/Window_bay", makeVocab("Window bay"));
-		populateDropDown("Building/Components/Bay_form", makeVocab("Bay form"));
-		populateDropDown("Building/Components/Window_dormer", makeVocab("Window dormer"));
-		populateDropDown("Building/Components/Replacements", makeVocab("Replacements"));
-		populateDropDown("Building/Components/Window_arch_lintel", makeVocab("Window arch/lintel"));
-		populateDropDown("Building/Components/Window_decorative_detail", makeVocab("Window decorative detail"));
-		populateDropDown("Building/Components/Window_glazing", makeVocab("Window glazing"));
-		populateDropDown("Building/Components/Door_lintel_arch", makeVocab("Door lintel/arch"));
-		populateDropDown("Building/Components/Door_lintel_form", makeVocab("Door lintel form"));
-		populateDropDown("Building/Components/Door_decorative_details", makeVocab("Door decorative details"));
-		populateDropDown("Building/Components/Door_glazing", makeVocab("Door glazing"));
-		populateDropDown("Building/Components/Door_glazing_detail", makeVocab("Door glazing detail"));
+    populateDropDown("Building/Components/Wall_material", makeVocab("Wall material"));
+    populatePictureGallery("Building/Components/Wall_brick", makePictureGallery("Wall brick"));
+    populatePictureGallery("Building/Components/Wall_masonry", makePictureGallery("Wall masonry"));
+    populatePictureGallery("Building/Components/Wall_quoins", makePictureGallery("Wall quoins"));
+    populateDropDown("Building/Components/Window_sash", makeVocab("Window sash"));
+    populateDropDown("Building/Components/Window_casement", makeVocab("Window casement"));
+    populateDropDown("Building/Components/Window_bay", makeVocab("Window bay"));
+    populateHierarchicalPictureGallery("Building/Components/Window_arch_lintel", "Window arch/lintel");
+    populatePictureGallery("Building/Components/Window_head", makePictureGallery("Window head"));
+    populateDropDown("Building/Components/Bay_form", makeVocab("Bay form"));
+    populateDropDown("Building/Components/Window_dormer", makeVocab("Window dormer"));
+    populateDropDown("Building/Components/Replacements", makeVocab("Replacements"));
+    populateHierarchicalPictureGallery("Building/Components/Window_arch_lintel", "Window arch lintel");
+    populateDropDown("Building/Components/Window_decorative_detail", makeVocab("Window decorative detail"));
+    populateDropDown("Building/Components/Window_glazing", makeVocab("Window glazing"));
+    populateDropDown("Building/Components/Door_lintel_arch", makeVocab("Door lintel/arch"));
+    populateDropDown("Building/Components/Door_lintel_form", makeVocab("Door lintel form"));
+    populateDropDown("Building/Components/Door_decorative_details", makeVocab("Door decorative details"));
+    populateDropDown("Building/Components/Door_glazing", makeVocab("Door glazing"));
+	populateDropDown("Building/Components/Door_glazing_detail", makeVocab("Door glazing detail"));
+    populatePictureGallery("Building/Components/Door_form", makePictureGallery("Door form"));
     
+
     populateRadioGroup("Building/Summary_data/Archaeological_materials", makeVocab("Archaeological materials"));
     populateDropDown("Building/Summary_data/Heritage_listed", makeVocab("Heritage listed"));
     populateRadioGroup("Building/Summary_data/Substantially_original", makeVocab("Substantially original"));
@@ -138,6 +149,10 @@ saveEntitiesToRel(type, entity1, entity2) {
 makeVocab(String attrib){
     Object a = fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' ");
     return a;
+}
+
+makePictureGallery(String attrib){
+    fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "';");
 }
 
 /*** Uneditable - you can edit the code below with extreme precaution ***/

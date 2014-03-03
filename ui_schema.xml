@@ -291,9 +291,13 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Plan" faims_attribute_name="Plan" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Plan" faims_attribute_name="Plan" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Plan}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <select ref="Plan_sketch" faims_attribute_name="Plan sketch" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
           <label>Sketch (if Other)</label>
           <item>
@@ -376,9 +380,13 @@
       </group>
       <group ref="Roof">
         <label>{Roof}</label>
-        <input ref="Roof_form" faims_attribute_name="Roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Roof_form" faims_attribute_name="Roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Roof_Form}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <input ref="Number_of_gables" faims_attribute_name="Number of gables" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Number_of_Gables}</label>
         </input>
@@ -394,16 +402,20 @@
           </item>
         </select1>
         <!--We would like to see Dropdown-->
-        <select1 ref="Finial" faims_attribute_name="Finial" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Finial" faims_attribute_name="Finial" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false" type="image">
           <label>{Finial}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Gable_form" faims_attribute_name="Gable form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Gable_form" faims_attribute_name="Gable form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Gable_Form}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <input ref="Number_of_chimneys" faims_attribute_name="Number of chimneys" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Number_of_chimneys}</label>
         </input>
@@ -454,9 +466,13 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Verandah_roof_form" faims_attribute_name="Verandah roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Verandah_roof_form" faims_attribute_name="Verandah roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Roof_Form}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Verandah_decorative_detail" faims_attribute_name="Verandah decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Decorative_Detail}</label>
@@ -466,7 +482,7 @@
           </item>
         </select1>
         <!--We would like to see Dropdown-->
-        <select1 ref="Verandah_posts" faims_attribute_name="Verandah posts" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Verandah_posts" faims_attribute_name="Verandah posts" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false" type="image">
           <label>{Verandah_Posts}</label>
           <item>
             <label>placeholder</label>
@@ -487,15 +503,27 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Wall_brick" faims_attribute_name="Wall brick" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Wall_brick" faims_attribute_name="Wall brick" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Wall_Brick}</label>
-        </input>
-        <input ref="Wall_masonry" faims_attribute_name="Wall masonry" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Wall_masonry" faims_attribute_name="Wall masonry" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Wall_Masonry}</label>
-        </input>
-        <input ref="Wall_quoins" faims_attribute_name="Wall quoins" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Wall_quoins" faims_attribute_name="Wall quoins" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Wall_Quoins}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Window_sash" faims_attribute_name="Window sash" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_Sash}</label>
@@ -560,16 +588,20 @@
           <label>{Total_number_of_replacement_windows}</label>
         </input>
         <!--We would like to see Dropdown-->
-        <select1 ref="Window_arch_lintel" faims_attribute_name="Window arch/lintel" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Window_arch_lintel" faims_attribute_name="Window arch lintel" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false" type="image">
           <label>{Window_Arch/Lintel}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Window_head" faims_attribute_name="Window head" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Window_head" faims_attribute_name="Window head" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Window_head}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Window_decorative_detail" faims_attribute_name="Window decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_decorative_detail}</label>
@@ -608,9 +640,13 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Door_form" faims_attribute_name="Door form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Door_form" faims_attribute_name="Door form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Door_Form}</label>
-        </input>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Door_decorative_details" faims_attribute_name="Door decorative details" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Door_Decorative_Details}</label>
