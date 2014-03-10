@@ -66,11 +66,16 @@
               <Number_of_gablets/>
               <Gable_detail_bargeboard/>
               <Finial/>
+              <Finial_other/>
+              <attachFinial_sketch/>
               <Gable_form/>
+              <Gable_form_other/>
+              <attachGable_sketch/>
               <Number_of_chimneys/>
               <Chimney_form/>
               <Chimney_orientation/>
               <Chimney_decorative_detail/>
+              <viewattached/>
               <Update/>
             </Roof>
             <Verandah>
@@ -79,8 +84,13 @@
               <Location/>
               <Verandah_status/>
               <Verandah_roof_form/>
+              <Verandah_roof_form_other/>
+              <attachVerandahRoof_sketch/>
               <Verandah_decorative_detail/>
               <Verandah_posts/>
+              <Verandah_posts_other/>
+              <attachVerandahPosts_sketch/>
+              <viewattached/>
               <Update/>
             </Verandah>
             <Components>
@@ -97,10 +107,16 @@
               <Bay_form/>
               <Window_dormer/>
               <Number_of_dormers/>
+              <Windows_other/>
+              <attachWindows_sketch/>
               <Replacements/>
               <Total_number_of_replacement_windows/>
               <Window_arch_lintel/>
+              <Window_arch_lintel_other/>
+              <attachWindowArch_sketch/>
               <Window_head/>
+              <Window_head_other/>
+              <attachWindowHead_sketch/>
               <Window_decorative_detail/>
               <Window_glazing/>
               <Door_single/>
@@ -108,9 +124,12 @@
               <Door_lintel_arch/>
               <Door_lintel_form/>
               <Door_form/>
+              <Door_form_other/>
+              <attachDoor_sketch/>
               <Door_decorative_details/>
               <Door_glazing/>
               <Door_glazing_detail/>
+              <viewattached/>
               <Update/>
             </Components>
             <Summary_data>
@@ -271,13 +290,16 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select1 ref="Alterations" faims_attribute_name="Alterations" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <trigger ref="Alterations">
+          <label> Has Alterations? </label>
+        </trigger>
+<!--         <select1 ref="Alterations" faims_attribute_name="Alterations" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Alterations}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
-        </select1>
+        </select1> -->
         <!--We would like to see Radiogroup-->
         <select1 ref="Scale" faims_attribute_name="Scale" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Scale}</label>
@@ -331,13 +353,16 @@
           </item>
         </select1>
         <!--We would like to see Radiogroup-->
-        <select1 ref="Verandah" faims_attribute_name="Verandah" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <trigger ref="Verandah">
+          <label> Has Verandah? </label>
+        </trigger>
+<!--         <select1 ref="Verandah" faims_attribute_name="Verandah" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Verandah}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
-        </select1>
+        </select1> -->
         <select ref="Photo" faims_attribute_name="Photo" faims_certainty="true" faims_attribute_type="freetext" faims_sync="true" type="camera" faims_annotation="false">
           <label>{Photo}</label>
           <item>
@@ -415,6 +440,16 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Finial_other" faims_attribute_name="Finial other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachFinial_sketch">
+          <label>Attach Sketch of Finial</label>
+        </trigger>
         <select1 ref="Gable_form" faims_attribute_name="Gable form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Gable_Form}</label>
           <item>
@@ -422,12 +457,26 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Gable_form_other" faims_attribute_name="Gable form other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachGable_sketch">
+          <label>Attach Sketch of Gable Form</label>
+        </trigger>
         <input ref="Number_of_chimneys" faims_attribute_name="Number of chimneys" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Number_of_chimneys}</label>
         </input>
-        <input ref="Chimney_form" faims_attribute_name="Chimney form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Chimney_form" faims_attribute_name="Chimney form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Chimney_Form}</label>
-        </input>
+            <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <!--We would like to see Dropdown-->
         <select1 ref="Chimney_orientation" faims_attribute_name="Chimney orientation" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Orientation}</label>
@@ -444,6 +493,9 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <trigger ref="viewattached">
+          <label>View Attached Files</label>
+        </trigger>
         <trigger ref="Update">
           <label>{Save.Record}</label>
         </trigger>
@@ -479,6 +531,16 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Verandah_roof_form_other" faims_attribute_name="Verandah roof form other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachVerandahRoof_sketch">
+          <label>Attach Sketch of Verandah Roof</label>
+        </trigger>
         <!--We would like to see Dropdown-->
         <select1 ref="Verandah_decorative_detail" faims_attribute_name="Verandah decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Decorative_Detail}</label>
@@ -495,6 +557,19 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Verandah_posts_other" faims_attribute_name="Verandah posts other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachVerandahPosts_sketch">
+          <label>Attach Sketch of Verandah Posts</label>
+        </trigger>
+        <trigger ref="viewattached">
+          <label>View Attached Files</label>
+        </trigger>
         <trigger ref="Update">
           <label>{Save.Record}</label>
         </trigger>
@@ -582,6 +657,16 @@
         <input ref="Number_of_dormers" faims_attribute_name="Number of dormers" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Number_of_dormers}</label>
         </input>
+        <select ref="Windows_other" faims_attribute_name="Windows other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachWindows_sketch">
+          <label>Attach Sketch of Windows</label>
+        </trigger>
         <!--We would like to see Radiogroup-->
         <select1 ref="Replacements" faims_attribute_name="Replacements" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Replacements}</label>
@@ -601,6 +686,16 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Window_arch_lintel_other" faims_attribute_name="Window arch lintel other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachWindowArch_sketch">
+          <label>Attach Sketch of Window Arch/Lintel</label>
+        </trigger>
         <select1 ref="Window_head" faims_attribute_name="Window head" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
           <label>{Window_head}</label>
           <item>
@@ -608,6 +703,16 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Window_head_other" faims_attribute_name="Window head other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachWindowHead_sketch">
+          <label>Attach Sketch of Window Head</label>
+        </trigger>
         <!--We would like to see Dropdown-->
         <select1 ref="Window_decorative_detail" faims_attribute_name="Window decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Window_decorative_detail}</label>
@@ -653,6 +758,16 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <select ref="Door_form_other" faims_attribute_name="Door form other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+          <label>Sketch (if Other)</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="attachDoor_sketch">
+          <label>Attach Sketch of Door Form</label>
+        </trigger>
         <!--We would like to see Dropdown-->
         <select1 ref="Door_decorative_details" faims_attribute_name="Door decorative details" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
           <label>{Door_Decorative_Details}</label>
@@ -677,6 +792,9 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <trigger ref="viewattached">
+          <label>View Attached Files</label>
+        </trigger>
         <trigger ref="Update">
           <label>{Save.Record}</label>
         </trigger>

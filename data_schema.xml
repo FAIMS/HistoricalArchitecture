@@ -29,18 +29,18 @@
     <property name="Date" type="enum" isIdentifier="true">
       <description> These are any and all stylistic dates that you have been able to obtain by looking at the various elements that make up the building.  Some of these may be more precise than others; in many situations you may not be able to come up with any good dates at all just by looking at style (but see also ‘Major Architectural Influences’ below).  If you found dates for construction or alteration from other sources, then include all of this information here.</description>
       <lookup>
-      <term>Date obtained from roof form<description>Date obtained from roof form</description></term>
-      <term>Date obtained from window arches<description>Date obtained from window arches</description></term>
-      <term>Date obtained from finials<description>Date obtained from finials</description></term>
-      <term>Date obtained from doors<description>Date obtained from doors</description></term>
-      <term>Date obtained from verandah roof form<description>Date obtained from verandah roof form</description></term>
-      <term>Date obtained from door arches<description>Date obtained from door arches</description></term>
-      <term>Date obtained from verandah posts<description>Date obtained from verandah posts</description></term>
-      <term>Date obtained from historical sources<description>Date obtained from historical sources</description></term>
-      <term>Date obtained from quoins<description>Date obtained from quoins</description></term>
-      <term>Date obtained from chimneys<description>Date obtained from chimneys</description></term>
-      <term>Date obtained from windows<description>Date obtained from windows</description></term>
-      <term>Any other dateable features<description>Any other dateable features</description></term>
+      <term>Date obtained from roof form:<description>Date obtained from roof form</description></term>
+      <term>Date obtained from window arches:<description>Date obtained from window arches</description></term>
+      <term>Date obtained from finials:<description>Date obtained from finials</description></term>
+      <term>Date obtained from doors:<description>Date obtained from doors</description></term>
+      <term>Date obtained from verandah roof form:<description>Date obtained from verandah roof form</description></term>
+      <term>Date obtained from door arches:<description>Date obtained from door arches</description></term>
+      <term>Date obtained from verandah posts:<description>Date obtained from verandah posts</description></term>
+      <term>Date obtained from historical sources:<description>Date obtained from historical sources</description></term>
+      <term>Date obtained from quoins:<description>Date obtained from quoins</description></term>
+      <term>Date obtained from chimneys:<description>Date obtained from chimneys</description></term>
+      <term>Date obtained from windows:<description>Date obtained from windows</description></term>
+      <term>Any other dateable features:<description>Any other dateable features</description></term>
       </lookup>
     </property>
     <property name="Description" type="freetext">
@@ -119,12 +119,12 @@
     <property type="freetext" name="Plan">
       <description>Note which façade you are recording.  In most cases the façade will be the ‘front’, or public entry to the building.  Some buildings may have more than one ‘front’, in which case you will have to choose which façade to record.  Indicate on the plan where the ‘front’, or the façade you have chosen is located.</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Plan/Square.png"><description>Plan</description></term>
-        <term pictureURL="files/data/gallery/Plan/Rectangle.png"><description>Plan</description></term>
-        <term pictureURL="files/data/gallery/Plan/Lshape.png"><description>Plan</description></term>
-        <term pictureURL="files/data/gallery/Plan/Ushape.png"><description>Plan</description></term>
-        <term pictureURL="files/data/gallery/Plan/Tshape.png"><description>Plan</description></term>
-        <term pictureURL="files/data/gallery/Plan/Combi.png"><description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Square.png">Square<description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Rectangle.png">Rectangle<description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Lshape.png">L Shape<description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Ushape.png">U Shape<description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Tshape.png">T Shape<description>Plan</description></term>
+        <term pictureURL="files/data/gallery/Plan/Combi.png">Combination<description>Plan</description></term>
       </lookup>
     </property>
     <property type="file" name="Plan sketch">
@@ -199,17 +199,17 @@
     <property type="freetext" name="Roof form">
       <description>Note that in some cases it may be difficult if not impossible to tell and ‘M’ roof from a well roof from ground level.  Just do the best you can.</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Roof/Gable.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/HalfGabled.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/Mansard.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/Hipped.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/HalfHip.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/Skillion.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/Flat.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/Butterfly.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/Bellcast.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/MRoof.png"><description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/WellRoof.png"><description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Gable.png">Gabled (1840-present)<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/HalfGabled.png">Half-grabled<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Mansard.png">Mansard<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Hipped.png">Hipped (1840-present)<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/HalfHip.png">Half-hipped (or jerkin head)<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Skillion.png">Skillion<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Flat.png">Flat<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Butterfly.png">Butterfly<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/Bellcast.png">Bellcast<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/MRoof.png">'M'Roof (until 1890)<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/WellRoof.png">Well Roof(1890-1905)<description>Roof</description></term>
       </lookup>
     </property>
     <property type="float" name="Number of gables">
@@ -237,35 +237,44 @@
         </term>
       </lookup>
     </property>
+    <property type="file" name="Finial other">
+      <description>Finial other</description>
+    </property>
     <property type="freetext" name="Gable form">
       <description>Gable form</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Gableform/Plain.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/Dutch or curvilinear.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/Battened.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/Bracket.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/FrettedBargeboard.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/HalfTimber.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/Shingled.png"><description>Gable form</description></term>
-        <term pictureURL="files/data/gallery/Gableform/RoughCast.png"><description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Plain.png">Plain<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Dutch or curvilinear.png">Dutch or curvilinear<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Battened.png">Battened<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Bracket.png">Bracket<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/FrettedBargeboard.png">FrettedBargeboard<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/HalfTimber.png">HalfTimber<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/Shingled.png">Shingled<description>Gable form</description></term>
+        <term pictureURL="files/data/gallery/Gableform/RoughCast.png">RoughCast<description>Gable form</description></term>
       </lookup>
+    </property>
+    <property type="file" name="Gable form other">
+      <description>Gable form other</description>
     </property>
     <property type="float" name="Number of chimneys">
       <description>Number of chimneys</description>
     </property>
-    <property type="freetext" name="Chimney form">
+    <property type="vocab" name="Chimney form">
       <description>Chimney form</description>
-    </property>
+      <lookup>
+        <term>Chimney not observed<description/></term>
+        <term HeuristID="0-3391" StandardCode="">Colonial (c1840)<description>c1840</description></term>
+        <term HeuristID="0-3392" StandardCode="">Early Victorian (c1850)<description>c1850</description></term>
+        <term HeuristID="0-3395" StandardCode="">Edwardian (c1901)<description>c1901</description></term>
+        <term HeuristID="0-3396" StandardCode="">English vernacular Revival (c1910)<description>c1910</description></term>
+        <term HeuristID="0-3394" StandardCode="">Late Victorian (c1890)<description>c1890</description></term>
+        <term HeuristID="0-3393" StandardCode="">Mid Victorian (c1870)<description>c1870</description></term>
+      </lookup>
+      </property>
     <property type="enum" name="Chimney orientation">
       <description>Chimney orientation</description>
       <lookup>
-        <term HeuristID="0-3391" StandardCode="">{Colonial}<description>c1840</description></term>
         <term HeuristID="0-3390" StandardCode="">{Diagonally_set}<description>Sides at 45 degrees to walls</description></term>
-        <term HeuristID="0-3392" StandardCode="">{Early_Victorian}<description>c1850</description></term>
-        <term HeuristID="0-3395" StandardCode="">{Edwardian}<description>c1901</description></term>
-        <term HeuristID="0-3396" StandardCode="">{English_vernacular_Revival}<description>c1910</description></term>
-        <term HeuristID="0-3394" StandardCode="">{Late_Victorian}<description>c1890</description></term>
-        <term HeuristID="0-3393" StandardCode="">{Mid_Victorian}<description>c1870</description></term>
         <term HeuristID="0-3389" StandardCode="">{Square_set}<description>Sides parallel with walls</description></term>
       </lookup>
     </property>
@@ -303,13 +312,15 @@
     <property type="freetext" name="Verandah roof form">
       <description>Verandah Roof Form</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Verandah Roof Form/Concave.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Verandah Roof Form/Convex.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Verandah Roof Form/Sshaped.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Verandah Roof Form/Bullnose.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Verandah Roof Form/Single.png"><description>Verandah</description></term>
-        <term pictureURL="files/data/gallery/Verandah Roof Form/Other.png"><description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Concave.png">Concave (c1840)<description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Convex.png">Convex (c1857)<description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Sshaped.png">Ogee (1860-1880)<description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Bullnose.png">Bullnose (1890+)<description>Verandah</description></term>
+        <term pictureURL="files/data/gallery/Verandah Roof Form/Single.png">Single Pitch<description>Verandah</description></term>
       </lookup>
+    </property>
+    <property type="file" name="Verandah roof form other">
+      <description>Verandah roof form other</description>
     </property>
     <property type="enum" name="Verandah decorative detail">
       <description>Verandah decorative detail</description>
@@ -324,27 +335,34 @@
       <description>Verandah posts</description>
       <lookup>
         <term pictureURL="files/data/gallery/Verandah Posts/Masonry/montage.png" HeuristID="0-3425" StandardCode="">{Brick}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png"><description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png">Brick/Stone Square<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png">Brick/stone tapered<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png">Masonry and timber c1915<description>Verandah Posts</description></term>
         </term>
-        <term pictureURL="files/data/gallery/Verandah Posts/Cast/montage.png" HeuristID="0-3422" StandardCode="">{Cast_iron}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Flat c1870.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Round and classical c1890.png"><description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Cast/montage.png" HeuristID="0-3422" StandardCode="">{Cast_iron}<description>Decorative iron that is produced by pouring it into a mould.</description>
+          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Flat c1870.png">Flat c1870<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Round and classical c1890.png">Round and classical c1890<description>Verandah Posts</description></term>
         </term>
         <term HeuristID="0-3426" StandardCode="">{Combination}<description/></term>
-        <term HeuristID="0-3424" StandardCode="">{Stone}<description/></term>
-        <term pictureURL="files/data/gallery/Verandah Posts/Timber/montage.png" HeuristID="0-3421" StandardCode="">{Timber}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Half turned half square c1895.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square chamfered.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square panelled c1850.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square plain.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square tapered.png"><description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Turned c1905.png"><description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/montage.png" HeuristID="0-3424" StandardCode="">{Stone}<description/>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png">Brick/Stone Square<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png">Brick/stone tapered<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png">Masonry and timber c1915<description>Verandah Posts</description></term>
         </term>
-        <term pictureURL="files/dat/gallery/Verandah Posts/Wrought iron.png" HeuristID="0-3423" StandardCode="">{Wrought_iron}<description>Decorative iron work that is produced by twisting or bending it into a pattern.</description>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/montage.png" HeuristID="0-3421" StandardCode="">{Timber}<description/>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Half turned half square c1895.png">Half turned and half square c1895<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square chamfered.png">Square chamfered<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square panelled c1850.png">Square panelled c1850<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square plain.png">Square plain<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square tapered.png">Square tapered<description>Verandah Posts</description></term>
+          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Turned c1905.png">Turned c1905<description>Verandah Posts</description></term>
+        </term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Wrought iron.png" HeuristID="0-3423" StandardCode="">{Wrought_iron}<description>Decorative iron work that is produced by twisting or bending it into a pattern.</description>
         </term>
       </lookup>
+    </property>
+    <property type="file" name="Verandah posts other">
+      <description>Verandah posts other</description>
     </property>
     <property type="enum" name="Wall material">
       <description>Wall material</description>
@@ -361,32 +379,32 @@
     <property type="freetext" name="Wall brick">
       <description>Are recognised by the pattern of stretchers (brick sides) and headers (brick ends) that can be seen on the face of a wall.</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Colonial.png"><description>Brick Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Brick Masonry/English.png"><description>Brick Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Flemish.png"><description>Brick Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Stretcher.png"><description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Colonial.png">Colonial<description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/English.png">English<description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Flemish.png">Flemish<description>Brick Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Brick Masonry/Stretcher.png">Stretcher<description>Brick Walls</description></term>
       </lookup>
     </property>
     <property type="freetext" name="Wall masonry">
       <description>The method of overlapping bricks or stones to form a wall. </description>
       <lookup>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Ashlar.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Irregular.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Random coursed.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Random.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Regular.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Square random coursed.png"><description>Stone Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Square random.png"><description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Ashlar.png">Ashlar<description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Irregular.png">Irregular<description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Random coursed.png">Random coursed<description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Random.png">Random<description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Regular.png">Regular<description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Square random coursed.png">Square random coursed<description>Stone Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Stone Masonry/Square random.png">Square random<description>Stone Walls</description></term>
       </lookup>
     </property>
     <property type="freetext" name="Wall quoins">
       <description>Corner stones at the angles of a building.</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Walls/Quoin/Alternate patterned.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Quoin/Alternate picked.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Quoin/Brick.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Quoin/Patterned.png"><description>Quoin Walls</description></term>
-        <term pictureURL="files/data/gallery/Walls/Quoin/Smooth rendered.png"><description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Alternate patterned.png">Alternate patterned (1895-1920)<description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Alternate picked.png">Alternate picked (1890-1900)<description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Brick.png">Brick (1840-1875)<description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Patterned.png">Patterned (1895-1920)<description>Quoin Walls</description></term>
+        <term pictureURL="files/data/gallery/Walls/Quoin/Smooth rendered.png">Smooth rendered (1875-1895)<description>Quoin Walls</description></term>
       </lookup>
     </property>
     <property type="enum" name="Window sash">
@@ -446,6 +464,9 @@
     <property type="float" name="Number of dormers">
       <description>Number of dormers</description>
     </property>
+    <property type="file" name="Windows other">
+      <description>Windows other</description>
+    </property>
     <property type="enum" name="Replacements">
       <description>Replacements</description>
       <lookup>
@@ -462,47 +483,53 @@
       <lookup>
         <term HeuristID="0-3468" StandardCode="">{Brick}<description/>
           <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3470" StandardCode="">{Rendered}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi Circular Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png">Shallow Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
           </term>
           <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3471" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat <description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi-circular Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"> Shallow Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
           </term>
         </term>
         <term HeuristID="0-3467" StandardCode="">{NONE}<description/></term>
         <term HeuristID="0-3469" StandardCode="">{Stone}<description/>
           <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3503" StandardCode="">{Rendered}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi Circular Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png">Shallow Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
           </term>
           <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3504" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"><description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png"><description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi Circular Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png">Shallow Arch<description/></term>
+            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
           </term>
         </term>
       </lookup>
     </property>
+    <property type="file" name="Window arch lintel other">
+      <description>Plan Sketch</description>
+    </property>
     <property type="freetext" name="Window head">
       <description>Window head</description>
       <lookup>
-        <term pictureURL="files/data/gallery/WindowHead/Gothic.png"><description>Window Head</description></term>
-        <term pictureURL="files/data/gallery/WindowHead/SemiCircular.png"><description>Window Head</description></term>
-        <term pictureURL="files/data/gallery/WindowHead/Shallow.png"><description>Window Head</description></term>
-        <term pictureURL="files/data/gallery/WindowHead/Square.png"><description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/Gothic.png">Gothic<description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/SemiCircular.png">Semi Circular<description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/Shallow.png">Shallow<description>Window Head</description></term>
+        <term pictureURL="files/data/gallery/WindowHead/Square.png">Square<description>Window Head</description></term>
       </lookup>
+    </property>
+    <property type="file" name="Window head other">
+      <description>Window head other</description>
     </property>
     <property type="enum" name="Window decorative detail">
       <description>Window decorative detail</description>
@@ -554,10 +581,13 @@
     <property type="freetext" name="Door form">
       <description>Door form</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Door/Colonial.png"><description>Door</description></term>
-        <term pictureURL="files/data/gallery/Door/HighWaist.png"><description>Door</description></term>
-        <term pictureURL="files/data/gallery/Door/Victorian.png"><description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/Colonial.png">Colonial (Low waisted, 6-panelled) c1840<description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/HighWaist.png">High waisted (c1915 onwards)<description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/Victorian.png">Victorial (Low waisted, 4 panelled) c1850-1900<description>Door</description></term>
       </lookup>
+    </property>
+    <property type="file" name="Door form other">
+      <description>Door form other</description>
     </property>
     <property type="enum" name="Door decorative details">
       <description>Door decorative details</description>
