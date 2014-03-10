@@ -133,6 +133,7 @@
               <Best_fit_date_of_construction/>
               <Date_of_alterations/>
               <Update/>
+              <generateDates/>
               <newDate/>
               <DateList/>
             </Dates>
@@ -447,7 +448,7 @@
           <label>{Save.Record}</label>
         </trigger>
       </group>
-      <group ref="Verandah">
+      <group ref="Verandah" faims_hidden="true">
         <label>{Verandah}</label>
         <input ref="Number_of_verandahs" faims_attribute_name="Number of verandahs" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Number_of_Verandahs}</label>
@@ -728,7 +729,7 @@
           <label>{Save.Record}</label>
         </trigger>
       </group>
-      <group ref="Alterations" faims_scrollable="false">
+      <group ref="Alterations" faims_scrollable="false" faims_hidden="true">
         <label>Alterations</label>
         <trigger ref="newAlteration">
           <label>New Alteration</label>
@@ -751,6 +752,9 @@
         </input>
         <trigger ref="Update">
           <label>{Save.Record}</label>
+        </trigger>
+        <trigger ref="generateDates">
+          <label>Generate Dates</label>
         </trigger>
         <trigger ref="newDate">
           <label>New Date</label>
