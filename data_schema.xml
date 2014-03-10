@@ -46,6 +46,12 @@
     <property name="Description" type="freetext">
       <description>Description of significant date</description>
     </property>
+    <property name="Min date" type="freetext">
+      <description>Mininum date in date range</description>
+    </property>
+    <property name="Max date" type="freetext">
+      <description>Maximum date in date range</description>
+    </property>
   </RelationshipElement>
 
   <!--Archaeological elements correspond with Heurist record types-->

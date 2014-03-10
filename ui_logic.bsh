@@ -437,21 +437,44 @@ reallyGenerateDates(){
 
 
 createDateReln(stringLookingFor, vocabToUpdateFrom){
+    String lowDate = null;
+    String highDate = null;
     Pattern r = Pattern.compile("([0-9]{4,4})");
     Matcher m = r.matcher(vocabToUpdateFrom);
     print(vocabToUpdateFrom);
     print(stringLookingFor);
-    while (m.find()){
-        print(m.group());
+    int count = 0;
+    while(m.find()) count++;
+    print(count);
+    if(count == 1){
+        m = r.matcher(vocabToUpdateFrom);
+        m.find();
+        lowDate = m.group();
+        highDate = lowDate;
+        print(highDate);
+
+    } else if (count == 2) {
+        m = r.matcher(vocabToUpdateFrom);
+        m.find();
+        lowDate = m.group();
+        print(lowDate);
+        m.find();
+        highDate = m.group();
+        print(highDate);
     }
+
+/*    while (m.find()){
+        print(m.group());
+    }*/
 
     m = r.matcher(vocabToUpdateFrom);
     if(m.find()) {
         String dateVocab = fetchOne("Select vocabid from vocabulary where vocabname = '"+stringLookingFor+"';").get(0);
         List attributes = createAttributeList();
         attributes.add(createRelationshipAttribute("Date", null, dateVocab, null));
-        String coolVocab = null;
         attributes.add(createRelationshipAttribute("Description", vocabToUpdateFrom, null, null));
+        attributes.add(createRelationshipAttribute("Min_date", lowDate, null, null));
+        attributes.add(createRelationshipAttribute("Max_date", highDate, null, null));
         String rel_id = saveRel(null, "Date", null, attributes);
         addReln(building_id, rel_id, null);
         updateAllBuildingDates();
