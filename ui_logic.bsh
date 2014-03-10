@@ -71,7 +71,8 @@ refreshBuildings() {
 newBuilding(){
     building_id = null;
     newTabGroup("Building");
-    load = true;
+    // load = true;
+    setFieldValue("Building/Building/Date", getCurrentTime());
 }
 loadBuilding() {
     building_id = getListItemValue();
@@ -147,7 +148,7 @@ loadBuildingAttributes() {
     
 
     populateRadioGroup("Building/Summary_data/Archaeological_materials", makeVocab("Archaeological materials"));
-    populateDropDown("Building/Summary_data/Heritage_listed", makeVocab("Heritage listed"));
+    populateHierarchicalDropDown("Building/Summary_data/Heritage_listed", "Heritage listed");
     populateRadioGroup("Building/Summary_data/Substantially_original", makeVocab("Substantially original"));
 }
 
@@ -436,10 +437,15 @@ reallyGenerateDates(){
 
 
 createDateReln(stringLookingFor, vocabToUpdateFrom){
-    Pattern r = Pattern.compile("[0-9]{4,4}");
+    Pattern r = Pattern.compile("([0-9]{4,4})");
     Matcher m = r.matcher(vocabToUpdateFrom);
-    print (vocabToUpdateFrom);
-    print (stringLookingFor);
+    print(vocabToUpdateFrom);
+    print(stringLookingFor);
+    while (m.find()){
+        print(m.group());
+    }
+
+    m = r.matcher(vocabToUpdateFrom);
     if(m.find()) {
         String dateVocab = fetchOne("Select vocabid from vocabulary where vocabname = '"+stringLookingFor+"';").get(0);
         List attributes = createAttributeList();

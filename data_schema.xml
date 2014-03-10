@@ -169,7 +169,7 @@
       <description>Forecourt space</description>
       <lookup>
         <term HeuristID="0-3374" StandardCode="">{Fenced_garden_space}<description/></term>
-        <term HeuristID="0-3373" StandardCode="">{None_(entry_directly_from_footpath)}<description/></term>
+        <term HeuristID="0-3373" StandardCode="">None (entry directly from footpath)<description/></term>
         <term HeuristID="0-3375" StandardCode="">{Unfenced_garden_space}<description/></term>
       </lookup>
     </property>
@@ -179,7 +179,7 @@
         <term HeuristID="0-3380" StandardCode="">{Avenue/drive}<description/></term>
         <term HeuristID="0-3378" StandardCode="">{Formal_plantings}<description/></term>
         <term HeuristID="0-3379" StandardCode="">{Informal_plantings}<description/></term>
-        <term HeuristID="0-3377" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3377" StandardCode="">None<description/></term>
         <term HeuristID="0-3382" StandardCode="">{Piers_flanking_steps}<description/></term>
         <term HeuristID="0-3381" StandardCode="">{Steps/stairs}<description/></term>
       </lookup>
@@ -208,7 +208,7 @@
         <term pictureURL="files/data/gallery/Roof/Flat.png">Flat<description>Roof</description></term>
         <term pictureURL="files/data/gallery/Roof/Butterfly.png">Butterfly<description>Roof</description></term>
         <term pictureURL="files/data/gallery/Roof/Bellcast.png">Bellcast<description>Roof</description></term>
-        <term pictureURL="files/data/gallery/Roof/MRoof.png">'M'Roof (until 1890)<description>Roof</description></term>
+        <term pictureURL="files/data/gallery/Roof/MRoof.png">M Roof (until 1890)<description>Roof</description></term>
         <term pictureURL="files/data/gallery/Roof/WellRoof.png">Well Roof(1890-1905)<description>Roof</description></term>
       </lookup>
     </property>
@@ -222,7 +222,7 @@
       <description>Gable detail bargeboard</description>
       <lookup>
         <term HeuristID="0-3362" StandardCode="">{Fretted_(cut_timber)}<description/></term>
-        <term HeuristID="0-3360" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3360" StandardCode="">None<description/></term>
         <term HeuristID="0-3361" StandardCode="">{Plain}<description/></term>
       </lookup>
     </property>
@@ -412,7 +412,7 @@
       <lookup>
         <term HeuristID="0-3452" StandardCode="">{Double_pane}<description/></term>
         <term HeuristID="0-3453" StandardCode="">{Multi-pane_(4_or_more)}<description/></term>
-        <term HeuristID="0-3552" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3552" StandardCode="">None<description/></term>
         <term HeuristID="0-3451" StandardCode="">{Single_pane}<description/></term>
       </lookup>
     </property>
@@ -424,7 +424,7 @@
       <lookup>
         <term HeuristID="0-3452" StandardCode="">{Double_pane}<description/></term>
         <term HeuristID="0-3453" StandardCode="">{Multi-pane_(4_or_more)}<description/></term>
-        <term HeuristID="0-3552" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3552" StandardCode="">None<description/></term>
         <term HeuristID="0-3451" StandardCode="">{Single_pane}<description/></term>
       </lookup>
     </property>
@@ -436,7 +436,7 @@
       <lookup>
         <term HeuristID="0-3452" StandardCode="">{Double_pane}<description/></term>
         <term HeuristID="0-3453" StandardCode="">{Multi-pane_(4_or_more)}<description/></term>
-        <term HeuristID="0-3552" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3552" StandardCode="">None<description/></term>
         <term HeuristID="0-3451" StandardCode="">{Single_pane}<description/></term>
       </lookup>
     </property>
@@ -457,7 +457,7 @@
       <lookup>
         <term HeuristID="0-3452" StandardCode="">{Double_pane}<description/></term>
         <term HeuristID="0-3453" StandardCode="">{Multi-pane_(4_or_more)}<description/></term>
-        <term HeuristID="0-3552" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3552" StandardCode="">None<description/></term>
         <term HeuristID="0-3451" StandardCode="">{Single_pane}<description/></term>
       </lookup>
     </property>
@@ -497,7 +497,7 @@
             <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
           </term>
         </term>
-        <term HeuristID="0-3467" StandardCode="">{NONE}<description/></term>
+        <term HeuristID="0-3467" StandardCode="">NONE<description/></term>
         <term HeuristID="0-3469" StandardCode="">{Stone}<description/>
           <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3503" StandardCode="">{Rendered}<description/>
             <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
@@ -538,7 +538,7 @@
         <term HeuristID="0-3475" StandardCode="">{Keystone}<description/></term>
         <term HeuristID="0-3474" StandardCode="">{Label_mould}<description>Projecting moulding across the top of a doorway or window</description></term>
         <term HeuristID="0-3478" StandardCode="">{Louvred_shutters}<description/></term>
-        <term HeuristID="0-3473" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3473" StandardCode="">None<description/></term>
         <term HeuristID="0-3480" StandardCode="">{Other_(specify)}<description/></term>
         <term HeuristID="0-3477" StandardCode="">{Pilasters}<description/></term>
         <term HeuristID="0-3479" StandardCode="">{Solid_shutters}<description/></term>
@@ -604,7 +604,7 @@
       <lookup>
         <term HeuristID="0-3521" StandardCode="">{Fanlight_(pane_above_door)}<description>Window incorporated into a doorcase above the door</description></term>
         <term HeuristID="0-3519" StandardCode="">{Glazed_panels_in_door}<description>Colonial buildings usually had clear glass panes, Gothic-style (1850) and later buildings began to use solid panes of glass as margin panes (narrow panes of glass beside the main panes) in stair and feature windows.  Painted, embossed and etched glass began to be used after this time.</description></term>
-        <term HeuristID="0-3518" StandardCode="">{None}<description/></term>
+        <term HeuristID="0-3518" StandardCode="">None<description/></term>
         <term HeuristID="0-3520" StandardCode="">{Sidelights_(narrow_panes_on_either_side_of_door)}<description>Glazed part of a doorway at the side of the door and below the fanlight</description></term>
       </lookup>
     </property>

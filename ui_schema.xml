@@ -270,7 +270,7 @@
         <input ref="Postcode" faims_attribute_name="Postcode" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
           <label>{Postcode}</label>
         </input>
-        <input ref="Date" faims_attribute_name="Date" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Date" faims_attribute_name="Date" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="true">
           <label>{Date_of_Recording}</label>
         </input>
         <!--We would like to see Dropdown-->
@@ -803,7 +803,7 @@
         <label>{Summary_Data}</label>
         <!--We would like to see Radiogroup-->
         <select1 ref="Archaeological_materials" faims_attribute_name="Archaeological materials" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Is_building_likely_to_have_archaeological_material/deposits?}</label>
+          <label>Would building have arch. mat./dep.?</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
