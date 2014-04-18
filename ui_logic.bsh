@@ -178,12 +178,13 @@ updateAllBuildingAlterations(){
 
 updateAllBuildingDates(){
     if (!isNull(building_id)){
-        buildingDates = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText)" +
-            "from (select relationshipid, vocabname, freetext " +
+        buildingDates = fetchAll("select relationshipid, group_concat( case attributename when 'Description' then substr(replace(replace(freetext,'_',' '),'{',''), 1, instr(freetext, '(')-2 )||': ' when 'Min date' then FreeText || '–' else freetext || ' ' end , '')" +
+            "from (select relationshipid, vocabname, freetext, attributename " +
                   "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
                   "left outer join vocabulary using (vocabid) " +
-                  "join relntype using (relntypeid)" +
-                 "where relntypename = 'Date'" +
+                  "join relntype using (relntypeid) " +
+                  "join attributekey using (attributeid) " +
+                   "where relntypename = 'Date' " +
                    "and relationshipid in (select relationshipid " +
                                             "from aentreln " +
                                            "where uuid = '" + building_id + "')" +
@@ -399,16 +400,18 @@ reallyGenerateDates(){
     // Fetch all related dates
     saveBuilding();
     if (!isNull(building_id)){
-        buildingDates = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText)" +
-            "from (select relationshipid, vocabname, freetext " +
+        buildingDates = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText) " +
+            "from (select distinct relationshipid, vocabname, freetext " +
                   "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
                   "left outer join vocabulary using (vocabid) " +
-                  "join relntype using (relntypeid)" +
-                 "where relntypename = 'Date'" +
-                   "and relationshipid in (select relationshipid " +
-                                            "from aentreln " +
-                                           "where uuid = '" + building_id + "')" +
-               ")" +
+                  "join relntype using (relntypeid) " +
+                  "join attributekey using (attributeid) " +
+                  "where relntypename = 'Date' " +
+                  "and attributename != 'Description' " +
+                  "and relationshipid in (select relationshipid " +
+                                           "from aentreln " +
+                                          "where uuid = '" + building_id + "')" +
+                 ")" +
         "group by relationshipid;");
     } else {
         Object buildingDates = fetchAll("select '', '';");
@@ -432,7 +435,7 @@ reallyGenerateDates(){
     if (!isNull(getFieldValue("Building/Components/Wall_quoins")))createDateReln("Date obtained from quoins:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Wall_quoins")+"';").get(0));
     if (!isNull(getFieldValue("Building/Roof/Chimney_form")))createDateReln("Date obtained from chimneys:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Chimney_form")+"';").get(0));
     //if (!isNull(getFieldValue("Building/Components/Window_decorative_detail")))createDateReln("Date obtained from windows", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_decorative_detail")+"';").get(0));
-    createDateReln("Any other dateable features:", "Fill me in (e.g. 1984)");
+    //createDateReln("Any other dateable features:", "Fill me in (e.g. 1984)");
 }
 
 
@@ -473,8 +476,8 @@ createDateReln(stringLookingFor, vocabToUpdateFrom){
         List attributes = createAttributeList();
         attributes.add(createRelationshipAttribute("Date", null, dateVocab, null));
         attributes.add(createRelationshipAttribute("Description", vocabToUpdateFrom, null, null));
-        attributes.add(createRelationshipAttribute("Min_date", lowDate, null, null));
-        attributes.add(createRelationshipAttribute("Max_date", highDate, null, null));
+        attributes.add(createRelationshipAttribute("Min date", lowDate, null, null));
+        attributes.add(createRelationshipAttribute("Max date", highDate, null, null));
         String rel_id = saveRel(null, "Date", null, attributes);
         addReln(building_id, rel_id, null);
         updateAllBuildingDates();
