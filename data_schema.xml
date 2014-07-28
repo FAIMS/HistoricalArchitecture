@@ -59,13 +59,6 @@
   <!--BUILDING-->
   <ArchaeologicalElement name="Building">
     <description>Building</description>
-    <property type="enum" name="Cornerstone">
-      <description>Cornerstone</description>
-      <lookup>
-        <term HeuristID="0-3299" StandardCode="No">{No}<description>No</description></term>
-        <term HeuristID="0-3298" StandardCode="Yes">{Yes}<description>Yes</description></term>
-      </lookup>
-    </property>
     <property type="freetext" name="Street Address" isIdentifier="true">
       <description>Please note the suburb and postcode if you know it.</description>
     </property>
@@ -84,7 +77,7 @@
         <term HeuristID="0-3306" StandardCode="">{Commercial}<description/></term>
         <term HeuristID="0-3305" StandardCode="">{Domestic/private}<description/></term>
         <term HeuristID="0-3308" StandardCode="">{Educational}<description/></term>
-        <term HeuristID="0-3311" StandardCode="">{Other}<description/></term>
+        <term HeuristID="0-3311" StandardCode="">{zOther}<description/></term>
         <term HeuristID="0-3307" StandardCode="">{Religious}<description/></term>
         <term HeuristID="0-3309" StandardCode="">{State/government}<description/></term>
       </lookup>
@@ -114,6 +107,12 @@
     </property>
     <property type="float" name="Percentage of grounds">
       <description>The grounds is the block of land on which the building is constructed.  This asks you to estimate how large the building is in relation to the block it is built on, e.g. is the block twice as large as the building, or is the building so large that it takes up most of its block?  Write this estimate as a percentage, e.g. if the block is twice as large, write 50% (the building is half the size of the grounds).  If the block and building are nearly the same size, write 90% (the block is only 10% larger than the building).</description>
+      <lookup>
+        <term>{aLess_than_50}<description/></term>
+        <term>{b50-75}<description/></term>
+        <term>{c75-90}<description/></term>
+        <term>{dGreater_than_90}<description/></term>
+      </lookup>
     </property>
     <property type="enum" name="Qualities">
       <description>Qualities</description>
@@ -152,7 +151,7 @@
     <property type="enum" name="Orientation facade faces">
       <description>Orientation facade faces</description>
       <lookup>
-        <term HeuristID="0-3352" StandardCode="">{Other}<description/></term>
+        <term HeuristID="0-3352" StandardCode="">{zOther}<description/></term>
         <term HeuristID="0-3351" StandardCode="">{Park/Open_space}<description/></term>
         <term HeuristID="0-3350" StandardCode="">{Rear/side_of_other_building}<description/></term>
         <term HeuristID="0-3349" StandardCode="">{Road}<description/></term>
@@ -194,7 +193,7 @@
       <description>Outbuildings</description>
       <lookup>
         <term HeuristID="0-3384" StandardCode="">{None}<description/></term>
-        <term HeuristID="0-3387" StandardCode="">{Other}<description/></term>
+        <term HeuristID="0-3387" StandardCode="">{zOther}<description/></term>
         <term HeuristID="0-3385" StandardCode="">{Outhouse}<description/></term>
         <term HeuristID="0-3386" StandardCode="">{Shed}<description/></term>
       </lookup>
@@ -340,31 +339,22 @@
     <property type="enum" name="Verandah posts">
       <description>Verandah posts</description>
       <lookup>
-        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/montage.png" HeuristID="0-3425" StandardCode="">{Brick}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png">Brick/Stone Square<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png">Brick/stone tapered<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png">Masonry and timber c1915<description>Verandah Posts</description></term>
-        </term>
-        <term pictureURL="files/data/gallery/Verandah Posts/Cast/montage.png" HeuristID="0-3422" StandardCode="">{Cast_iron}<description>Decorative iron that is produced by pouring it into a mould.</description>
-          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Flat c1870.png">Flat c1870<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Cast/Round and classical c1890.png">Round and classical c1890<description>Verandah Posts</description></term>
-        </term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png">Brick/Stone Square<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png">Brick/stone tapered<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png">Masonry and timber c1915<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Cast/Flat c1870.png">Flat c1870<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Cast/Round and classical c1890.png">Round and classical c1890<description>Verandah Posts</description></term>
         <term HeuristID="0-3426" StandardCode="">{Combination}<description/></term>
-        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/montage.png" HeuristID="0-3424" StandardCode="">{Stone}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png">Brick/Stone Square<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png">Brick/stone tapered<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png">Masonry and timber c1915<description>Verandah Posts</description></term>
-        </term>
-        <term pictureURL="files/data/gallery/Verandah Posts/Timber/montage.png" HeuristID="0-3421" StandardCode="">{Timber}<description/>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Half turned half square c1895.png">Half turned and half square c1895<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square chamfered.png">Square chamfered<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square panelled c1850.png">Square panelled c1850<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square plain.png">Square plain<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square tapered.png">Square tapered<description>Verandah Posts</description></term>
-          <term pictureURL="files/data/gallery/Verandah Posts/Timber/Turned c1905.png">Turned c1905<description>Verandah Posts</description></term>
-        </term>
-        <term pictureURL="files/data/gallery/Verandah Posts/Wrought iron.png" HeuristID="0-3423" StandardCode="">{Wrought_iron}<description>Decorative iron work that is produced by twisting or bending it into a pattern.</description>
-        </term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone square.png">Brick/Stone Square<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Brick or stone tapered.png">Brick/stone tapered<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Masonry/Masonry and timber c1915.png">Masonry and timber c1915<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/Half turned half square c1895.png">Half turned and half square c1895<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square chamfered.png">Square chamfered<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square panelled c1850.png">Square panelled c1850<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square plain.png">Square plain<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/Square tapered.png">Square tapered<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Timber/Turned c1905.png">Turned c1905<description>Verandah Posts</description></term>
+        <term pictureURL="files/data/gallery/Verandah Posts/Wrought iron.png" HeuristID="0-3423" StandardCode="">{Wrought_iron}<description>Decorative iron work that is produced by twisting or bending it into a pattern.</description></term>
       </lookup>
     </property>
     <property type="file" name="Verandah posts other">
@@ -374,12 +364,11 @@
       <description>Wall material</description>
       <lookup>
         <term HeuristID="0-3429" StandardCode="">{Brick}<description/></term>
-        <term HeuristID="0-3449" StandardCode="">{Clapboard}<description>abutting boards</description></term>
         <term HeuristID="0-3433" StandardCode="">{Combination}<description/></term>
         <term HeuristID="0-3431" StandardCode="">{Corrugated_iron}<description/></term>
-        <term HeuristID="0-3428" StandardCode="">{Rendered_(or_uncertain)}<description/><term HeuristID="0-3444" StandardCode="">{Roughcast}<description>Plaster or mortar with pebbles/gravel used to give a rough texture to a wall.</description></term><term HeuristID="0-3442" StandardCode="">{Scored_ashlar}<description>lines engraved to resemble stonework</description></term><term HeuristID="0-3446" StandardCode="">{Stucco/cement_render}<description>or any other kind of render</description></term></term>
         <term HeuristID="0-3430" StandardCode="">{Stone}<description/></term>
-        <term HeuristID="0-3432" StandardCode="">{Timber}<description/><term HeuristID="0-3448" StandardCode="">{Weatherboard}<description> overlapping boards</description></term></term>
+        <term HeuristID="0-3432" StandardCode="">{Timber}<description/></term>
+        <term>{zOther}<description/></term>
       </lookup>
     </property>
     <property type="freetext" name="Wall brick">
@@ -391,8 +380,24 @@
         <term pictureURL="files/data/gallery/Walls/Brick Masonry/Stretcher.png">Stretcher<description>Brick Walls</description></term>
       </lookup>
     </property>
+    <property type="enum" name="Wall rendered">
+      <description>Is the wall rendered?</description>
+      <lookup>
+        <term>Yes<description/></term>
+        <term>No<description/></term>
+      </lookup>
+    </property>
+    <property type="freetext" name="Wall timber">
+      <description>The type of component in timber wall, eg 'weatherboard'. </description>
+      <lookup>
+        <term pictureURL="">No Observation<description></description></term>
+        <term pictureURL="">Clapboard<description></description></term>
+        <term pictureURL="">Weatherboard<description></description></term>
+        <term pictureURL="">Other<description></description></term>
+      </lookup>
+    </property>
     <property type="freetext" name="Wall masonry">
-      <description>The method of overlapping bricks or stones to form a wall. </description>
+      <description>The method of overlapping stones to form a wall. </description>
       <lookup>
         <term pictureURL="files/data/gallery/Walls/Stone Masonry/Ashlar.png">Ashlar<description>Stone Walls</description></term>
         <term pictureURL="files/data/gallery/Walls/Stone Masonry/Irregular.png">Irregular<description>Stone Walls</description></term>
@@ -416,10 +421,10 @@
     <property type="enum" name="Window sash">
       <description>Window Sash</description>
       <lookup>
-        <term HeuristID="0-3452" StandardCode="">{Double_pane}<description/></term>
-        <term HeuristID="0-3453" StandardCode="">{Multi-pane_(4_or_more)}<description/></term>
-        <term HeuristID="0-3552" StandardCode="">None<description/></term>
-        <term HeuristID="0-3451" StandardCode="">{Single_pane}<description/></term>
+        <term HeuristID="0-3552" StandardCode="">{aNone}<description/></term>
+        <term HeuristID="0-3451" StandardCode="">{bSingle_pane}<description/></term>
+        <term HeuristID="0-3452" StandardCode="">{cDouble_pane}<description/></term>
+        <term HeuristID="0-3453" StandardCode="">{dMulti-pane_(4_or_more)}<description/></term>
       </lookup>
     </property>
     <property type="float" name="Number of sashes">
@@ -485,45 +490,18 @@
       <description>Total number of replacement windows</description>
     </property>
     <property type="enum" name="Window arch lintel">
-      <description>Window Arch/Lintel</description>
+      <description>The shape of the arch above the window</description>
       <lookup>
-        <term HeuristID="0-3468" StandardCode="">{Brick}<description/>
-          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3470" StandardCode="">{Rendered}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi Circular Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png">Shallow Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
-          </term>
-          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3471" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat <description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi-circular Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png"> Shallow Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
-          </term>
-        </term>
-        <term HeuristID="0-3467" StandardCode="">NONE<description/></term>
-        <term HeuristID="0-3469" StandardCode="">{Stone}<description/>
-          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3503" StandardCode="">{Rendered}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi Circular Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png">Shallow Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
-          </term>
-          <term pictureURL="files/data/gallery/WindowArch/montage.png" HeuristID="0-3504" StandardCode="">{Unrendered_(may_or_may_not_be_painted)}<description/>
-            <term pictureURL="files/data/gallery/WindowArch/FlatArch.png">Flat Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/GothicArch.png">Gothic Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/SemiCircArch.png">Semi Circular Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/ShallowArch.png">Shallow Arch<description/></term>
-            <term pictureURL="files/data/gallery/WindowArch/Solid.png">Solid<description/></term>
-          </term>
-        </term>
+        <term>{Flat}<description/></term>
+        <term>{Gothic_Arch}<description/></term>
+        <term>{Semi_circular_Arch}<description/></term>
+        <term>{Shallow_Arch}<description/></term>
+        <term>{Solid}<description/></term>
+        <term>{zOther}<description/></term>  
       </lookup>
     </property>
     <property type="file" name="Window arch lintel other">
-      <description>Plan Sketch</description>
+      <description>Window Arch Lintel Other</description>
     </property>
     <property type="freetext" name="Window head">
       <description>Window head</description>
@@ -545,7 +523,7 @@
         <term HeuristID="0-3474" StandardCode="">{Label_mould}<description>Projecting moulding across the top of a doorway or window</description></term>
         <term HeuristID="0-3478" StandardCode="">{Louvred_shutters}<description/></term>
         <term HeuristID="0-3473" StandardCode="">None<description/></term>
-        <term HeuristID="0-3480" StandardCode="">{Other_(specify)}<description/></term>
+        <term HeuristID="0-3480" StandardCode="">{zOther_(specify)}<description/></term>
         <term HeuristID="0-3477" StandardCode="">{Pilasters}<description/></term>
         <term HeuristID="0-3479" StandardCode="">{Solid_shutters}<description/></term>
       </lookup>
@@ -572,38 +550,55 @@
       <lookup>
         <term HeuristID="0-3497" StandardCode="">{Brick}<description/><term HeuristID="0-3499" StandardCode="">{Rendered}<description/></term><term HeuristID="0-3500" StandardCode="">{Unrendered}<description/></term></term>
         <term HeuristID="0-3498" StandardCode="">{Stone}<description/><term HeuristID="0-3501" StandardCode="">{Rendered}<description/></term><term HeuristID="0-3502" StandardCode="">{Unrendered}<description/></term></term>
+        <term HeuristID="0-3515" StandardCode="">{Gothic_arch}<description/></term>
+        <term HeuristID="0-3516" StandardCode="">{zOther_(specify)}<description/></term>
+        <term HeuristID="0-3514" StandardCode="">{Semi-circular}<description/></term>
+        <term HeuristID="0-3513" StandardCode="">{Shallow_arch}<description/></term>
+        <term HeuristID="0-3512" StandardCode="">{Solid_block}<description/></term>
       </lookup>
     </property>
     <property type="enum" name="Door lintel form">
       <description>Door lintel form</description>
       <lookup>
         <term HeuristID="0-3509" StandardCode="">{Gothic_arch}<description/></term>
-        <term HeuristID="0-3510" StandardCode="">{Other_(specify)}<description/></term>
+        <term HeuristID="0-3510" StandardCode="">{zOther_(specify)}<description/></term>
         <term HeuristID="0-3508" StandardCode="">{Semi-circular}<description/></term>
         <term HeuristID="0-3507" StandardCode="">{Shallow_arch}<description/></term>
-        <term HeuristID="0-3506" StandardCode="">{Solid_block_(or_rendered_and_uncertain)}<description/></term>
+        <term HeuristID="0-3506" StandardCode="">{Solid_block}<description/></term>
       </lookup>
     </property>
-    <property type="freetext" name="Door form">
+    <property type="enum" name="Door form">
       <description>Door form</description>
       <lookup>
         <term pictureURL="files/data/gallery/Door/Colonial.png">Colonial (Low waisted, 6-panelled) c1840<description>Door</description></term>
         <term pictureURL="files/data/gallery/Door/HighWaist.png">High waisted (c1915 onwards)<description>Door</description></term>
-        <term pictureURL="files/data/gallery/Door/Victorian.png">Victorial (Low waisted, 4 panelled) c1850-1900<description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/Victorian.png">Victorian (Low waisted, 4 panelled) c1850-1900<description>Door</description></term>
+        <term pictureURL="files/data/gallery/Door/Solid.png">Solid<description>Door</description></term>
+      </lookup>
+    </property>
+    <property type="enum" name="Decorative Timber">
+      <description>Decorative elements in the timber wall.</description>
+      <lookup>
+        <term pictureURL="files/data/gallery/Wall/1.png">{0No_Observation}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/2.png">{Clapboard}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/3.png">{Weatherboard}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/7.png">{zOther}<description>Wall</description></term>
+      </lookup>
+    </property>
+    <property type="enum" name="Window Type">
+      <description>The type of window, eg 'sash', 'casement'.</description>
+      <lookup>
+        <term pictureURL="files/data/gallery/Wall/1.png">{0No_Observation}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/2.png">{Sash}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/3.png">{Casement}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/4.png">{Louvres}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/5.png">{Bay}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/6.png">{Dormer}<description>Wall</description></term>
+        <term pictureURL="files/data/gallery/Wall/7.png">{zOther}<description>Wall</description></term>
       </lookup>
     </property>
     <property type="file" name="Door form other">
       <description>Door form other</description>
-    </property>
-    <property type="enum" name="Door decorative details">
-      <description>Door decorative details</description>
-      <lookup>
-        <term HeuristID="0-3515" StandardCode="">{Gothic_arch}<description/></term>
-        <term HeuristID="0-3516" StandardCode="">{Other_(specify)}<description/></term>
-        <term HeuristID="0-3514" StandardCode="">{Semi-circular}<description/></term>
-        <term HeuristID="0-3513" StandardCode="">{Shallow_arch}<description/></term>
-        <term HeuristID="0-3512" StandardCode="">{Solid_block_(or_rendered_and_uncertain)}<description/></term>
-      </lookup>
     </property>
     <property type="enum" name="Door glazing">
       <description>Door glazing</description>
@@ -626,9 +621,9 @@ Plain glazing means clear, see-through glass.</description>
         <term HeuristID="0-3492" StandardCode="">{Stained_glass_(single_panes)}<description>Glass that has had colour added to the pane.  Can be a single solid pane of colour, or incorporated into a geometrical or figurative design.  Note that some sources also refer to this as ‘leadlight’.</description></term>
       </lookup>
     </property>
+
     <property type="enum" name="Archaeological materials">
-      <description>This is your assessment of the likelihood that good subsurface deposits may still exist in situ.  You will base this on the extent of ground disturbance to the block, the age of the building (structures built after 1880 are more likely to have been part of municipal rubbish disposal systems (i.e. public dumps), rather than disposing of rubbish in back yard deposits.  Very early rubbish disposal practices tended to bury rubbish in small pits in the back yard), and whether you think there are likely to be good excavate-able deposits (remember that pit toilets and wells usually contain the best and stratified material).  For more information on rubbish disposal practices in 19th century Adelaide, see ‘Turner’s Paddock and Historic Rubbish Disposal in Adelaide’:
-http://ehlt.flinders.edu.au/archaeology/department/research/</description>
+      <description>This is your assessment of the likelihood that good subsurface deposits may still exist in situ.  You will base this on the extent of ground disturbance to the block, the age of the building (structures built after 1880 are more likely to have been part of municipal rubbish disposal systems (i.e. public dumps), rather than disposing of rubbish in back yard deposits.  Very early rubbish disposal practices tended to bury rubbish in small pits in the back yard), and whether you think there are likely to be good excavate-able deposits (remember that pit toilets and wells usually contain the best and stratified material).</description>
       <lookup>
         <term HeuristID="0-3299" StandardCode="No">{No}<description>No</description></term>
         <term HeuristID="0-3298" StandardCode="Yes">{Yes}<description>Yes</description></term>
