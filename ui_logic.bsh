@@ -1,577 +1,23 @@
+import java.util.concurrent.Callable;
 import java.util.regex;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 User user; // dont touch
 String userid;
 
-setSyncEnabled(true);
-setFileSyncEnabled(true);
-
 /*** control ***/
-onEvent("control", "show", "refreshBuildings()");
-onEvent("control", "load", "loadBuildingAttributes();");
-onEvent("control", "load", "loadAlterationAttributes();");
-onEvent("control", "load", "loadDateAttributes();");
-onEvent("control/control/connectexternal", "click", "startExternalGPS()");
-onEvent("control/control/connectinternal", "click", "startInternalGPS()");
-
-/*** ArchEnt: Building ***/
-
-onEvent("control/building/BuildingList", "click", "loadBuilding()");
-onEvent("control/building/newBuilding", "click", "newBuilding()");
-
-// onEvent("Building", "show", "showAlterationsAndVeradahTabs();");
-// onEvent("control/building", "show", "load = false;");
-// onEvent("Building/Building/Alterations", "click", "showAlterations(false)");
-// onEvent("Building/Building/Verandah", "click", "showVerandah(false)");
-
-onEvent("Building", "show", "hideTabs()");
-onEvent("Building/Building/Alterations", "click", "showTab(\"Building/Alterations\")");
-onEvent("Building/Building/Verandah", "click", "showTab(\"Building/Verandah\")");
-
-onEvent("Building/Building/Update", "delayclick", "saveBuilding()");
-onEvent("Building/Roof/Update", "delayclick", "saveBuilding()");
-onEvent("Building/Verandah/Update", "delayclick", "saveBuilding()");
-onEvent("Building/Components/Update", "delayclick", "saveBuilding()");
-onEvent("Building/Walls/Update", "delayclick", "saveBuilding()");
-onEvent("Building/Summary_data/Update", "delayclick", "saveBuilding()");
-
-onEvent("Building/Alterations/newAlteration", "click", "newAlteration()");
-onEvent("Building/Alterations/AlterationList", "click", "loadAlteration()");
-onEvent("Building/Alterations", "show", "updateAllBuildingAlterations()");
-
-onEvent("Building/Dates", "show", "updateAllBuildingDates()");
-onEvent("Building/Dates/Update", "delayclick", "saveBuilding()");
-onEvent("Building/Dates/generateDates", "delayclick", "generateDates()");
-onEvent("Building/Dates/newDate", "click", "newDate()");
-onEvent("Building/Dates/DateList", "click", "loadDate()");
-
-onEvent("Building/Building/attachPhoto", "click", "attachPictureTo(\"Building/Building/Photo\")");
-
-onEvent("Building/Building/attachPlan_sketch", "click", "attachFileTo(\"Building/Building/Plan_sketch\")");
-onEvent("Building/Roof/attachGable_sketch", "click", "attachFileTo(\"Building/Roof/Gable_form_other\")");
-onEvent("Building/Roof/attachFinial_sketch", "click", "attachFileTo(\"Building/Roof/Finial_other\")");
-onEvent("Building/Verandah/attachVerandahRoof_sketch", "click", "attachFileTo(\"Building/Verandah/Verandah_roof_form_other\")");
-onEvent("Building/Verandah/attachVerandahPosts_sketch", "click", "attachFileTo(\"Building/Verandah/Verandah_posts_other\")");
-onEvent("Building/Components/attachWindowArch_sketch", "click", "attachFileTo(\"Building/Components/Window_arch_lintel_other\")");
-onEvent("Building/Components/attachWindowHead_sketch", "click", "attachFileTo(\"Building/Components/Window_head_other\")");
-
-onEvent("Building/Building/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
-onEvent("Building/Roof/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
-onEvent("Building/Verandah/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
-onEvent("Building/Components/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
-
-String building_id = null;
+onEvent("control", "show", "refreshBuildings();removeNavigationButtons();");
+onEvent("control/building/BuildingList", "click", "loadBuilding();");
+onEvent("control/building/newBuilding", "click", "newBuilding();");
 
 refreshBuildings() {
-    populateList("control/building/BuildingList", fetchEntityList("Building"));
-}
-
-newBuilding(){
-    building_id = null;
-    newTabGroup("Building");
-    // load = true;
-    setFieldValue("Building/Building/Date", getCurrentTime());
-}
-loadBuilding() {
-    building_id = getListItemValue();
-    loadBuildingFrom(building_id);
-}
-loadBuildingFrom(entid) {
-    building_id = entid;
-    if (isNull(entid)) return;
-    showTabGroup("Building", entid);    
-}
-
-saveBuilding() {
-    if (isNull(getFieldValue("Building/Building/Street_address"))) { 
-        showWarning("Validation Error", "Cannot save Building without Street Address.");
-        return;
-    }
-    if (!isNull(building_id)) {
-        entity = fetchArchEnt(building_id);
-    }
-    saveTabGroup("Building", building_id, null, null, "building_id = getLastSavedRecordId();");
-}
- 
-loadBuildingAttributes() {
-    populateDropDown("Building/Building/Original_purpose", makeVocab("Original purpose"));
-    populateRadioGroup("Building/Building/Change_of_purpose", makeVocab("Change of purpose"));
-    // populateDropDown("Building/Building/Alterations", makeVocab("Alterations"));
-    populateRadioGroup("Building/Building/Scale", makeVocab("Scale"));
-    populateRadioGroup("Building/Building/Qualities", makeVocab("Qualities"));
-    populateDropDown("Building/Building/Orientation_of_facade", makeVocab("Orientation of facade"));
-    populateDropDown("Building/Building/Orientation_facade_faces", makeVocab("Orientation facade faces"));
-    // populateDropDown("Building/Building/Verandah", makeVocab("Verandah"));
-    populateDropDown("Building/Building/Forecourt_space", makeVocab("Forecourt space"));
-    populateDropDown("Building/Building/Forecourt_decoration", makeVocab("Forecourt decoration"));
-    populateDropDown("Building/Building/Outbuildings", makeVocab("Outbuildings"));
-    populatePictureGallery("Building/Building/Plan", makePictureGallery("Plan"));
-
-    populateRadioGroup("Building/Roof/Gable_detail_bargeboard", makeVocab("Gable detail bargeboard"));
-    populatePictureGallery("Building/Roof/Gable_form", makePictureGallery("Gable form"));
-    populateHierarchicalPictureGallery("Building/Roof/Finial", "Finial");
-    populateDropDown("Building/Roof/Chimney_form", makeVocab("Chimney form"));
-    populateDropDown("Building/Roof/Chimney_orientation", makeVocab("Chimney orientation"));
-    populateDropDown("Building/Roof/Chimney_decorative_detail", makeVocab("Chimney decorative detail"));
-    populatePictureGallery("Building/Roof/Roof_form", makePictureGallery("Roof form"));
-
-    populateRadioGroup("Building/Verandah/Location", makeVocab("Location"));
-    populateRadioGroup("Building/Verandah/Verandah_status", makeVocab("Verandah status"));
-    populateDropDown("Building/Verandah/Verandah_decorative_detail", makeVocab("Verandah decorative detail"));
-    populatePictureGallery("Building/Verandah/Verandah_posts", makePictureGallery("Verandah posts"));
-    populatePictureGallery("Building/Verandah/Verandah_roof_form", makePictureGallery("Verandah roof form"));
-
-    populateDropDown("Building/Walls/Wall_material", makeVocab("Wall material"));
-    populatePictureGallery("Building/Walls/Wall_brick", makePictureGallery("Wall brick"));
-    populateRadioGroup("Building/Walls/Wall_rendered", makeVocab("Wall rendered"));
-    populatePictureGallery("Building/Walls/Wall_timber", makePictureGallery("Wall timber"));
-    populatePictureGallery("Building/Walls/Decorative_Timber", makePictureGallery("Decorative Timber"));
-    populatePictureGallery("Building/Walls/Wall_masonry", makePictureGallery("Wall masonry"));
-    populatePictureGallery("Building/Walls/Wall_quoins", makePictureGallery("Wall quoins"));
-    populateDropDown("Building/Components/Window_sash", makeVocab("Window sash"));
-    populateDropDown("Building/Components/Window_casement", makeVocab("Window casement"));
-    populateDropDown("Building/Components/Window_bay", makeVocab("Window bay"));
-
-    populatePictureGallery("Building/Components/Window_Type", makePictureGallery("Window Type"));
-    populateHierarchicalPictureGallery("Building/Components/Window_arch_lintel", "Window arch/lintel");
-    populatePictureGallery("Building/Components/Window_head", makePictureGallery("Window head"));
-    populateDropDown("Building/Components/Bay_form", makeVocab("Bay form"));
-    populateDropDown("Building/Components/Window_dormer", makeVocab("Window dormer"));
-    populateDropDown("Building/Components/Replacements", makeVocab("Replacements"));
-    populateHierarchicalPictureGallery("Building/Components/Window_arch_lintel", "Window arch lintel");
-    populateCheckBoxGroup("Building/Components/Window_decorative_detail", makeVocab("Window decorative detail"));
-    populateDropDown("Building/Components/Window_glazing", makeVocab("Window glazing"));
-    populateDropDown("Building/Components/Door_lintel_arch", makeVocab("Door lintel/arch"));
-    populateDropDown("Building/Components/Door_lintel_form", makeVocab("Door lintel form"));
-    populateDropDown("Building/Components/Door_glazing", makeVocab("Door glazing"));
-    populateDropDown("Building/Components/Door_glazing_detail", makeVocab("Door glazing detail"));
-    populatePictureGallery("Building/Components/Door_form", makePictureGallery("Door form"));
-    
-
-    populateRadioGroup("Building/Summary_data/Archaeological_materials", makeVocab("Archaeological materials"));
-    populateHierarchicalDropDown("Building/Summary_data/Heritage_listed", "Heritage listed");
-    populateRadioGroup("Building/Summary_data/Substantially_original", makeVocab("Substantially original"));
-}
-
-loadDateAttributes() {
-    populateDropDown("Date/Date/Date", makeVocab("Date"));
-}
-
-updateAllBuildingAlterations(){
-    if (!isNull(building_id)){
-        buildingAlterations = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText)" +
-            "from (select relationshipid, vocabname, freetext " +
-                  "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
-                  "left outer join vocabulary using (vocabid) " +
-                  "join relntype using (relntypeid)" +
-                 "where relntypename = 'Alteration'" +
-                   "and relationshipid in (select relationshipid " +
-                                            "from aentreln " +
-                                           "where uuid = '" + building_id + "')" +
-               ")" +
-        "group by relationshipid;");
-        populateList("Building/Alterations/AlterationList", buildingAlterations);
-    } else {
-        Object empty = fetchAll("select '', '';");
-        populateList("Building/Alterations/AlterationList",  empty);
-    }
-}
-
-updateAllBuildingDates(){
-    if (!isNull(building_id)){
-        buildingDates = fetchAll("select relationshipid, group_concat( case attributename when 'Description' then substr(replace(replace(freetext,'_',' '),'{',''), 1, instr(freetext, '(')-2 )||': ' when 'Min date' then FreeText || '–' else freetext || ' ' end , '')" +
-            "from (select relationshipid, vocabname, freetext, attributename " +
-                  "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
-                  "left outer join vocabulary using (vocabid) " +
-                  "join relntype using (relntypeid) " +
-                  "join attributekey using (attributeid) " +
-                   "where relntypename = 'Date' " +
-                   "and relationshipid in (select relationshipid " +
-                                            "from aentreln " +
-                                           "where uuid = '" + building_id + "')" +
-               ")" +
-        "group by relationshipid;");
-        populateList("Building/Dates/DateList", buildingDates);
-    } else {
-        Object empty = fetchAll("select '', '';");
-        populateList("Building/Dates/DateList",  empty);
-    }
-}
-
-hideTabs() {
-    cancelTab("Building/Verandah", false);
-    cancelTab("Building/Alterations", false);
-    if(!isNull(building_id)) {
-        buildingAlterations = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText)" +
-                "from (select relationshipid, vocabname, freetext " +
-                      "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
-                      "left outer join vocabulary using (vocabid) " +
-                      "join relntype using (relntypeid)" +
-                     "where relntypename = 'Alteration'" +
-                       "and relationshipid in (select relationshipid " +
-                                                "from aentreln " +
-                                               "where uuid = '" + building_id + "')" +
-                   ")" +
-            "group by relationshipid;");
-        if(buildingAlterations.size() > 0) {
-            showTab("Building/Alterations");
+    fetchEntityList("Building", new FetchCallback() {
+        onFetch(entities) {
+            populateList("control/building/BuildingList", entities);
         }
-        print(getFieldValue("Building/Verandah/Verandah_decorative_detail"));
-        if(!getFieldValue("Building/Verandah/Number_of_verandahs").equals("")
-            || !getFieldValue("Building/Verandah/Number_of_porticos").equals("") 
-            || !isNull(getFieldValue("Building/Verandah/Location"))
-            || !isNull(getFieldValue("Building/Verandah/Verandah_status"))
-            || !isNull(getFieldValue("Building/Verandah/Verandah_roof_form"))
-            || !isNull(getFieldValue("Building/Verandah/Verandah_roof_form_other"))
-            || !isNull(getFieldValue("Building/Verandah/Verandah_posts"))
-            || !isNull(getFieldValue("Building/Verandah/Verandah_posts_other"))) {
-            showTab("Building/Verandah");
-        }
-        showTab("Building/Building");
-    }
+    });
 }
-
-// Boolean load = false;
-// showAlterationsAndVeradahTabs() {
-//     cancelTab("Building/Verandah", false);
-//     cancelTab("Building/Alterations", false);
-//     showAlterations(true);
-//     load = false;
-//     showVerandah(true);
-// }
-// showAlterations(returnToBuilding){
-//     Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Alterations")+"';");   
-//     String alteration = values.get(0);
-//     if(alteration.equals("{Yes}")) {
-//         if(returnToBuilding) {
-//             showTab("Building/Alterations");
-//             showTab("Building/Building");
-//         } else {
-//             if(load) {
-//                 showTab("Building/Alterations");
-//             } else {
-//                 showTab("Building/Building");
-//                 load = true;
-//             }   
-//         }
-//     }
-// }
-// showVerandah(returnToBuilding){
-//     Object values = fetchOne("select vocabName from vocabulary where vocabid = '"+getFieldValue("Building/Building/Verandah")+"';");
-//     String verandah = values.get(0);
-//     if(verandah.equals("{Yes}")) {
-//         if(returnToBuilding) {
-//             showTab("Building/Verandah");
-//             showTab("Building/Building");
-//         } else {
-//             if(load) {
-//                 showTab("Building/Verandah");
-//             } else {
-//                 showTab("Building/Building");
-//                 load = true;
-//             }   
-//         }
-//     }
-// }
-
-/** RelnEnt: Alteration **/
-onEvent("Alteration/Alteration/Update", "delayclick" ,"saveAlteration()");
-onEvent("Alteration/Alteration/Update_and_new", "delayclick" ,"saveAndNewAlteration()");
-onEvent("Alteration/Alteration/Remove", "delayclick" ,"removeAlteration()");
-
-String alteration_id = null;
-
-newAlteration(){
-    alteration_id = null;
-    newTabGroup("Alteration");
-    saveBuilding();
-}
-loadAlteration() {
-    alteration_id = getListItemValue();
-    loadAlterationFrom(alteration_id);
-}
-loadAlterationFrom(entid) {
-    alteration_id = entid;
-    if (isNull(entid)) return;
-    showTabGroup("Alteration", entid);    
-}
-
-saveAlteration() {
-    if (isNull(getFieldValue("Alteration/Alteration/Alteration"))) { 
-        showWarning("Validation Error", "Cannot save Alteraton without Alteration.");
-        return;
-    }
-    if (!isNull(alteration_id)) {
-        entity = fetchArchEnt(alteration_id);
-    }
-    saveTabGroup("Alteration", alteration_id, null, null, "alteration_id = getLastSavedRecordId();addReln(building_id, alteration_id, null);");
-}
-
-saveAndNewAlteration() {
-    if (isNull(getFieldValue("Alteration/Alteration/Alteration"))) { 
-        showWarning("Validation Error", "Cannot save Alteraton without Alteration.");
-        return;
-    }
-    if (!isNull(alteration_id)) {
-        entity = fetchArchEnt(alteration_id);
-    }
-    saveTabGroup("Alteration", alteration_id, null, null, "alteration_id = getLastSavedRecordId();addReln(building_id, alteration_id, null);newAlteration();");
-}
-
-removeAlteration() {
-    if(isNull(alteration_id)) {
-        showTabGroup("Building", building_id);
-        return;
-    }
-    removeBuildingAlterationReln();
-}
-
-removeBuildingAlterationReln() {
-    if(!isNull(building_id)) {
-        String query = "insert into aentreln (uuid, relationshipid, deleted, participatesverb, userid) select uuid, relationshipid, 'true', participatesverb, '"+userid+"' from latestnondeletedaentreln where relationshipid = '"+alteration_id+"';";
-        fetchOne(query);
-        deleteRel(alteration_id);
-        updateAllBuildingAlterations();
-    }
-    showTabGroup("Building", building_id);
-}
-
-loadAlterationAttributes() {
-    populateDropDown("Alteration/Alteration/Alteration", makeVocab("Alteration"));
-}
-
-
-/*** RelnEnt: Date ***/
-onEvent("Date/Date/Update", "delayclick", "saveDate()");
-onEvent("Date/Date/Update_and_new", "delayclick", "saveAndNewDate();");
-onEvent("Date/Date/Remove", "delayclick", "removeDate();");
-
-String date_id = null;
-
-newDate(){
-    if(isNull(building_id)){
-        showWarning("Warning", "Please save your Building first.");
-        return;
-    }
-    date_id = null;
-    newTabGroup("Date");
-    saveBuilding();
-}
-
-loadDate() {
-    date_id = getListItemValue();
-    loadDateFrom(date_id);
-}
-
-loadDateFrom(entid) {
-    date_id = entid;
-    if (isNull(entid)) return;
-    showTabGroup("Date", entid);
-}
-
-saveDate() {
-    if (isNull(getFieldValue("Date/Date/Date"))) { 
-        showWarning("Validation Error", "Cannot save Date without Date type.");
-        return;
-    }
-
-    if(!isNull(building_id)){
-        saveTabGroup("Date", date_id, null, null, "date_id = getLastSavedRecordId();addReln(building_id, date_id, null);");    
-    } else {
-        showToast("No building ID");
-        return;
-    }
-}
-
-saveAndNewDate() {
-    if (isNull(getFieldValue("Date/Date/Date"))) { 
-        showWarning("Validation Error", "Cannot save Date without Date type.");
-        return;
-    }
-
-    if(!isNull(building_id)){
-        saveTabGroup("Date", date_id, null, null, "date_id = getLastSavedRecordId();addReln(building_id, date_id, null);newDate();");    
-    } else {
-        showToast("No building ID");
-        return;
-    }
-}
-
-generateDates(){
-    if(isNull(building_id)){
-        showWarning("Warning", "Please save your Building first.");
-        return;
-    }
-    showAlert("Confirm", "Are you sure? This will delete all of your current dates!", "reallyGenerateDates()", "doNotDelete()");
-}
-
-reallyGenerateDates(){
-    // Fetch all related dates
-    saveBuilding();
-    if (!isNull(building_id)){
-        buildingDates = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText) " +
-            "from (select distinct relationshipid, vocabname, freetext " +
-                  "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
-                  "left outer join vocabulary using (vocabid) " +
-                  "join relntype using (relntypeid) " +
-                  "join attributekey using (attributeid) " +
-                  "where relntypename = 'Date' " +
-                  "and attributename != 'Description' " +
-                  "and relationshipid in (select relationshipid " +
-                                           "from aentreln " +
-                                          "where uuid = '" + building_id + "')" +
-                 ")" +
-        "group by relationshipid;");
-    } else {
-        Object buildingDates = fetchAll("select '', '';");
-    }
-    //delete all related dates
-    for (dateToDelete : buildingDates){
-        String query = "insert into aentreln (uuid, relationshipid, deleted, participatesverb, userid) select uuid, relationshipid, 'true', participatesverb, '"+userid+"' from latestnondeletedaentreln where relationshipid = '"+dateToDelete+"';";
-        fetchOne(query);
-        deleteRel(dateToDelete.get(0));
-    }
-
-    //create dates based on the values of the fields require
-    if (!isNull(getFieldValue("Building/Roof/Roof_form")))createDateReln("Date obtained from roof form:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Roof_form")+"';").get(0));
-    //if (!isNull(getFieldValue("Building/Components/Window_arch_lintel")))createDateReln("Date obtained from window arches", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_arch_lintel")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Roof/Finial")))createDateReln("Date obtained from finials:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Finial")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Components/Door_form")))createDateReln("Date obtained from doors:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Door_form")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Verandah/Verandah_roof_form")))createDateReln("Date obtained from verandah roof form:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Verandah/Verandah_roof_form")+"';").get(0));
-    //if (!isNull(getFieldValue("Building/Components/Door_lintel_form")))createDateReln("Date obtained from door arches:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Door_lintel_form")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Verandah/Verandah_posts")))createDateReln("Date obtained from verandah posts:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Verandah/Verandah_posts")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Summary_data/Sources")))createDateReln("Date obtained from historical sources:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Summary_data/Sources")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Components/Wall_quoins")))createDateReln("Date obtained from quoins:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Wall_quoins")+"';").get(0));
-    if (!isNull(getFieldValue("Building/Roof/Chimney_form")))createDateReln("Date obtained from chimneys:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Chimney_form")+"';").get(0));
-    //if (!isNull(getFieldValue("Building/Components/Window_decorative_detail")))createDateReln("Date obtained from windows", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_decorative_detail")+"';").get(0));
-    //createDateReln("Any other dateable features:", "Fill me in (e.g. 1984)");
-}
-
-
-createDateReln(stringLookingFor, vocabToUpdateFrom){
-    String lowDate = null;
-    String highDate = null;
-    Pattern r = Pattern.compile("([0-9]{4,4})");
-    Matcher m = r.matcher(vocabToUpdateFrom);
-    print(vocabToUpdateFrom);
-    print(stringLookingFor);
-    int count = 0;
-    while(m.find()) count++;
-    print(count);
-    if(count == 1){
-        m = r.matcher(vocabToUpdateFrom);
-        m.find();
-        lowDate = m.group();
-        highDate = lowDate;
-        print(highDate);
-
-    } else if (count == 2) {
-        m = r.matcher(vocabToUpdateFrom);
-        m.find();
-        lowDate = m.group();
-        print(lowDate);
-        m.find();
-        highDate = m.group();
-        print(highDate);
-    }
-
-/*    while (m.find()){
-        print(m.group());
-    }*/
-
-    m = r.matcher(vocabToUpdateFrom);
-    if(m.find()) {
-        String dateVocab = fetchOne("Select vocabid from vocabulary where vocabname = '"+stringLookingFor+"';").get(0);
-        List attributes = createAttributeList();
-        attributes.add(createRelationshipAttribute("Date", null, dateVocab, null));
-        attributes.add(createRelationshipAttribute("Description", vocabToUpdateFrom, null, null));
-        attributes.add(createRelationshipAttribute("Min date", lowDate, null, null));
-        attributes.add(createRelationshipAttribute("Max date", highDate, null, null));
-        String rel_id = saveRel(null, "Date", null, attributes);
-        addReln(building_id, rel_id, null);
-        updateAllBuildingDates();
-    }
-}
-
-removeDate() {
-    if(isNull(date_id)) {
-        showTabGroup("Building", building_id);
-        return;
-    }
-    removeBuildingDateReln();
-}
-
-removeBuildingDateReln() {
-    if(!isNull(building_id)) {
-        String query = "insert into aentreln (uuid, relationshipid, deleted, participatesverb, userid) select uuid, relationshipid, 'true', participatesverb, '"+userid+"' from latestnondeletedaentreln where relationshipid = '"+date_id+"';";
-        fetchOne(query);
-        deleteRel(date_id);
-        updateAllBuildingDates();
-    }
-    showTabGroup("Building", building_id);
-}
-
-// MISC FUNCTIONS    
-
-saveEntitiesToRel(type, entity1, entity2) {
-    if (isNull(entity1) || isNull(entity2)) return;
-    rel_id = saveRel(null, type, null, null);
-    addReln(entity1, rel_id, null);
-    addReln(entity2, rel_id, null);
-}
-
-makeVocab(String attrib){
-    Object a = fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' ");
-    return a;
-}
-
-makePictureGallery(String attrib){
-    fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabname;");
-}
-
-/*** Uneditable - you can edit the code below with extreme precaution ***/
-/*** USER ***/
-
-getDefaultUsersList() {
-    users = fetchAll("select userid, fname || ' ' || lname from user");
-    return users;
-}
-
-populateListForUsers(){
-    populateList("user/usertab/users", getDefaultUsersList());
-}
-
-populateListForUsers();
-
-String username = "";
-String device = "";
-
-login(){
-    Object userResult = fetchOne("select userid,fname,lname,email from user where userid='" + getListItemValue() + "';");
-    User user = new User(userResult.get(0),userResult.get(1),userResult.get(2),userResult.get(3));
-    userid = userResult.get(0);
-    setUser(user);
-    username = userResult.get(1) + " " + userResult.get(2);
-    showTabGroup("control");
-}
-
-doNotDelete(){
-    showToast("Delete Cancelled.");
-}
-
-onEvent("user/usertab/users", "click", "login()");
-
-/*** SYNC ***/
-
-onEvent("control/control/startsync", "click", "startSync()");
-onEvent("control/control/stopsync", "click", "stopSync()");
-
-setSyncMinInterval(10.0f);
-setSyncMaxInterval(20.0f);
-setSyncDelay(5.0f);
 
 startSync() {
     setSyncEnabled(true);
@@ -582,3 +28,809 @@ stopSync() {
     setSyncEnabled(false);
     setFileSyncEnabled(false);
 }
+
+setSyncMinInterval(10.0f);
+setSyncMaxInterval(20.0f);
+setSyncDelay(5.0f);
+startSync();
+
+addActionBarItem("sync", new ToggleActionButtonCallback() {
+    actionOnLabel() {
+        "Sync enabled";
+    }
+    actionOn() {
+        setSyncEnabled(false);
+        setFileSyncEnabled(false);
+        showToast("Sync disabled.");
+    }
+    isActionOff() {
+        isSyncEnabled();
+    }
+    actionOffLabel() {
+        "Sync disabled";
+    }
+    actionOff() {
+        setSyncEnabled(true);
+        setFileSyncEnabled(true);
+        showToast("Sync enabled.");
+    }
+});
+
+removeNavigationButtons() {
+    removeNavigationButton("save");
+    removeNavigationButton("save_and_new");
+    removeNavigationButton("delete");
+}
+
+/*** ArchEnt: Building ***/
+onEvent("Building", "show", "addBuildingNavigation();");
+
+onFocus("Building/Building/Street_address", null, "activateAutoSaveBuilding();");
+
+onEvent("Building/Building/Has_Alterations", "click", "showAlterationTab();");
+onEvent("Building/Building/Has_Verandah", "click", "showVerandahTab();");
+
+onEvent("Building/Alterations", "show", "refreshRelatedAlterations()");
+onEvent("Building/Alterations/newAlteration", "click", "saveBuildingNewAlteration()");
+onEvent("Building/Alterations/AlterationList", "click", "loadAlteration()");
+
+onEvent("Building/Dates", "show", "refreshRelatedDates()");
+onEvent("Building/Dates/generateDates", "delayclick", "generateDates()");
+onEvent("Building/Dates/newDate", "click", "saveBuildingNewDate()");
+onEvent("Building/Dates/DateList", "click", "loadDate()");
+
+onEvent("Building/Building/attachPhoto", "click", "attachPictureTo(\"Building/Building/Photo\")");
+onEvent("Building/Building/attachPlan_sketch", "click", "attachFileTo(\"Building/Building/Plan_sketch\")");
+onEvent("Building/Roof/attachGable_sketch", "click", "attachFileTo(\"Building/Roof/Gable_form_other\")");
+onEvent("Building/Roof/attachFinial_sketch", "click", "attachFileTo(\"Building/Roof/Finial_other\")");
+onEvent("Building/Verandah/attachVerandahRoof_sketch", "click", "attachFileTo(\"Building/Verandah/Verandah_roof_form_other\")");
+onEvent("Building/Verandah/attachVerandahPosts_sketch", "click", "attachFileTo(\"Building/Verandah/Verandah_posts_other\")");
+onEvent("Building/Components/attachWindowOther_sketch", "click", "attachFileTo(\"Building/Components/Window_Type\")");
+onEvent("Building/Components/attachWindowArch_sketch", "click", "attachFileTo(\"Building/Components/Window_arch_lintel_other\")");
+onEvent("Building/Components/attachWindowHead_sketch", "click", "attachFileTo(\"Building/Components/Window_head_other\")");
+onEvent("Building/Components/attachDoorForm_sketch", "click", "attachFileTo(\"Building/Components/Door_form_other\")");
+
+onEvent("Building/Building/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
+onEvent("Building/Roof/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
+onEvent("Building/Verandah/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
+onEvent("Building/Components/viewattached", "click", "viewArchEntAttachedFiles(building_id)");
+
+String building_id = null;
+
+newBuilding(){
+    newTabGroup("Building");
+    building_id = null;
+    fetchOne("select datetime('now', 'localtime');", new FetchCallback() {
+        onFetch(result) {
+            setFieldValue("Building/Building/Date", result.get(0));
+            // Make sure the Alteration and Verandah tabs are not showing
+            showTab("Building/Alterations");
+            showTab("Building/Verandah");
+            cancelTab("Building/Verandah", false);
+            cancelTab("Building/Alterations", false);
+            showTab("Building/Building");
+        }
+    });
+}
+
+loadBuilding() {
+    building_id = getListItemValue();
+    loadBuildingFrom(building_id);
+}
+
+loadBuildingFrom(archent_id) {
+    if (isNull(archent_id)) {
+        showToast("No record selected");
+        return;
+    }
+    showTabGroup("Building", archent_id, new FetchCallback() {
+        onFetch(result) {
+            building_id = archent_id;
+            matchVocab("Building/Building/Has_Verandah", "{Yes}", new Callable() {
+                call() {
+                    showTab("Building/Verandah");
+                    showTab("Building/Building");
+                }
+            }, new Callable() {
+                call() {
+                    showTab("Building/Verandah");
+                    cancelTab("Building/Verandah", false);
+                    showTab("Building/Building");
+                }
+            });
+
+            matchVocab("Building/Building/Has_Alterations", "{Yes}", new Callable() {
+                call() {
+                    showTab("Building/Alterations");
+                    showTab("Building/Building");
+                }
+            }, new Callable() {
+                call() {
+                    showTab("Building/Alterations");
+                    cancelTab("Building/Alterations", false);
+                    showTab("Building/Building");
+                }
+            });
+            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+building_id+"' group by uuid having min(aenttimestamp);",
+            new FetchCallback() {
+                onFetch(result) {
+                    setFieldValue("Building/Building/Date", result.get(0));
+
+                    saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+                        onSave(uuid, newRecord) {
+                            building_id = uuid;
+                        }
+                    }, true);
+                }
+            });
+        }
+    });    
+}
+
+activateAutoSaveBuilding() {
+    if(!isNull(building_id)) return;
+    if(isNull(getFieldValue("Building/Building/Street_address"))) return;
+    saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            building_id = uuid;
+            saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    building_id = uuid;
+                }
+            }, true);
+        }
+    });
+}
+
+saveBuilding(Callable callback) {
+    if (isNull(getFieldValue("Building/Building/Street_address"))) { 
+        showWarning("Validation Error", "Cannot save Building without Street Address.");
+        return;
+    }
+    saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            building_id = uuid;
+            callback.call();
+        }
+    });
+}
+
+saveBuildingNewAlteration() {
+    saveBuilding(new Callable() {
+        call() {
+            newAlteration();
+        }
+    });
+}
+
+saveBuildingNewDate() {
+    saveBuilding(new Callable() {
+        call() {
+            newDate();
+        }
+    });
+}
+
+deleteBuilding() {
+    if (!isNull(building_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this {Building} Record!", "reallyDeleteBuilding()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Building", false);
+    }
+}
+
+reallyDeleteBuilding() {
+    deleteArchEnt(building_id);
+    cancelTabGroup("Building", false);
+}
+ 
+loadBuildingAttributes() {
+    makeVocab("DropDown", "Building/Building/Original_purpose", "Original purpose");
+    makeVocab("RadioGroup", "Building/Building/Change_of_purpose", "Change of purpose");
+    makeVocab("DropDown", "Building/Building/Scale", "Scale");
+    makeVocab("RadioGroup", "Building/Building/Qualities", "Qualities");
+    makeVocab("DropDown", "Building/Building/Orientation_of_facade", "Orientation of facade");
+    makeVocab("DropDown", "Building/Building/Orientation_facade_faces", "Orientation facade faces");
+    makeVocab("DropDown", "Building/Building/Forecourt_space", "Forecourt space");
+    makeVocab("DropDown", "Building/Building/Forecourt_decoration", "Forecourt decoration");
+    makeVocab("DropDown", "Building/Building/Outbuildings", "Outbuildings");
+    makePictureGallery("Building/Building/Plan", "Plan");
+    makeVocab("RadioGroup", "Building/Building/Has_Verandah", "Has Verandah");
+    makeVocab("RadioGroup", "Building/Building/Has_Alterations", "Has Alterations");
+
+    makeVocab("RadioGroup", "Building/Roof/Gable_detail_bargeboard", "Gable detail bargeboard");
+    makePictureGallery("Building/Roof/Gable_form", "Gable form");
+    populateHierarchicalPictureGallery("Building/Roof/Finial", "Finial");
+    makeVocab("DropDown", "Building/Roof/Chimney_form", "Chimney form");
+    makeVocab("DropDown", "Building/Roof/Chimney_orientation", "Chimney orientation");
+    makeVocab("DropDown", "Building/Roof/Chimney_decorative_detail", "Chimney decorative detail");
+    makePictureGallery("Building/Roof/Roof_form", "Roof form");
+
+    makeVocab("RadioGroup", "Building/Verandah/Location", "Location");
+    makeVocab("RadioGroup", "Building/Verandah/Verandah_status", "Verandah status");
+    makeVocab("DropDown", "Building/Verandah/Verandah_decorative_detail", "Verandah decorative detail");
+    makePictureGallery("Building/Verandah/Verandah_posts", "Verandah posts");
+    makePictureGallery("Building/Verandah/Verandah_roof_form", "Verandah roof form");
+
+    makeVocab("DropDown", "Building/Walls/Wall_material", "Wall material");
+    makePictureGallery("Building/Walls/Wall_brick", "Wall brick");
+    makeVocab("RadioGroup", "Building/Walls/Wall_rendered", "Wall rendered");
+    makePictureGallery("Building/Walls/Wall_timber", "Wall timber");
+    makePictureGallery("Building/Walls/Decorative_Timber", "Decorative Timber");
+    makePictureGallery("Building/Walls/Wall_masonry", "Wall masonry");
+    makePictureGallery("Building/Walls/Wall_quoins", "Wall quoins");
+    makeVocab("DropDown", "Building/Components/Window_sash", "Window sash");
+    makeVocab("DropDown", "Building/Components/Window_casement", "Window casement");
+    makeVocab("DropDown", "Building/Components/Window_bay", "Window bay");
+
+    makePictureGallery("Building/Components/Window_Type", "Window Type");
+    makePictureGallery("Building/Components/Window_head", "Window head");
+    makeVocab("DropDown", "Building/Components/Bay_form", "Bay form");
+    makeVocab("DropDown", "Building/Components/Window_dormer", "Window dormer");
+    makeVocab("DropDown", "Building/Components/Replacements", "Replacements");
+    populateHierarchicalPictureGallery("Building/Components/Window_arch_lintel", "Window arch lintel");
+    makeVocab("CheckBoxGroup", "Building/Components/Window_decorative_detail", "Window decorative detail");
+    makeVocab("DropDown", "Building/Components/Window_glazing", "Window glazing");
+    makeVocab("DropDown", "Building/Components/Door_lintel_arch", "Door lintel/arch");
+    makeVocab("DropDown", "Building/Components/Door_lintel_form", "Door lintel form");
+    makeVocab("DropDown", "Building/Components/Door_glazing", "Door glazing");
+    makeVocab("DropDown", "Building/Components/Door_glazing_detail", "Door glazing detail");
+    makePictureGallery("Building/Components/Door_form", "Door form");
+
+    makeVocab("RadioGroup", "Building/Summary_data/Archaeological_materials", "Archaeological materials");
+    populateHierarchicalDropDown("Building/Summary_data/Heritage_listed", "Heritage listed");
+    makeVocab("RadioGroup", "Building/Summary_data/Substantially_original", "Substantially original");
+}
+
+addBuildingNavigation() {
+    removeNavigationButton("save");
+    removeNavigationButton("save_and_new");
+    removeNavigationButton("delete");
+
+    addNavigationButton("save", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Save {Building}";
+        }
+        actionOn() {
+            saveBuilding(null);
+        }
+    }, "success");
+
+    addNavigationButton("save_and_new", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Save and New {Building}";
+        }
+        actionOn() {
+            saveBuilding(new Callable() {
+                call() {
+                    newBuilding();
+                }
+            });
+        }
+    }, "success");
+
+    addNavigationButton("delete", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Delete {Building}";
+        }
+        actionOn() {
+            deleteBuilding();
+        }
+    }, "danger");
+}
+
+refreshRelatedAlterations(){
+    if(!isNull(building_id)) {
+        fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Alteration'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                    where uuid = "+building_id+"\n"+
+            "                                                       and relntypeName = 'BuildingAlteration')\n"+
+            "                             and uuid != "+building_id+")\n"+
+            "        ORDER BY uuid, attributename DESC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;", new FetchCallback() {
+                onFetch(result) {
+                    populateList("Building/Alterations/AlterationList", result);
+                }
+            });
+    } else {
+        populateList("Building/Alterations/AlterationList", new ArrayList());
+    }
+}
+
+refreshRelatedDates(){
+    if (!isNull(building_id)){
+        fetchAll("select uuid, group_concat( case attributename when 'Description' then substr(replace(replace(freetext,'_',' '),'{',''), 1, instr(freetext, '(')-2 )||': ' when 'Min date' then FreeText || '–' else freetext || ' ' end , '')\n" +
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Date'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                    where uuid = "+building_id+"\n"+
+            "                                                       and relntypeName = 'BuildingDate')\n"+
+            "                             and uuid != "+building_id+")\n"+
+            "        ORDER BY uuid, attributename DESC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;", new FetchCallback() {
+                onFetch(result) {
+                    populateList("Building/Dates/DateList", result);
+                }
+            });
+    } else {
+        populateList("Building/Dates/DateList", new ArrayList());
+    }
+}
+
+showAlterationTab() {
+    matchVocab("Building/Building/Has_Alterations", "{Yes}", new Callable() {
+        call() {
+            showTab("Building/Alterations");
+        }
+    }, null);
+}
+
+showVerandahTab() {
+    matchVocab("Building/Building/Has_Verandah", "{Yes}", new Callable() {
+        call() {
+            showTab("Building/Verandah");
+        }
+    }, null);
+}
+
+/** RelnEnt: Alteration **/
+onEvent("Alteration", "show", "addAlterationNavigation();");
+onEvent("Alteration/Alteration/Alteration", "click", "activateAutoSaveAlteration();");
+
+String alteration_id = null;
+
+newAlteration(){
+    newTabGroup("Alteration");
+    alteration_id = null;
+}
+
+loadAlteration() {
+    alteration_id = getListItemValue();
+    loadAlterationFrom(alteration_id);
+}
+
+loadAlterationFrom(archent_id) {
+    if (isNull(archent_id)) return;
+    showTabGroup("Alteration", archent_id, new FetchCallback() {
+        onFetch(result) {
+            alteration_id = archent_id;
+            saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    alteration_id = uuid;
+                }
+            }, true);
+        }
+    });    
+}
+
+saveAlteration(Callable callback) {
+    if (isNull(getFieldValue("Alteration/Alteration/Alteration"))) { 
+        showWarning("Validation Error", "Cannot save Alteraton without Alteration.");
+        return;
+    }
+    dialog = showBusy("Saving {Alteration}", "Please wait.");
+    saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            alteration_id = uuid;
+            if(newRecord) {
+                saveEntitiesToRel("BuildingAlteration", building_id, alteration_id);
+            }
+            dialog.dismiss();
+            callback.call();
+        }
+    });
+}
+
+activateAutoSaveAlteration() {
+    if(!isNull(alteration_id)) return;
+    saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            alteration_id = uuid;
+            if(newRecord) {
+                saveEntitiesToRel("BuildingAlteration", building_id, alteration_id);
+            }
+            saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    alteration_id = uuid;
+                }
+            }, true);
+        }
+    });
+}
+
+deleteAlteration() {
+    if (!isNull(alteration_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this {Alteration} Record!", "reallyDeleteAlteration()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Alteration", false);
+        showTab("Building/Alterations");
+    }
+}
+
+reallyDeleteAlteration() {
+    deleteArchEnt(alteration_id);
+    cancelTabGroup("Alteration", false);
+    showTab("Building/Alterations");
+}
+
+loadAlterationAttributes() {
+    makeVocab("DropDown", "Alteration/Alteration/Alteration", "Alteration");
+}
+
+addAlterationNavigation() {
+    removeNavigationButton("save");
+    removeNavigationButton("save_and_new");
+    removeNavigationButton("delete");
+
+    addNavigationButton("save", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Save {Alteration}";
+        }
+        actionOn() {
+            saveAlteration(null);
+        }
+    }, "success");
+
+    addNavigationButton("save_and_new", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Save and New {Alteration}";
+        }
+        actionOn() {
+            saveAlteration(new Callable() {
+                call() {
+                    newAlteration();
+                }
+            });
+        }
+    }, "success");
+
+    addNavigationButton("delete", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Delete {Alteration}";
+        }
+        actionOn() {
+            deleteAlteration();
+        }
+    }, "danger");
+}
+
+
+/*** RelnEnt: Date ***/
+onEvent("Date", "show", "addDateNavigation();");
+
+String date_id = null;
+
+newDate(){
+    newTabGroup("Date");
+    date_id = null;
+}
+
+loadDate() {
+    date_id = getListItemValue();
+    loadDateFrom(date_id);
+}
+
+loadDateFrom(archent_id) {
+    if (isNull(archent_id)) return;
+    showTabGroup("Date", archent_id, new FetchCallback() {
+        onFetch(result) {
+            date_id = archent_id;
+            saveTabGroup("Date", date_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    date_id = uuid;
+                }
+            }, true);
+        }
+    });    
+}
+
+saveDate(Callable callback) {
+    if (isNull(getFieldValue("Date/Date/Date"))) { 
+        showWarning("Validation Error", "Cannot save Alteraton without Date.");
+        return;
+    }
+    dialog = showBusy("Saving {Date}", "Please wait.");
+    saveTabGroup("Date", date_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            date_id = uuid;
+            if(newRecord) {
+                saveEntitiesToRel("BuildingDate", building_id, date_id);
+            }
+            dialog.dismiss();
+            callback.call();
+        }
+    });
+}
+
+deleteDate() {
+    if (!isNull(date_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this {Date} Record!", "reallyDeleteDate()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Date", false);
+        showTab("Building/Dates");
+    }
+}
+
+reallyDeleteDate() {
+    deleteArchEnt(date_id);
+    cancelTabGroup("Date", false);
+    showTab("Building/Dates");
+}
+
+
+loadDateAttributes() {
+    makeVocab("DropDown", "Date/Date/Date", "Date");
+}
+
+addDateNavigation() {
+    removeNavigationButton("save");
+    removeNavigationButton("save_and_new");
+    removeNavigationButton("delete");
+
+    addNavigationButton("save", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Save {Date}";
+        }
+        actionOn() {
+            saveDate(null);
+        }
+    }, "success");
+
+    addNavigationButton("save_and_new", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Save and New {Date}";
+        }
+        actionOn() {
+            saveDate(new Callable() {
+                call() {
+                    newDate();
+                }
+            });
+        }
+    }, "success");
+
+    addNavigationButton("delete", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Delete {Date}";
+        }
+        actionOn() {
+            deleteDate();
+        }
+    }, "danger");
+}
+
+// WTF?
+
+// generateDates(){
+//     if(isNull(building_id)){
+//         showWarning("Warning", "Please save your Building first.");
+//         return;
+//     }
+//     showAlert("Confirm", "Are you sure? This will delete all of your current dates!", "reallyGenerateDates()", "doNotDelete()");
+// }
+
+// reallyGenerateDates(){
+//     // Fetch all related dates
+//     saveBuilding(null);
+//     if (!isNull(building_id)){
+//         buildingDates = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText) " +
+//             "from (select distinct relationshipid, vocabname, freetext " +
+//                   "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
+//                   "left outer join vocabulary using (vocabid) " +
+//                   "join relntype using (relntypeid) " +
+//                   "join attributekey using (attributeid) " +
+//                   "where relntypename = 'Date' " +
+//                   "and attributename != 'Description' " +
+//                   "and relationshipid in (select relationshipid " +
+//                                            "from aentreln " +
+//                                           "where uuid = '" + building_id + "')" +
+//                  ")" +
+//         "group by relationshipid;");
+//     } else {
+//         Object buildingDates = fetchAll("select '', '';");
+//     }
+//     //delete all related dates
+//     for (dateToDelete : buildingDates){
+//         String query = "insert into aentreln (uuid, relationshipid, deleted, participatesverb, userid) select uuid, relationshipid, 'true', participatesverb, '"+userid+"' from latestnondeletedaentreln where relationshipid = '"+dateToDelete+"';";
+//         fetchOne(query);
+//         deleteRel(dateToDelete.get(0));
+//     }
+
+//     //create dates based on the values of the fields require
+//     if (!isNull(getFieldValue("Building/Roof/Roof_form")))createDateReln("Date obtained from roof form:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Roof_form")+"';").get(0));
+//     //if (!isNull(getFieldValue("Building/Components/Window_arch_lintel")))createDateReln("Date obtained from window arches", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_arch_lintel")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Roof/Finial")))createDateReln("Date obtained from finials:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Finial")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Components/Door_form")))createDateReln("Date obtained from doors:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Door_form")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Verandah/Verandah_roof_form")))createDateReln("Date obtained from verandah roof form:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Verandah/Verandah_roof_form")+"';").get(0));
+//     //if (!isNull(getFieldValue("Building/Components/Door_lintel_form")))createDateReln("Date obtained from door arches:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Door_lintel_form")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Verandah/Verandah_posts")))createDateReln("Date obtained from verandah posts:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Verandah/Verandah_posts")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Summary_data/Sources")))createDateReln("Date obtained from historical sources:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Summary_data/Sources")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Components/Wall_quoins")))createDateReln("Date obtained from quoins:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Wall_quoins")+"';").get(0));
+//     if (!isNull(getFieldValue("Building/Roof/Chimney_form")))createDateReln("Date obtained from chimneys:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Chimney_form")+"';").get(0));
+//     //if (!isNull(getFieldValue("Building/Components/Window_decorative_detail")))createDateReln("Date obtained from windows", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_decorative_detail")+"';").get(0));
+//     //createDateReln("Any other dateable features:", "Fill me in (e.g. 1984)");
+// }
+
+
+// createDateReln(stringLookingFor, vocabToUpdateFrom){
+//     String lowDate = null;
+//     String highDate = null;
+//     Pattern r = Pattern.compile("([0-9]{4,4})");
+//     Matcher m = r.matcher(vocabToUpdateFrom);
+//     print(vocabToUpdateFrom);
+//     print(stringLookingFor);
+//     int count = 0;
+//     while(m.find()) count++;
+//     print(count);
+//     if(count == 1){
+//         m = r.matcher(vocabToUpdateFrom);
+//         m.find();
+//         lowDate = m.group();
+//         highDate = lowDate;
+//         print(highDate);
+
+//     } else if (count == 2) {
+//         m = r.matcher(vocabToUpdateFrom);
+//         m.find();
+//         lowDate = m.group();
+//         print(lowDate);
+//         m.find();
+//         highDate = m.group();
+//         print(highDate);
+//     }
+
+// /*    while (m.find()){
+//         print(m.group());
+//     }*/
+
+//     m = r.matcher(vocabToUpdateFrom);
+//     if(m.find()) {
+//         String dateVocab = fetchOne("Select vocabid from vocabulary where vocabname = '"+stringLookingFor+"';").get(0);
+//         List attributes = createAttributeList();
+//         attributes.add(createRelationshipAttribute("Date", null, dateVocab, null));
+//         attributes.add(createRelationshipAttribute("Description", vocabToUpdateFrom, null, null));
+//         attributes.add(createRelationshipAttribute("Min date", lowDate, null, null));
+//         attributes.add(createRelationshipAttribute("Max date", highDate, null, null));
+//         String rel_id = saveRel(null, "Date", null, attributes);
+//         addReln(building_id, rel_id, null);
+//         updateAllBuildingDates();
+//     }
+// }
+
+// MISC FUNCTIONS    
+
+saveEntitiesToRel(String type, String entity1, String entity2) {
+    if (isNull(entity1) || isNull(entity2)) return;
+    print("Whut?");
+    saveRel(null, type, null, null, new SaveCallback() {
+        onSave(rel_id, newRecord) {
+            print("Whut #2?");
+            addReln(entity1, rel_id, null);
+            addReln(entity2, rel_id, null);
+        }
+    });
+}
+
+saveEntitiesToRel(String type, String entity1, String entity2, Callable callback) {
+    if (isNull(entity1) || isNull(entity2)) return;
+    saveRel(null, type, null, null, new SaveCallback() {
+        onSave(rel_id, newRecord) {
+            addReln(entity1, rel_id, null);
+            addReln(entity2, rel_id, null);
+            callback.call();
+        }
+    });
+}
+
+makeVocab(String type, String path, String attrib){
+    fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' order by vocabcountorder",
+        new FetchCallback() {
+            onFetch(result) {
+                if(type.equals("CheckBoxGroup")) {
+                    populateCheckBoxGroup(path, result);
+                } else if(type.equals("DropDown")) {
+                    populateDropDown(path, result);
+                } else if(type.equals("RadioGroup")) {
+                    populateRadioGroup(path, result);
+                } else if(type.equals("List")) {
+                    populateList(path, result);
+                }
+            }
+        });
+}
+
+matchVocab(String path, String vocabName, Callable callbackIfTrue, Callable callbackIfFalse) {
+    fetchOne("select vocabname from vocabulary where vocabname = '" + vocabName + "' and vocabid = '" + getFieldValue(path) + "';",
+        new FetchCallback() {
+            onFetch(result) {
+                if (!isNull(result)){
+                    if(callbackIfTrue != null) callbackIfTrue.call();
+                } else {
+                    if(callbackIfFalse != null) callbackIfFalse.call();
+                }
+            }
+        });
+}
+
+matchVocabID(String vocabid, String vocabName, Callable callbackIfTrue, Callable callbackIfFalse){
+    fetchOne("select vocabname from vocabulary where vocabname = '" + vocabName + "' and vocabid = '" + vocabid + "';",
+        new FetchCallback() {
+            onFetch(result) {
+                if (!isNull(result)){
+                    if(callbackIfTrue != null) callbackIfTrue.call();
+                } else {
+                    if(callbackIfFalse != null) callbackIfFalse.call();
+                }
+            }
+        });
+}
+
+setVocab(String path, String attribName, String vocabName){
+    fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributeName = '" + attribName + "' and vocabname = '" + vocabName + "';",
+        new FetchCallback() {
+            onFetch(result) {
+                setFieldValue(path, result.get(0));
+            }
+        });
+}
+
+makePictureGallery(String path, String attrib) {
+    fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabcountorder;",
+        new FetchCallback() {
+            onFetch(result) {
+                populatePictureGallery(path, result);
+            }
+        });
+}
+
+doNotDelete(){
+    showToast("Delete Cancelled.");
+}
+
+/*** Uneditable - you can edit the code below with extreme precaution ***/
+/*** USER ***/
+
+loadUsers() {
+    fetchAll("select userid, fname || ' ' || lname from user", new FetchCallback() {
+        onFetch(result) {
+            populateList("user/usertab/users", result);
+        }
+    });
+}
+
+loadUsers();
+
+String username = "";
+
+login() {
+    fetchOne("select userid,fname,lname,email from user where userid='" + getListItemValue() + "';", new FetchCallback() {
+        onFetch(result) {
+            user = new User(result.get(0),result.get(1),result.get(2),result.get(3));
+            setUser(user);
+            username = result.get(1) + " " + result.get(2);
+            showTabGroup("control");
+        }
+    });
+}
+
+onEvent("user/usertab/users", "click", "login()");
+
+loadBuildingAttributes();
+loadAlterationAttributes();
+loadDateAttributes();

@@ -28,12 +28,6 @@
               <newBuilding/>
               <BuildingList/>
             </building>
-            <control>
-              <startsync/>
-              <stopsync/>
-              <connectexternal/>
-              <connectinternal/>
-            </control>
           </control>
           <!--list of tabgroups for entities-->
           <!--ArchEnt / Record Type: BUILDING-->
@@ -51,7 +45,6 @@
               <Date/>
               <Original_purpose/>
               <Change_of_purpose/>
-              <Alterations/>
               <Scale/>
               <Percentage_of_grounds/>
               <Qualities/>
@@ -60,7 +53,6 @@
               <attachPlan_sketch/>
               <Orientation_of_facade/>
               <Orientation_facade_faces/>
-              <Verandah/>
               <Photo/>
               <attachPhoto/>
               <Comments/>
@@ -68,8 +60,9 @@
               <Forecourt_decoration/>
               <Outbuildings/>
               <Problems_with_recording/>
+              <Has_Verandah/>
+              <Has_Alterations/>
               <viewattached/>
-              <Update/>
             </Building>
             <Roof>
               <Roof_form/>
@@ -87,7 +80,6 @@
               <Chimney_orientation/>
               <Chimney_decorative_detail/>
               <viewattached/>
-              <Update/>
             </Roof>
             <Verandah>
               <Number_of_verandahs/>
@@ -102,10 +94,11 @@
               <Verandah_posts_other/>
               <attachVerandahPosts_sketch/>
               <viewattached/>
-              <Update/>
             </Verandah>
             <Components>
               <Window_Type/>
+              <Windows_other/>
+              <attachWindowOther_sketch/>
               <Number_of_sashes/>
               <Window_casement/>
               <Window_sash/>
@@ -115,7 +108,6 @@
               <Bay_form/>
               <Window_dormer/>
               <Number_of_dormers/>
-              <Windows_other/>
               <Window_arch_lintel/>
               <Window_arch_lintel_other/>
               <attachWindowArch_sketch/>
@@ -132,10 +124,10 @@
               <Door_lintel_form/>
               <Door_form/>
               <Door_form_other/>
+              <attachDoorForm_sketch/>
               <Door_glazing/>
               <Door_glazing_detail/>
               <viewattached/>
-              <Update/>
             </Components>
             <Walls>
               <Wall_material/>
@@ -145,7 +137,6 @@
               <Wall_masonry/>
               <Decorative_Timber/>
               <Wall_quoins/>
-              <Update/>
             </Walls>
             <Summary_data>
               <Archaeological_materials/>
@@ -157,7 +148,6 @@
               <Association_historical_figures/>
               <Association_historical_events/>
               <Sources/>
-              <Update/>
             </Summary_data>
             <Alterations>
               <newAlteration/>
@@ -166,7 +156,6 @@
             <Dates>
               <Best_fit_date_of_construction/>
               <Date_of_alterations/>
-              <Update/>
               <generateDates/>
               <newDate/>
               <DateList/>
@@ -177,9 +166,6 @@
             <Alteration>
               <Alteration/>
               <Description/>
-              <Update/>
-              <Update_and_new/>
-              <Remove/>
             </Alteration>
           </Alteration>
 
@@ -191,16 +177,13 @@
               <Description/>
               <Min_date/>
               <Max_date/>
-              <Update/>
-              <Update_and_new/>
-              <Remove/>
             </Date>
           </Date>
         </faims>
       </instance>
       <!--list of numeric and blocktext(memo) attributes(fields)-->
       <bind nodeset="/faims/Building/Building/Postcode" type="decimal"/>
-      <bind nodeset="/faims/Building/Building/Percenage_of_grounds" type="decimal"/>
+      <bind nodeset="/faims/Building/Building/Percentage_of_grounds" type="decimal"/>
       <bind nodeset="/faims/Building/Building/Comments" type="string"/>
       <bind nodeset="/faims/Building/Roof/Number_of_gables" type="decimal"/>
       <bind nodeset="/faims/Building/Roof/Number_of_gablets" type="decimal"/>
@@ -241,7 +224,7 @@
       <label>{User_List}</label>
       <group ref="usertab" faims_scrollable="false">
         <label>{User_List}</label>
-        <select1 appearance="compact" ref="users">
+        <select1 ref="users" appearance="compact" faims_certainty="false" faims_annotation="false">
           <label>{Users}:</label>
           <item>
             <label>placeholder</label>
@@ -257,28 +240,13 @@
         <trigger ref="newBuilding">
           <label>New Building</label>
         </trigger>
-        <select1 faims_annotation="false" faims_certainty="false" ref="BuildingList" appearance="compact">
+        <select1 ref="BuildingList" appearance="compact" faims_certainty="false" faims_annotation="false">
           <label>Buildings:</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-      </group>
-      <group ref="control">
-        <label>Control</label>
-        <trigger ref="startsync">
-          <label>Start Synching</label>
-        </trigger>
-        <trigger ref="stopsync">
-          <label>Stop Synching</label>
-        </trigger>
-        <trigger ref="connectexternal">
-          <label>Connect To External GPS</label>
-        </trigger>
-        <trigger ref="connectinternal">
-          <label>Connect To Internal GPS</label>
-        </trigger>
       </group>
     </group>
 
@@ -287,78 +255,66 @@
       <label>{Building}</label>
       <group ref="Building">
         <label>{Building}</label>
-        <!--We would like to see Radiogroup-->
-        <input ref="Street_address" faims_attribute_name="Street Address" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Street_address" faims_attribute_name="Street Address" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Street_Address}</label>
         </input>
         <group faims_style="orientation" ref="container1">
           <label/>
           <group faims_style="even" ref="child1">
             <label/>
-            <input ref="Suburb" faims_attribute_name="Suburb" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+            <input ref="Suburb" faims_attribute_name="Suburb" faims_attribute_type="measure"  faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Suburb}</label>
             </input>
           </group>
           <group faims_style="even" ref="child2">
             <label/>
-            <input ref="Postcode" faims_attribute_name="Postcode" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+            <input ref="Postcode" faims_attribute_name="Postcode" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Postcode}</label>
             </input>
           </group>
         </group>
-        <input ref="Date" faims_attribute_name="Date" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="true">
+        <input ref="Date" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Date_of_Recording}</label>
         </input>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Original_purpose" faims_attribute_name="Original purpose" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Original_purpose" faims_attribute_name="Original purpose" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Original_Purpose}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Change_of_purpose" faims_attribute_name="Change of purpose" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Change_of_purpose" appearance="full" faims_attribute_name="Change of purpose" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Change_of_Purpose}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-<!--         <select1 ref="Alterations" faims_attribute_name="Alterations" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Alterations}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1> -->
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Scale" faims_attribute_name="Scale" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Scale" faims_attribute_name="Scale" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Scale}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Percentage_of_grounds" faims_attribute_name="Percentage of grounds" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Percentage_of_grounds" faims_attribute_name="Percentage of grounds" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Percentage_of_Grounds}</label>
         </input>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Qualities" faims_attribute_name="Qualities" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Qualities" appearance="full" faims_attribute_name="Qualities" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Qualities}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Plan" faims_attribute_name="Plan" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Plan" faims_attribute_name="Plan" faims_attribute_type="measure" faims_certainty="true" faims_read_only="false" type="image">
           <label>{Plan}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Plan_sketch" faims_attribute_name="Plan sketch" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Plan_sketch" type="file"  faims_attribute_name="Plan sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -368,34 +324,21 @@
         <trigger ref="attachPlan_sketch">
           <label>Attach Sketch of Plan</label>
         </trigger>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Orientation_of_facade" faims_attribute_name="Orientation of facade" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Orientation_of_facade" faims_attribute_name="Orientation of facade" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Orientation_of_Facade}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Orientation_facade_faces" faims_attribute_name="Orientation facade faces" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Orientation_facade_faces" faims_attribute_name="Orientation facade faces" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Orientation_Facade_Faces}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Radiogroup-->
-        <trigger ref="Verandah">
-          <label> Has Verandah? </label>
-        </trigger>
-<!--         <select1 ref="Verandah" faims_attribute_name="Verandah" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Verandah}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1> -->
-        <select ref="Photo" faims_attribute_name="Photo" faims_certainty="true" faims_attribute_type="freetext" faims_sync="true" type="camera" faims_annotation="false">
+        <select ref="Photo" type="camera" faims_attribute_name="Photo" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false" faims_sync="true">
           <label>{Photo}</label>
           <item>
             <label>placeholder</label>
@@ -405,77 +348,81 @@
         <trigger ref="attachPhoto">
           <label>Take Picture</label>
         </trigger>
-        <input ref="Comments" faims_attribute_name="Comments" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Comments" faims_attribute_name="Comments" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Comments}</label>
         </input>
-        <select1 ref="Forecourt_space" faims_attribute_name="Forecourt space" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Forecourt_space" faims_attribute_name="Forecourt space" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Forecourt_Space}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Forecourt_decoration" faims_attribute_name="Forecourt decoration" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Forecourt_decoration" faims_attribute_name="Forecourt decoration" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Forecourt_Decoration}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Outbuildings" faims_attribute_name="Outbuildings" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Outbuildings" faims_attribute_name="Outbuildings" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Outbuildings}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Problems_with_recording" faims_attribute_name="Problems with recording" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Problems_with_recording" faims_attribute_name="Problems with recording" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Any_problems_with_recording?}</label>
         </input>
+        <select1 ref="Has_Verandah" appearance="full" faims_attribute_name="Has Verandah" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true"  faims_read_only="false">
+          <label>{Has_Verandah}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Has_Alterations" appearance="full" faims_attribute_name="Has Alterations" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Has_Alterations}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <trigger ref="viewattached">
           <label>View Attached Files</label>
-        </trigger>
-        <trigger ref="Alterations">
-          <label> Has Alterations? </label>
-        </trigger>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
         </trigger>
       </group>
       <group ref="Roof">
         <label>{Roof}</label>
-        <select1 ref="Roof_form" faims_attribute_name="Roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Roof_form" type="image" faims_attribute_name="Roof form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Roof_Form}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Number_of_gables" faims_attribute_name="Number of gables" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Number_of_gables" faims_attribute_name="Number of gables" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_Gables}</label>
         </input>
-        <input ref="Number_of_gablets" faims_attribute_name="Number of gablets" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Number_of_gablets" faims_attribute_name="Number of gablets" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_Gablets}</label>
         </input>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Gable_detail_bargeboard" faims_attribute_name="Gable detail bargeboard" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Gable_detail_bargeboard" appearance="full" faims_attribute_name="Gable detail bargeboard" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Gable_Detail_Bargeboard}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Finial" faims_attribute_name="Finial" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false" type="image">
+        <select1 ref="Finial" type="image" faims_attribute_name="Finial" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Finial}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Finial_other" faims_attribute_name="Finial other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Finial_other" type="file"  faims_attribute_name="Finial other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -485,14 +432,14 @@
         <trigger ref="attachFinial_sketch">
           <label>Attach Sketch of Finial</label>
         </trigger>
-        <select1 ref="Gable_form" faims_attribute_name="Gable form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Gable_form" type="image" faims_attribute_name="Gable form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Gable_Form}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Gable_form_other" faims_attribute_name="Gable form other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Gable_form_other" type="file" faims_attribute_name="Gable form other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -502,26 +449,24 @@
         <trigger ref="attachGable_sketch">
           <label>Attach Sketch of Gable Form</label>
         </trigger>
-        <input ref="Number_of_chimneys" faims_attribute_name="Number of chimneys" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Number_of_chimneys" faims_attribute_name="Number of chimneys" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_chimneys}</label>
         </input>
-        <select1 ref="Chimney_form" faims_attribute_name="Chimney form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Chimney_form" faims_attribute_name="Chimney form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Chimney_Form}</label>
             <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Chimney_orientation" faims_attribute_name="Chimney orientation" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Chimney_orientation" faims_attribute_name="Chimney orientation" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Orientation}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Chimney_decorative_detail" faims_attribute_name="Chimney decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Chimney_decorative_detail" faims_attribute_name="Chimney decorative detail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Decorative_Detail}</label>
           <item>
             <label>placeholder</label>
@@ -531,42 +476,37 @@
         <trigger ref="viewattached">
           <label>View Attached Files</label>
         </trigger>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
-        </trigger>
       </group>
       <group ref="Verandah" faims_hidden="true">
         <label>{Verandah}</label>
-        <input ref="Number_of_verandahs" faims_attribute_name="Number of verandahs" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Number_of_verandahs" faims_attribute_name="Number of verandahs" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_Verandahs}</label>
         </input>
-        <input ref="Number_of_porticos" faims_attribute_name="Number of porticos" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Number_of_porticos" faims_attribute_name="Number of porticos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_Porticos}</label>
         </input>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Location" faims_attribute_name="Location" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 appearance="full" ref="Location" faims_attribute_name="Location" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Location}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Verandah_status" faims_attribute_name="Verandah status" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Verandah_status" appearance="full" faims_attribute_name="Verandah status" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Status}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Verandah_roof_form" faims_attribute_name="Verandah roof form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Verandah_roof_form" type="image" faims_attribute_name="Verandah roof form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Roof_Form}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Verandah_roof_form_other" faims_attribute_name="Verandah roof form other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Verandah_roof_form_other" type="file"  faims_attribute_name="Verandah roof form other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -576,23 +516,21 @@
         <trigger ref="attachVerandahRoof_sketch">
           <label>Attach Sketch of Verandah Roof</label>
         </trigger>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Verandah_decorative_detail" faims_attribute_name="Verandah decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Verandah_decorative_detail" faims_attribute_name="Verandah decorative detail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Decorative_Detail}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Verandah_posts" faims_attribute_name="Verandah posts" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false" type="image">
+        <select1 ref="Verandah_posts" type="image" faims_attribute_name="Verandah posts" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Verandah_Posts}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Verandah_posts_other" faims_attribute_name="Verandah posts other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Verandah_posts_other" type="file" faims_attribute_name="Verandah posts other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -605,86 +543,81 @@
         <trigger ref="viewattached">
           <label>View Attached Files</label>
         </trigger>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
-        </trigger>
       </group>
       <group ref="Components">
         <label>{Components}</label>
-        <select1 ref="Window_Type" faims_attribute_name="Window Type" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Window_Type" type="image" faims_attribute_name="Window Type" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_Type}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Number_of_sashes" faims_attribute_name="Number of sashes" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
-          <label>{Number_of_sashes}</label>
-        </input>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Window_casement" faims_attribute_name="Window casement" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Window_Casement}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <input ref="Number_of_casements" faims_attribute_name="Number of casements" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
-          <label>{Number_of_casements}</label>
-        </input>
-        <select1 ref="Window_sash" faims_attribute_name="Window sash" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Window_Sash}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Window_bay" faims_attribute_name="Window bay" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Window_Bay}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <input ref="Number_of_bays" faims_attribute_name="Number of bays" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
-          <label>{Number_of_bays}</label>
-        </input>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Bay_form" faims_attribute_name="Bay form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Bay_form}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Window_dormer" faims_attribute_name="Window dormer" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
-          <label>{Window_dormer}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <input ref="Number_of_dormers" faims_attribute_name="Number of dormers" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
-          <label>{Number_of_dormers}</label>
-        </input>
-        <select ref="Windows_other" faims_attribute_name="Windows other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Windows_other" type="file" faims_attribute_name="Windows other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Window_arch_lintel" faims_attribute_name="Window arch lintel" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false" type="image">
+        <trigger ref="attachWindowOther_sketch">
+          <label>Attach Sketch of Window Type</label>
+        </trigger>
+        <input ref="Number_of_sashes" faims_attribute_name="Number of sashes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Number_of_sashes}</label>
+        </input>
+        <select1 ref="Window_casement" faims_attribute_name="Window casement" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Window_Casement}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Number_of_casements" faims_attribute_name="Number of casements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Number_of_casements}</label>
+        </input>
+        <select1 ref="Window_sash" faims_attribute_name="Window sash" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Window_Sash}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Window_bay" faims_attribute_name="Window bay" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Window_Bay}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Number_of_bays" faims_attribute_name="Number of bays" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Number_of_bays}</label>
+        </input>
+        <select1 ref="Bay_form" faims_attribute_name="Bay form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Bay_form}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Window_dormer" faims_attribute_name="Window dormer" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Window_dormer}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Number_of_dormers" faims_attribute_name="Number of dormers" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Number_of_dormers}</label>
+        </input>
+        <select1 ref="Window_arch_lintel" type="image" faims_attribute_name="Window arch lintel" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_Arch/Lintel}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Window_arch_lintel_other" faims_attribute_name="Window arch lintel other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Window_arch_lintel_other" type="file" faims_attribute_name="Window arch lintel other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -694,14 +627,14 @@
         <trigger ref="attachWindowArch_sketch">
           <label>Attach Sketch of Window Arch/Lintel</label>
         </trigger>
-        <select1 ref="Window_head" faims_attribute_name="Window head" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Window_head" type="image" faims_attribute_name="Window head" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_head}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Window_head_other" faims_attribute_name="Window head other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Window_head_other" type="file" faims_attribute_name="Window head other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
@@ -711,78 +644,75 @@
         <trigger ref="attachWindowHead_sketch">
           <label>Attach Sketch of Window Head</label>
         </trigger>
-        <!--We would like to see Dropdown-->
-        <select ref="Window_decorative_detail" faims_attribute_name="Window decorative detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select ref="Window_decorative_detail" faims_attribute_name="Window decorative detail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_decorative_detail}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <select1 ref="Replacements" faims_attribute_name="Replacements" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Replacements" faims_attribute_name="Replacements" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Replacements}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Total_number_of_replacement_windows" faims_attribute_name="Total number of replacement windows" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Total_number_of_replacement_windows" faims_attribute_name="Total number of replacement windows" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Total_number_of_replacement_windows}</label>
         </input>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Window_glazing" faims_attribute_name="Window glazing" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Window_glazing" faims_attribute_name="Window glazing" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_glazing}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Door_single" faims_attribute_name="Door single" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Door_single" faims_attribute_name="Door single" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_Single_Doors}</label>
         </input>
-        <input ref="Door_french" faims_attribute_name="Door french" faims_certainty="true" faims_attribute_type="measure" faims_read_only="false">
+        <input ref="Door_french" faims_attribute_name="Door french" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Number_of_French_Doors}</label>
         </input>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Door_lintel_arch" faims_attribute_name="Door lintel/arch" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Door_lintel_arch" faims_attribute_name="Door lintel/arch" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Door_Lintel/Arch}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Door_lintel_form" faims_attribute_name="Door lintel form" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Door_lintel_form" faims_attribute_name="Door lintel form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Door_Lintel_Form}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Door_form" faims_attribute_name="Door form" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Door_form" type="image" faims_attribute_name="Door form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Door_Form}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Door_form_other" faims_attribute_name="Door form other" faims_certainty="true" faims_attribute_type="freetext" type="file" faims_annotation="false">
+        <select ref="Door_form_other" type="file" faims_attribute_name="Door form other" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Sketch (if Other)</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Door_glazing" faims_attribute_name="Door glazing" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <trigger ref="attachDoorForm_sketch">
+          <label>Attach Sketch of Door Form</label>
+        </trigger>
+        <select1 ref="Door_glazing" faims_attribute_name="Door glazing" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Door_Glazing}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Door_glazing_detail" faims_attribute_name="Door glazing detail" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Door_glazing_detail" faims_attribute_name="Door glazing detail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Door_Glazing_Detail}</label>
           <item>
             <label>placeholder</label>
@@ -792,119 +722,107 @@
         <trigger ref="viewattached">
           <label>View Attached Files</label>
         </trigger>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
-        </trigger>
       </group>
       <group ref="Walls">
         <label>Walls</label>
-        <select1 ref="Wall_material" faims_attribute_name="Wall material" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Wall_material" faims_attribute_name="Wall material" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Material}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Wall_brick" faims_attribute_name="Wall brick" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Wall_brick" type="image" faims_attribute_name="Wall brick" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Brick}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Wall_rendered" appearance="full" faims_attribute_name="Wall rendered" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <select1 ref="Wall_rendered" appearance="full" faims_attribute_name="Wall rendered" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Is the wall rendered?</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>   
-        <select1 ref="Wall_timber" faims_attribute_name="Wall timber" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Wall_timber" type="image" faims_attribute_name="Wall timber" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Timber}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>     
-        <select1 ref="Wall_masonry" faims_attribute_name="Wall masonry" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Wall_masonry" type="image" faims_attribute_name="Wall masonry" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Masonry}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Decorative_Timber" faims_attribute_name="Decorative Timber" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Decorative_Timber" type="image" faims_attribute_name="Decorative Timber" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Decorative_Timber}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Wall_quoins" faims_attribute_name="Wall quoins" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false" type="image">
+        <select1 ref="Wall_quoins" type="image" faims_attribute_name="Wall quoins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Quoins}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
-        </trigger>
       </group>
       <group ref="Summary_data">
         <label>{Summary_Data}</label>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Archaeological_materials" faims_attribute_name="Archaeological materials" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Archaeological_materials" appearance="full" faims_attribute_name="Archaeological materials" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Would building have arch. mat./dep.?</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Dropdown-->
-        <select1 ref="Heritage_listed" faims_attribute_name="Heritage listed" faims_certainty="true" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Heritage_listed" faims_attribute_name="Heritage listed" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Is_building_heritage_listed?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Substantially_original" faims_attribute_name="Substantially original" faims_certainty="true" appearance="full" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Substantially_original" appearance="full"  faims_attribute_name="Substantially original" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Is_building_substantially_original?}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Who_paid_construction" faims_attribute_name="Who paid construction" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Who_paid_construction" faims_attribute_name="Who paid construction" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Who_paid_for_construction?}</label>
         </input>
-        <input ref="Payer_profession" faims_attribute_name="Payer profession" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Payer_profession" faims_attribute_name="Payer profession" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{What_was_their_profession?}</label>
         </input>
-        <input ref="Architect" faims_attribute_name="Architect" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Architect" faims_attribute_name="Architect" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Who_was_the_architect?}</label>
         </input>
-        <input ref="Association_historical_figures" faims_attribute_name="Association historical figures" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Association_historical_figures" faims_attribute_name="Association historical figures" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Association_with_historical_figures?}</label>
         </input>
-        <input ref="Association_historical_events" faims_attribute_name="Association historical events" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Association_historical_events" faims_attribute_name="Association historical events" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Association_with_historical_events?}</label>
         </input>
-        <input ref="Sources" faims_attribute_name="Sources" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Sources" faims_attribute_name="Sources" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Sources}</label>
         </input>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
-        </trigger>
       </group>
       <group ref="Alterations" faims_scrollable="false" faims_hidden="true">
         <label>Alterations</label>
         <trigger ref="newAlteration">
           <label>New Alteration</label>
         </trigger>
-        <select1 faims_annotation="false" faims_certainty="false" ref="AlterationList" appearance="compact">
+        <select1 ref="AlterationList" appearance="compact" faims_certainty="false" faims_annotation="false">
           <label>Alterations:</label>
           <item>
             <label>placeholder</label>
@@ -914,22 +832,19 @@
       </group>
       <group ref="Dates" faims_scrollable="false">
         <label>{Dates}</label>
-        <input ref="Best_fit_date_of_construction" faims_attribute_name="Best fit date of construction" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Best_fit_date_of_construction" faims_attribute_name="Best fit date of construction" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Best_Fit_Date_of_Construction}</label>
         </input>
-        <input ref="Date_of_alterations" faims_attribute_name="Date of alterations" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Date_of_alterations" faims_attribute_name="Date of alterations" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Date_of_Alterations}</label>
         </input>
-        <trigger ref="Update">
-          <label>{Save.Record}</label>
-        </trigger>
         <trigger ref="generateDates">
           <label>Generate Dates</label>
         </trigger>
         <trigger ref="newDate">
           <label>New Date</label>
         </trigger>
-        <select1 faims_annotation="false" faims_certainty="false" ref="DateList" appearance="compact">
+        <select1 ref="DateList" appearance="compact" faims_certainty="false" faims_annotation="false">
           <label>Dates:</label>
           <item>
             <label>placeholder</label>
@@ -944,26 +859,16 @@
       <label>Alteration</label>
       <group ref="Alteration">
         <label>Alteration</label>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Alteration" faims_attribute_name="Alteration" faims_certainty="false" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Alteration" faims_attribute_name="Alteration" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>Alteration</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Description" faims_attribute_name="Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Description" faims_attribute_name="Description" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Description</label>
         </input>
-        <trigger ref="Update">
-          <label>Save Alteration </label>
-        </trigger>
-        <trigger ref="Update_and_new">
-          <label>Save Alteration and New</label>
-        </trigger>
-        <trigger ref="Remove">
-          <label>Remove Alteration</label>
-        </trigger>
       </group>
     </group>
 
@@ -972,32 +877,22 @@
       <label>Dates</label>
       <group ref="Date">
         <label>Dates</label>
-        <!--We would like to see Radiogroup-->
-        <select1 ref="Date" faims_attribute_name="Date" faims_certainty="false" faims_attribute_type="vocab" faims_read_only="false">
+        <select1 ref="Date" faims_attribute_name="Date" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>Date Type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Description" faims_attribute_name="Description" faims_certainty="false" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Description" faims_attribute_name="Description" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Description</label>
         </input>
-        <input ref="Min_date" faims_attribute_name="Min date" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Min_date" faims_attribute_name="Min date" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Minimum Date</label>
         </input>
-        <input ref="Max_date" faims_attribute_name="Max date" faims_certainty="true" faims_attribute_type="freetext" faims_read_only="false">
+        <input ref="Max_date" faims_attribute_name="Max date" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Maximum Date</label>
         </input>
-        <trigger ref="Update">
-          <label>Save Date</label>
-        </trigger>
-        <trigger ref="Update_and_new">
-          <label>Save Date and New</label>
-        </trigger>
-        <trigger ref="Remove">
-          <label>Remove Date</label>
-        </trigger>
       </group>
     </group>
   </h:body>
