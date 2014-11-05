@@ -1,5 +1,4 @@
 import java.util.concurrent.Callable;
-import java.util.regex;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -190,7 +189,7 @@ saveBuilding(Callable callback) {
     saveTabGroup("Building", building_id, null, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             building_id = uuid;
-            callback.call();
+            if(callback != null) callback.call();
         }
     });
 }
@@ -348,7 +347,7 @@ refreshRelatedAlterations(){
 
 refreshRelatedDates(){
     if (!isNull(building_id)){
-        fetchAll("select uuid, group_concat( case attributename when 'Description' then substr(replace(replace(freetext,'_',' '),'{',''), 1, instr(freetext, '(')-2 )||': ' when 'Min date' then FreeText || '–' else freetext || ' ' end , '')\n" +
+        fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n" +
             "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
             "            FROM latestNonDeletedArchentIdentifiers\n"+
             "           WHERE aenttypename = 'Date'\n"+
@@ -361,10 +360,11 @@ refreshRelatedDates(){
             "                                                    where uuid = "+building_id+"\n"+
             "                                                       and relntypeName = 'BuildingDate')\n"+
             "                             and uuid != "+building_id+")\n"+
-            "        ORDER BY uuid, attributename DESC)\n"+
+            "        ORDER BY uuid, case attributename when 'Date Description' then 1 when 'Min date' then 2 when 'Max date' then 3 end)\n"+
             "group by uuid\n"+
             "order by valuetimestamp desc, uuid, attributename;", new FetchCallback() {
                 onFetch(result) {
+                    print(result);
                     populateList("Building/Dates/DateList", result);
                 }
             });
@@ -391,13 +391,28 @@ showVerandahTab() {
 
 /** RelnEnt: Alteration **/
 onEvent("Alteration", "show", "addAlterationNavigation();");
-onEvent("Alteration/Alteration/Alteration", "click", "activateAutoSaveAlteration();");
 
 String alteration_id = null;
 
 newAlteration(){
     newTabGroup("Alteration");
     alteration_id = null;
+    saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            alteration_id = uuid;
+            if(newRecord) {
+                saveEntitiesToRel("BuildingAlteration", building_id, uuid);    
+            }
+            saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    alteration_id = uuid;
+                    if(newRecord) {
+                            saveEntitiesToRel("BuildingAlteration", building_id, uuid);    
+                        }
+                }
+            }, true);
+        }
+    });
 }
 
 loadAlteration() {
@@ -424,32 +439,14 @@ saveAlteration(Callable callback) {
         showWarning("Validation Error", "Cannot save Alteraton without Alteration.");
         return;
     }
-    dialog = showBusy("Saving {Alteration}", "Please wait.");
     saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             alteration_id = uuid;
             if(newRecord) {
-                saveEntitiesToRel("BuildingAlteration", building_id, alteration_id);
+                saveEntitiesToRel("BuildingAlteration", building_id, alteration_id, callback);
+            } else {
+                if(callback != null) callback.call();
             }
-            dialog.dismiss();
-            callback.call();
-        }
-    });
-}
-
-activateAutoSaveAlteration() {
-    if(!isNull(alteration_id)) return;
-    saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
-        onSave(uuid, newRecord) {
-            alteration_id = uuid;
-            if(newRecord) {
-                saveEntitiesToRel("BuildingAlteration", building_id, alteration_id);
-            }
-            saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    alteration_id = uuid;
-                }
-            }, true);
         }
     });
 }
@@ -519,6 +516,22 @@ String date_id = null;
 newDate(){
     newTabGroup("Date");
     date_id = null;
+    saveTabGroup("Date", date_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            date_id = uuid;
+            if(newRecord) {
+                saveEntitiesToRel("BuildingDate", building_id, uuid);    
+            }
+            saveTabGroup("Date", date_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    date_id = uuid;
+                    if(newRecord) {
+                            saveEntitiesToRel("BuildingDate", building_id, uuid);    
+                        }
+                }
+            }, true);
+        }
+    });
 }
 
 loadDate() {
@@ -545,15 +558,14 @@ saveDate(Callable callback) {
         showWarning("Validation Error", "Cannot save Alteraton without Date.");
         return;
     }
-    dialog = showBusy("Saving {Date}", "Please wait.");
     saveTabGroup("Date", date_id, null, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             date_id = uuid;
             if(newRecord) {
-                saveEntitiesToRel("BuildingDate", building_id, date_id);
+                saveEntitiesToRel("BuildingDate", building_id, date_id, callback);
+            } else {
+                if(callback != null) callback.call();    
             }
-            dialog.dismiss();
-            callback.call();
         }
     });
 }
@@ -615,112 +627,102 @@ addDateNavigation() {
     }, "danger");
 }
 
-// WTF?
+generateDates() {
+    if(isNull(building_id)){
+        showWarning("Warning", "Please fill in the Street Address.");
+        return;
+    }
+    showAlert("Confirm", "Are you sure? This will delete all of your current dates!", "reallyGenerateDates()", "doNotDelete()");
+}
 
-// generateDates(){
-//     if(isNull(building_id)){
-//         showWarning("Warning", "Please save your Building first.");
-//         return;
-//     }
-//     showAlert("Confirm", "Are you sure? This will delete all of your current dates!", "reallyGenerateDates()", "doNotDelete()");
-// }
+reallyGenerateDates() {
+    // Fetch all related dates
+    fetchAll("select uuid " +
+        "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+        "            FROM latestNonDeletedArchentIdentifiers\n"+
+        "           WHERE aenttypename = 'Date'\n"+
+        "             AND uuid in (select uuid\n"+
+        "                            FROM latestNonDeletedAentReln\n"+
+        "                           where relationshipid in (select relationshipid\n"+
+        "                                                      FROM latestNonDeletedAentReln\n"+
+        "                                                      JOIN relationship using (relationshipid)\n"+
+        "                                                      JOIN relntype using (relntypeid)\n"+
+        "                                                    where uuid = "+building_id+"\n"+
+        "                                                       and relntypeName = 'BuildingDate')\n"+
+        "                             and uuid != "+building_id+")\n"+
+        "        ORDER BY uuid, attributename DESC)\n"+
+        "group by uuid\n"+
+        "order by valuetimestamp desc, uuid, attributename;", new FetchCallback() {
+            onFetch(result) {
+                for(date : result) {
+                    deleteArchEnt(date.get(0));
+                }
+                //create dates based on the values of the fields require
+                if (!isNull(getFieldValue("Building/Roof/Roof_form"))) createDate("Building/Roof/Roof_form", "Date obtained from finials:");
+                if (!isNull(getFieldValue("Building/Roof/Finial"))) createDate("Building/Roof/Finial", "Date obtained from finials:");
+                if (!isNull(getFieldValue("Building/Components/Door_form"))) createDate("Building/Components/Door_form", "Date obtained from doors:");
+                if (!isNull(getFieldValue("Building/Verandah/Verandah_roof_form"))) createDate("Building/Verandah/Verandah_roof_form", "Date obtained from verandah roof form:");
+                if (!isNull(getFieldValue("Building/Verandah/Verandah_posts"))) createDate("Building/Verandah/Verandah_posts", "Date obtained from verandah posts:");
+                if (!isNull(getFieldValue("Building/Summary_data/Sources"))) createDate("Building/Summary_data/Sources", "Date obtained from historical sources:");
+                if (!isNull(getFieldValue("Building/Walls/Wall_quoins"))) createDate("Building/Walls/Wall_quoins", "Date obtained from quoins:");
+                if (!isNull(getFieldValue("Building/Roof/Chimney_form"))) createDate("Building/Roof/Chimney_form", "Date obtained from chimneys:");
+                refreshRelatedDates();
+            }
+        });
 
-// reallyGenerateDates(){
-//     // Fetch all related dates
-//     saveBuilding(null);
-//     if (!isNull(building_id)){
-//         buildingDates = fetchAll("select relationshipid, group_concat(VocabName) || ' ' || group_concat(FreeText) " +
-//             "from (select distinct relationshipid, vocabname, freetext " +
-//                   "from latestnondeletedrelnvalue join latestnondeletedrelationship using (relationshipid) " +
-//                   "left outer join vocabulary using (vocabid) " +
-//                   "join relntype using (relntypeid) " +
-//                   "join attributekey using (attributeid) " +
-//                   "where relntypename = 'Date' " +
-//                   "and attributename != 'Description' " +
-//                   "and relationshipid in (select relationshipid " +
-//                                            "from aentreln " +
-//                                           "where uuid = '" + building_id + "')" +
-//                  ")" +
-//         "group by relationshipid;");
-//     } else {
-//         Object buildingDates = fetchAll("select '', '';");
-//     }
-//     //delete all related dates
-//     for (dateToDelete : buildingDates){
-//         String query = "insert into aentreln (uuid, relationshipid, deleted, participatesverb, userid) select uuid, relationshipid, 'true', participatesverb, '"+userid+"' from latestnondeletedaentreln where relationshipid = '"+dateToDelete+"';";
-//         fetchOne(query);
-//         deleteRel(dateToDelete.get(0));
-//     }
-
-//     //create dates based on the values of the fields require
-//     if (!isNull(getFieldValue("Building/Roof/Roof_form")))createDateReln("Date obtained from roof form:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Roof_form")+"';").get(0));
-//     //if (!isNull(getFieldValue("Building/Components/Window_arch_lintel")))createDateReln("Date obtained from window arches", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_arch_lintel")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Roof/Finial")))createDateReln("Date obtained from finials:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Finial")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Components/Door_form")))createDateReln("Date obtained from doors:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Door_form")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Verandah/Verandah_roof_form")))createDateReln("Date obtained from verandah roof form:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Verandah/Verandah_roof_form")+"';").get(0));
-//     //if (!isNull(getFieldValue("Building/Components/Door_lintel_form")))createDateReln("Date obtained from door arches:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Door_lintel_form")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Verandah/Verandah_posts")))createDateReln("Date obtained from verandah posts:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Verandah/Verandah_posts")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Summary_data/Sources")))createDateReln("Date obtained from historical sources:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Summary_data/Sources")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Components/Wall_quoins")))createDateReln("Date obtained from quoins:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Wall_quoins")+"';").get(0));
-//     if (!isNull(getFieldValue("Building/Roof/Chimney_form")))createDateReln("Date obtained from chimneys:", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Roof/Chimney_form")+"';").get(0));
-//     //if (!isNull(getFieldValue("Building/Components/Window_decorative_detail")))createDateReln("Date obtained from windows", fetchOne("Select vocabname from vocabulary where vocabid = '"+getFieldValue("Building/Components/Window_decorative_detail")+"';").get(0));
-//     //createDateReln("Any other dateable features:", "Fill me in (e.g. 1984)");
-// }
+}
 
 
-// createDateReln(stringLookingFor, vocabToUpdateFrom){
-//     String lowDate = null;
-//     String highDate = null;
-//     Pattern r = Pattern.compile("([0-9]{4,4})");
-//     Matcher m = r.matcher(vocabToUpdateFrom);
-//     print(vocabToUpdateFrom);
-//     print(stringLookingFor);
-//     int count = 0;
-//     while(m.find()) count++;
-//     print(count);
-//     if(count == 1){
-//         m = r.matcher(vocabToUpdateFrom);
-//         m.find();
-//         lowDate = m.group();
-//         highDate = lowDate;
-//         print(highDate);
+createDate(String path, String date_string) {
+    fetchOne("select vocabname from vocabulary where vocabid = '" + getFieldValue(path) + "';", new FetchCallback() {
+        onFetch(result) {
+            vocabname = result.get(0);
+            String low_date = null;
+            String high_date = null;
+            Pattern r = Pattern.compile("([0-9]{4,4})");
+            Matcher m = r.matcher(vocabname);
+            int count = 0;
+            while(m.find()) count++;
+            if(count == 1){
+                m = r.matcher(vocabname);
+                m.find();
+                low_date = m.group();
+                high_date = "Present";
 
-//     } else if (count == 2) {
-//         m = r.matcher(vocabToUpdateFrom);
-//         m.find();
-//         lowDate = m.group();
-//         print(lowDate);
-//         m.find();
-//         highDate = m.group();
-//         print(highDate);
-//     }
-
-// /*    while (m.find()){
-//         print(m.group());
-//     }*/
-
-//     m = r.matcher(vocabToUpdateFrom);
-//     if(m.find()) {
-//         String dateVocab = fetchOne("Select vocabid from vocabulary where vocabname = '"+stringLookingFor+"';").get(0);
-//         List attributes = createAttributeList();
-//         attributes.add(createRelationshipAttribute("Date", null, dateVocab, null));
-//         attributes.add(createRelationshipAttribute("Description", vocabToUpdateFrom, null, null));
-//         attributes.add(createRelationshipAttribute("Min date", lowDate, null, null));
-//         attributes.add(createRelationshipAttribute("Max date", highDate, null, null));
-//         String rel_id = saveRel(null, "Date", null, attributes);
-//         addReln(building_id, rel_id, null);
-//         updateAllBuildingDates();
-//     }
-// }
+            } else if (count == 2) {
+                m = r.matcher(vocabname);
+                m.find();
+                low_date = m.group();
+                m.find();
+                high_date = m.group();
+            }
+            if(count != 0) {
+                fetchOne("select vocabid from vocabulary where vocabname = '" + date_string + "';", new FetchCallback() {
+                    onFetch(result) {
+                        List attributes = createAttributeList();
+                        attributes.add(createEntityAttribute("Date", null, result.get(0), null, "1.0"));
+                        attributes.add(createEntityAttribute("Date Description", null, null, vocabname, "1.0"));
+                        attributes.add(createEntityAttribute("Min date", null, null, low_date, "1.0"));
+                        attributes.add(createEntityAttribute("Max date", null, null, high_date, "1.0"));
+                        saveArchEnt(null, "Date", null, attributes, new SaveCallback() {
+                            onSave(uuid, newRecord) {
+                                date_id = uuid;
+                                saveEntitiesToRel("BuildingDate", building_id, date_id);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
 
 // MISC FUNCTIONS    
 
 saveEntitiesToRel(String type, String entity1, String entity2) {
     if (isNull(entity1) || isNull(entity2)) return;
-    print("Whut?");
     saveRel(null, type, null, null, new SaveCallback() {
         onSave(rel_id, newRecord) {
-            print("Whut #2?");
             addReln(entity1, rel_id, null);
             addReln(entity2, rel_id, null);
         }
@@ -733,7 +735,7 @@ saveEntitiesToRel(String type, String entity1, String entity2, Callable callback
         onSave(rel_id, newRecord) {
             addReln(entity1, rel_id, null);
             addReln(entity2, rel_id, null);
-            callback.call();
+            if(callback != null) callback.call();
         }
     });
 }

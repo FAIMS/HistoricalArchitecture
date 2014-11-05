@@ -161,16 +161,12 @@
               <DateList/>
             </Dates>
           </Building>
-          <!--Alteration will be a relationship-->
           <Alteration>
             <Alteration>
               <Alteration/>
               <Description/>
             </Alteration>
           </Alteration>
-
-          <!--Date will be a relationship-->
-
           <Date>
             <Date>
               <Date/>
@@ -182,7 +178,7 @@
         </faims>
       </instance>
       <!--list of numeric and blocktext(memo) attributes(fields)-->
-      <bind nodeset="/faims/Building/Building/Postcode" type="decimal"/>
+      <bind nodeset="/faims/Building/Building/container1/child2/Postcode" type="decimal"/>
       <bind nodeset="/faims/Building/Building/Percentage_of_grounds" type="decimal"/>
       <bind nodeset="/faims/Building/Building/Comments" type="string"/>
       <bind nodeset="/faims/Building/Roof/Number_of_gables" type="decimal"/>
@@ -222,9 +218,9 @@
     </group>
     <group ref="user">
       <label>{User_List}</label>
-      <group ref="usertab" faims_scrollable="false">
+      <group ref="usertab">
         <label>{User_List}</label>
-        <select1 ref="users" appearance="compact" faims_certainty="false" faims_annotation="false">
+        <select1 ref="users" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="user_list">
           <label>{Users}:</label>
           <item>
             <label>placeholder</label>
@@ -235,12 +231,12 @@
     </group>
     <group ref="control">
       <label>Historical Architectures</label>
-      <group ref="building" faims_scrollable="false">
+      <group ref="building">
         <label>Buildings</label>
         <trigger ref="newBuilding">
           <label>New Building</label>
         </trigger>
-        <select1 ref="BuildingList" appearance="compact" faims_certainty="false" faims_annotation="false">
+        <select1 ref="BuildingList" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="menu_list">
           <label>Buildings:</label>
           <item>
             <label>placeholder</label>
@@ -255,7 +251,7 @@
       <label>{Building}</label>
       <group ref="Building">
         <label>{Building}</label>
-        <input ref="Street_address" faims_attribute_name="Street Address" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Street_address" faims_attribute_name="Street Address" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false" faims_style_class="required">
           <label>{Street_Address}</label>
         </input>
         <group faims_style="orientation" ref="container1">
@@ -307,7 +303,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Plan" faims_attribute_name="Plan" faims_attribute_type="measure" faims_certainty="true" faims_read_only="false" type="image">
+        <select1 ref="Plan" type="image" faims_attribute_name="Plan" faims_attribute_type="vocab" faims_certainty="true" faims_read_only="false">
           <label>{Plan}</label>
           <item>
             <label>placeholder</label>
@@ -395,7 +391,7 @@
       </group>
       <group ref="Roof">
         <label>{Roof}</label>
-        <select1 ref="Roof_form" type="image" faims_attribute_name="Roof form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Roof_form" type="image" faims_attribute_name="Roof form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Roof_Form}</label>
           <item>
             <label>placeholder</label>
@@ -432,7 +428,7 @@
         <trigger ref="attachFinial_sketch">
           <label>Attach Sketch of Finial</label>
         </trigger>
-        <select1 ref="Gable_form" type="image" faims_attribute_name="Gable form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Gable_form" type="image" faims_attribute_name="Gable form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Gable_Form}</label>
           <item>
             <label>placeholder</label>
@@ -499,7 +495,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Verandah_roof_form" type="image" faims_attribute_name="Verandah roof form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Verandah_roof_form" type="image" faims_attribute_name="Verandah roof form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Roof_Form}</label>
           <item>
             <label>placeholder</label>
@@ -546,7 +542,7 @@
       </group>
       <group ref="Components">
         <label>{Components}</label>
-        <select1 ref="Window_Type" type="image" faims_attribute_name="Window Type" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Window_Type" type="image" faims_attribute_name="Window Type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_Type}</label>
           <item>
             <label>placeholder</label>
@@ -627,7 +623,7 @@
         <trigger ref="attachWindowArch_sketch">
           <label>Attach Sketch of Window Arch/Lintel</label>
         </trigger>
-        <select1 ref="Window_head" type="image" faims_attribute_name="Window head" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Window_head" type="image" faims_attribute_name="Window head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Window_head}</label>
           <item>
             <label>placeholder</label>
@@ -688,7 +684,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Door_form" type="image" faims_attribute_name="Door form" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Door_form" type="image" faims_attribute_name="Door form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Door_Form}</label>
           <item>
             <label>placeholder</label>
@@ -732,7 +728,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Wall_brick" type="image" faims_attribute_name="Wall brick" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Wall_brick" type="image" faims_attribute_name="Wall brick" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Brick}</label>
           <item>
             <label>placeholder</label>
@@ -746,28 +742,28 @@
             <value>placeholder</value>
           </item>
         </select1>   
-        <select1 ref="Wall_timber" type="image" faims_attribute_name="Wall timber" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Wall_timber" type="image" faims_attribute_name="Wall timber" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Timber}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>     
-        <select1 ref="Wall_masonry" type="image" faims_attribute_name="Wall masonry" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Wall_masonry" type="image" faims_attribute_name="Wall masonry" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Masonry}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Decorative_Timber" type="image" faims_attribute_name="Decorative Timber" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Decorative_Timber" type="image" faims_attribute_name="Decorative Timber" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Decorative_Timber}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Wall_quoins" type="image" faims_attribute_name="Wall quoins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Wall_quoins" type="image" faims_attribute_name="Wall quoins" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Wall_Quoins}</label>
           <item>
             <label>placeholder</label>
@@ -817,12 +813,12 @@
           <label>{Sources}</label>
         </input>
       </group>
-      <group ref="Alterations" faims_scrollable="false" faims_hidden="true">
+      <group ref="Alterations" faims_hidden="true">
         <label>Alterations</label>
         <trigger ref="newAlteration">
           <label>New Alteration</label>
         </trigger>
-        <select1 ref="AlterationList" appearance="compact" faims_certainty="false" faims_annotation="false">
+        <select1 ref="AlterationList" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="menu_list">
           <label>Alterations:</label>
           <item>
             <label>placeholder</label>
@@ -830,7 +826,7 @@
           </item>
         </select1>
       </group>
-      <group ref="Dates" faims_scrollable="false">
+      <group ref="Dates">
         <label>{Dates}</label>
         <input ref="Best_fit_date_of_construction" faims_attribute_name="Best fit date of construction" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Best_Fit_Date_of_Construction}</label>
@@ -844,7 +840,7 @@
         <trigger ref="newDate">
           <label>New Date</label>
         </trigger>
-        <select1 ref="DateList" appearance="compact" faims_certainty="false" faims_annotation="false">
+        <select1 ref="DateList" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="date_list">
           <label>Dates:</label>
           <item>
             <label>placeholder</label>
@@ -855,36 +851,36 @@
     </group>
 
     <!--ALTERATION-->
-    <group ref="Alteration" faims_rel_type="Alteration">
+    <group ref="Alteration" faims_archent_type="Alteration">
       <label>Alteration</label>
       <group ref="Alteration">
         <label>Alteration</label>
-        <select1 ref="Alteration" faims_attribute_name="Alteration" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <select1 ref="Alteration" faims_attribute_name="Alteration" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false" faims_style_class="required">
           <label>Alteration</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Description" faims_attribute_name="Description" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Description" faims_attribute_name="Alteration Description" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Description</label>
         </input>
       </group>
     </group>
 
     <!--DATE-->
-    <group ref="Date" faims_rel_type="Date">
+    <group ref="Date" faims_archent_type="Date">
       <label>Dates</label>
       <group ref="Date">
         <label>Dates</label>
-        <select1 ref="Date" faims_attribute_name="Date" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <select1 ref="Date" faims_attribute_name="Date" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false" faims_style_class="required">
           <label>Date Type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Description" faims_attribute_name="Description" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Description" faims_attribute_name="Date Description" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Description</label>
         </input>
         <input ref="Min_date" faims_attribute_name="Min date" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
