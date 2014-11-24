@@ -656,6 +656,9 @@ Plain glazing means clear, see-through glass.</description>
     <property type="date" name="Date of alterations">
       <description>Date of alterations</description>
     </property>
+    <property type="freetext" name="Date of Recording">
+      <description>Date of recording</description>
+    </property>
   </ArchaeologicalElement>
 
   <!--ALTERATIONS-->
@@ -675,6 +678,9 @@ Plain glazing means clear, see-through glass.</description>
     </property>
     <property name="Alteration Description" type="freetext">
       <description>Description of the alteration made</description>
+    </property>
+    <property type="freetext" name="Timestamp">
+      <description/>
     </property>
   </ArchaeologicalElement>
   
@@ -706,6 +712,9 @@ Plain glazing means clear, see-through glass.</description>
     </property>
     <property name="Max date" type="freetext" isIdentifier="true">
       <description>Maximum date in date range</description>
+    </property>
+    <property type="freetext" name="Timestamp">
+      <description/>
     </property>
   </ArchaeologicalElement>
 </dataSchema>

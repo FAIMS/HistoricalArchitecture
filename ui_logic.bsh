@@ -35,7 +35,7 @@ startSync();
 
 addActionBarItem("sync", new ToggleActionButtonCallback() {
     actionOnLabel() {
-        "Sync enabled";
+        "Disable Sync";
     }
     actionOn() {
         setSyncEnabled(false);
@@ -46,7 +46,7 @@ addActionBarItem("sync", new ToggleActionButtonCallback() {
         isSyncEnabled();
     }
     actionOffLabel() {
-        "Sync disabled";
+        "Enable Sync";
     }
     actionOff() {
         setSyncEnabled(true);
@@ -56,8 +56,9 @@ addActionBarItem("sync", new ToggleActionButtonCallback() {
 });
 
 removeNavigationButtons() {
-    removeNavigationButton("save");
-    removeNavigationButton("save_and_new");
+    removeNavigationButton("duplicate");
+    removeNavigationButton("new");
+    removeNavigationButton("close");
     removeNavigationButton("delete");
 }
 
@@ -70,12 +71,12 @@ onEvent("Building/Building/Has_Alterations", "click", "showAlterationTab();");
 onEvent("Building/Building/Has_Verandah", "click", "showVerandahTab();");
 
 onEvent("Building/Alterations", "show", "refreshRelatedAlterations()");
-onEvent("Building/Alterations/newAlteration", "click", "saveBuildingNewAlteration()");
+onEvent("Building/Alterations/newAlteration", "click", "newAlterationFromBuilding()");
 onEvent("Building/Alterations/AlterationList", "click", "loadAlteration()");
 
 onEvent("Building/Dates", "show", "refreshRelatedDates()");
 onEvent("Building/Dates/generateDates", "delayclick", "generateDates()");
-onEvent("Building/Dates/newDate", "click", "saveBuildingNewDate()");
+onEvent("Building/Dates/newDate", "click", "newDateFromBuilding()");
 onEvent("Building/Dates/DateList", "click", "loadDate()");
 
 onEvent("Building/Building/attachPhoto", "click", "attachPictureTo(\"Building/Building/Photo\")");
@@ -84,7 +85,7 @@ onEvent("Building/Roof/attachGable_sketch", "click", "attachFileTo(\"Building/Ro
 onEvent("Building/Roof/attachFinial_sketch", "click", "attachFileTo(\"Building/Roof/Finial_other\")");
 onEvent("Building/Verandah/attachVerandahRoof_sketch", "click", "attachFileTo(\"Building/Verandah/Verandah_roof_form_other\")");
 onEvent("Building/Verandah/attachVerandahPosts_sketch", "click", "attachFileTo(\"Building/Verandah/Verandah_posts_other\")");
-onEvent("Building/Components/attachWindowOther_sketch", "click", "attachFileTo(\"Building/Components/Window_Type\")");
+onEvent("Building/Components/attachWindowOther_sketch", "click", "attachFileTo(\"Building/Components/Windows_other\")");
 onEvent("Building/Components/attachWindowArch_sketch", "click", "attachFileTo(\"Building/Components/Window_arch_lintel_other\")");
 onEvent("Building/Components/attachWindowHead_sketch", "click", "attachFileTo(\"Building/Components/Window_head_other\")");
 onEvent("Building/Components/attachDoorForm_sketch", "click", "attachFileTo(\"Building/Components/Door_form_other\")");
@@ -96,20 +97,12 @@ onEvent("Building/Components/viewattached", "click", "viewArchEntAttachedFiles(b
 
 String building_id = null;
 
-newBuilding(){
+newBuilding() {
     newTabGroup("Building");
     building_id = null;
-    fetchOne("select datetime('now', 'localtime');", new FetchCallback() {
-        onFetch(result) {
-            setFieldValue("Building/Building/Date", result.get(0));
-            // Make sure the Alteration and Verandah tabs are not showing
-            showTab("Building/Alterations");
-            showTab("Building/Verandah");
-            cancelTab("Building/Verandah", false);
-            cancelTab("Building/Alterations", false);
-            showTab("Building/Building");
-        }
-    });
+    setTimestamp("Building/Building/Date");    
+    // Make sure the Alteration and Verandah tabs are not showing
+    onEvent("Building", "show", "showTab(\"Building/Alterations\");showTab(\"Building/Verandah\");cancelTab(\"Building/Verandah\", false);cancelTab(\"Building/Alterations\", false);showTab(\"Building/Building\");");   
 }
 
 loadBuilding() {
@@ -125,43 +118,37 @@ loadBuildingFrom(archent_id) {
     showTabGroup("Building", archent_id, new FetchCallback() {
         onFetch(result) {
             building_id = archent_id;
-            matchVocab("Building/Building/Has_Verandah", "{Yes}", new Callable() {
-                call() {
-                    showTab("Building/Verandah");
-                    showTab("Building/Building");
-                }
-            }, new Callable() {
-                call() {
-                    showTab("Building/Verandah");
-                    cancelTab("Building/Verandah", false);
-                    showTab("Building/Building");
-                }
-            });
-
-            matchVocab("Building/Building/Has_Alterations", "{Yes}", new Callable() {
-                call() {
-                    showTab("Building/Alterations");
-                    showTab("Building/Building");
-                }
-            }, new Callable() {
-                call() {
-                    showTab("Building/Alterations");
-                    cancelTab("Building/Alterations", false);
-                    showTab("Building/Building");
-                }
-            });
-            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+building_id+"' group by uuid having min(aenttimestamp);",
-            new FetchCallback() {
+            matchVocab("Building/Building/Has_Verandah", "{Yes}", new FetchCallback() {
                 onFetch(result) {
-                    setFieldValue("Building/Building/Date", result.get(0));
-
-                    saveTabGroup("Building", building_id, null, null, new SaveCallback() {
-                        onSave(uuid, newRecord) {
-                            building_id = uuid;
-                        }
-                    }, true);
+                    if(!isNull(result)) {
+                        showTab("Building/Verandah");
+                        showTab("Building/Building");    
+                    } else {
+                        showTab("Building/Verandah");
+                        cancelTab("Building/Verandah", false);
+                        showTab("Building/Building");    
+                    }
                 }
             });
+
+            matchVocab("Building/Building/Has_Alterations", "{Yes}", new FetchCallback() {
+                onFetch(result) {
+                    if(!isNull(result)) {
+                        showTab("Building/Alterations");
+                        showTab("Building/Building");
+                    } else {
+                        showTab("Building/Alterations");
+                        cancelTab("Building/Alterations", false);
+                        showTab("Building/Building");
+                    }
+                }
+            });
+            
+            saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    building_id = uuid;
+                }
+            }, true);
         }
     });    
 }
@@ -181,33 +168,24 @@ activateAutoSaveBuilding() {
     });
 }
 
-saveBuilding(Callable callback) {
-    if (isNull(getFieldValue("Building/Building/Street_address"))) { 
-        showWarning("Validation Error", "Cannot save Building without Street Address.");
-        return;
+isBuildingSaved() {
+    if(isNull(building_id)) {
+        if (isNull(getFieldValue("Building/Building/Street_address"))) { 
+            showWarning("Validation Error", "Cannot save Building without Street Address.");
+        } else {
+            showToast("Please wait for this {Building} to finish saving.");
+        }
+        return false;
     }
-    saveTabGroup("Building", building_id, null, null, new SaveCallback() {
-        onSave(uuid, newRecord) {
-            building_id = uuid;
-            if(callback != null) callback.call();
-        }
-    });
+    return true;
 }
 
-saveBuildingNewAlteration() {
-    saveBuilding(new Callable() {
-        call() {
-            newAlteration();
-        }
-    });
+newAlterationFromBuilding() {
+    if(isBuildingSaved()) newAlteration();
 }
 
-saveBuildingNewDate() {
-    saveBuilding(new Callable() {
-        call() {
-            newDate();
-        }
-    });
+newDateFromBuilding() {
+    if(isBuildingSaved()) newDate();
 }
 
 deleteBuilding() {
@@ -219,8 +197,11 @@ deleteBuilding() {
 }
 
 reallyDeleteBuilding() {
-    deleteArchEnt(building_id);
-    cancelTabGroup("Building", false);
+    deleteArchEnt(building_id, new DeleteCallback() {
+        onDelete(uuid) {
+            cancelTabGroup("Building", false);        
+        }
+    });
 }
  
 loadBuildingAttributes() {
@@ -282,29 +263,70 @@ loadBuildingAttributes() {
 }
 
 addBuildingNavigation() {
-    removeNavigationButton("save");
-    removeNavigationButton("save_and_new");
+    removeNavigationButton("duplicate");
+    removeNavigationButton("new");
+    removeNavigationButton("close");
     removeNavigationButton("delete");
 
-    addNavigationButton("save", new ActionButtonCallback() {
+    addNavigationButton("duplicate", new ActionButtonCallback() {
         actionOnLabel() {
-            "Save {Building}";
+            "Duplicate {Building}";
         }
         actionOn() {
-            saveBuilding(null);
+            if(isBuildingSaved()) {
+                showTabGroup("Building", building_id, new FetchCallback() {
+                    onFetch(result) {
+                        building_id = null;
+                        populateCameraPictureGallery("Building/Building/Photo", new ArrayList());
+                        populateFileList("Building/Building/Plan_sketch", new ArrayList());
+                        populateFileList("Building/Roof/Gable_form_other", new ArrayList());
+                        populateFileList("Building/Roof/Finial_other", new ArrayList());
+                        populateFileList("Building/Verandah/Verandah_roof_form_other", new ArrayList());
+                        populateFileList("Building/Verandah/Verandah_posts_other", new ArrayList());
+                        populateFileList("Building/Components/Windows_other", new ArrayList());
+                        populateFileList("Building/Components/Window_arch_lintel_other", new ArrayList());
+                        populateFileList("Building/Components/Window_head_other", new ArrayList());
+                        populateFileList("Building/Components/Door_form_other", new ArrayList());
+                        setTimestamp("Building/Building/Date");
+                        saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+                            onSave(uuid, newRecord) {
+                                building_id = uuid;
+                                saveTabGroup("Building", building_id, null, null, new SaveCallback() {
+                                    onSave(uuid, newRecord) {
+                                        building_id = uuid;
+                                    }
+                                }, true);
+                            }
+                        });
+                    }
+                });
+            }
         }
     }, "success");
 
-    addNavigationButton("save_and_new", new ActionButtonCallback() {
+    addNavigationButton("new", new ActionButtonCallback() {
         actionOnLabel() {
-            "Save and New {Building}";
+            "New {Building}";
         }
         actionOn() {
-            saveBuilding(new Callable() {
-                call() {
-                    newBuilding();
-                }
-            });
+            if(!isNull(building_id)) {
+                newBuilding();
+            } else {
+                showAlert("Warning", "You will lose any unsaved changes!", "newBuilding()", "");
+            }
+        }
+    }, "success");
+
+    addNavigationButton("close", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Close {Building}";
+        }
+        actionOn() {
+            if(!isNull(building_id)) {
+                cancelTabGroup("Building", false);
+            } else {
+                cancelTabGroup("Building", true);
+            }
         }
     }, "success");
 
@@ -318,7 +340,7 @@ addBuildingNavigation() {
     }, "danger");
 }
 
-refreshRelatedAlterations(){
+refreshRelatedAlterations() {
     if(!isNull(building_id)) {
         fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n"+
             "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
@@ -345,8 +367,8 @@ refreshRelatedAlterations(){
     }
 }
 
-refreshRelatedDates(){
-    if (!isNull(building_id)){
+refreshRelatedDates() {
+    if (!isNull(building_id)) {
         fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n" +
             "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
             "            FROM latestNonDeletedArchentIdentifiers\n"+
@@ -374,19 +396,19 @@ refreshRelatedDates(){
 }
 
 showAlterationTab() {
-    matchVocab("Building/Building/Has_Alterations", "{Yes}", new Callable() {
-        call() {
-            showTab("Building/Alterations");
+    matchVocab("Building/Building/Has_Alterations", "{Yes}", new FetchCallback() {
+        onFetch(result) {
+            if(!isNull(result)) showTab("Building/Alterations");
         }
-    }, null);
+    });
 }
 
 showVerandahTab() {
-    matchVocab("Building/Building/Has_Verandah", "{Yes}", new Callable() {
-        call() {
-            showTab("Building/Verandah");
+    matchVocab("Building/Building/Has_Verandah", "{Yes}", new FetchCallback() {
+        onFetch(result) {
+            if(!isNull(result)) showTab("Building/Verandah");
         }
-    }, null);
+    });
 }
 
 /** RelnEnt: Alteration **/
@@ -394,9 +416,10 @@ onEvent("Alteration", "show", "addAlterationNavigation();");
 
 String alteration_id = null;
 
-newAlteration(){
+newAlteration() {
     newTabGroup("Alteration");
     alteration_id = null;
+    setTimestamp("Alteration/hidden/timestamp");
     saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             alteration_id = uuid;
@@ -406,9 +429,6 @@ newAlteration(){
             saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     alteration_id = uuid;
-                    if(newRecord) {
-                            saveEntitiesToRel("BuildingAlteration", building_id, uuid);    
-                        }
                 }
             }, true);
         }
@@ -434,23 +454,6 @@ loadAlterationFrom(archent_id) {
     });    
 }
 
-saveAlteration(Callable callback) {
-    if (isNull(getFieldValue("Alteration/Alteration/Alteration"))) { 
-        showWarning("Validation Error", "Cannot save Alteraton without Alteration.");
-        return;
-    }
-    saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
-        onSave(uuid, newRecord) {
-            alteration_id = uuid;
-            if(newRecord) {
-                saveEntitiesToRel("BuildingAlteration", building_id, alteration_id, callback);
-            } else {
-                if(callback != null) callback.call();
-            }
-        }
-    });
-}
-
 deleteAlteration() {
     if (!isNull(alteration_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Alteration} Record!", "reallyDeleteAlteration()", "doNotDelete()");
@@ -461,9 +464,12 @@ deleteAlteration() {
 }
 
 reallyDeleteAlteration() {
-    deleteArchEnt(alteration_id);
-    cancelTabGroup("Alteration", false);
-    showTab("Building/Alterations");
+    deleteArchEnt(alteration_id, new DeleteCallback() {
+        onDelete(uuid) {
+            cancelTabGroup("Alteration", false);
+            showTab("Building/Alterations");
+        }    
+    });
 }
 
 loadAlterationAttributes() {
@@ -471,29 +477,54 @@ loadAlterationAttributes() {
 }
 
 addAlterationNavigation() {
-    removeNavigationButton("save");
-    removeNavigationButton("save_and_new");
+    removeNavigationButton("duplicate");
+    removeNavigationButton("new");
+    removeNavigationButton("close");
     removeNavigationButton("delete");
 
     addNavigationButton("save", new ActionButtonCallback() {
         actionOnLabel() {
-            "Save {Alteration}";
+            "Duplicate {Alteration}";
         }
         actionOn() {
-            saveAlteration(null);
+            showTabGroup("Alteration", alteration_id, new FetchCallback() {
+                onFetch(result) {
+                    alteration_id = null;
+                    setTimestamp("Alteration/hidden/timestamp");
+                    saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+                        onSave(uuid, newRecord) {
+                            alteration_id = uuid;
+                            if(newRecord) {
+                                saveEntitiesToRel("BuildingAlteration", building_id, uuid);    
+                            }
+                            saveTabGroup("Alteration", alteration_id, null, null, new SaveCallback() {
+                                onSave(uuid, newRecord) {
+                                    alteration_id = uuid;
+                                }
+                            }, true);
+                        }
+                    });
+                }
+            });
         }
     }, "success");
 
-    addNavigationButton("save_and_new", new ActionButtonCallback() {
+    addNavigationButton("new", new ActionButtonCallback() {
         actionOnLabel() {
-            "Save and New {Alteration}";
+            "New {Alteration}";
         }
         actionOn() {
-            saveAlteration(new Callable() {
-                call() {
-                    newAlteration();
-                }
-            });
+            newAlteration();
+        }
+    }, "success");
+
+    addNavigationButton("close", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Close {Alteration}";
+        }
+        actionOn() {
+            cancelTabGroup("Alteration", false);
+            showTab("Building/Alterations");
         }
     }, "success");
 
@@ -513,9 +544,10 @@ onEvent("Date", "show", "addDateNavigation();");
 
 String date_id = null;
 
-newDate(){
+newDate() {
     newTabGroup("Date");
     date_id = null;
+    setTimestamp("Date/hidden/timestamp");
     saveTabGroup("Date", date_id, null, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             date_id = uuid;
@@ -525,9 +557,6 @@ newDate(){
             saveTabGroup("Date", date_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     date_id = uuid;
-                    if(newRecord) {
-                            saveEntitiesToRel("BuildingDate", building_id, uuid);    
-                        }
                 }
             }, true);
         }
@@ -553,23 +582,6 @@ loadDateFrom(archent_id) {
     });    
 }
 
-saveDate(Callable callback) {
-    if (isNull(getFieldValue("Date/Date/Date"))) { 
-        showWarning("Validation Error", "Cannot save Alteraton without Date.");
-        return;
-    }
-    saveTabGroup("Date", date_id, null, null, new SaveCallback() {
-        onSave(uuid, newRecord) {
-            date_id = uuid;
-            if(newRecord) {
-                saveEntitiesToRel("BuildingDate", building_id, date_id, callback);
-            } else {
-                if(callback != null) callback.call();    
-            }
-        }
-    });
-}
-
 deleteDate() {
     if (!isNull(date_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Date} Record!", "reallyDeleteDate()", "doNotDelete()");
@@ -580,40 +592,67 @@ deleteDate() {
 }
 
 reallyDeleteDate() {
-    deleteArchEnt(date_id);
-    cancelTabGroup("Date", false);
-    showTab("Building/Dates");
+    deleteArchEnt(date_id, new DeleteCallback() {
+        onDelete(uuid) {
+            cancelTabGroup("Date", false);
+            showTab("Building/Dates");
+        }
+    });
 }
-
 
 loadDateAttributes() {
     makeVocab("DropDown", "Date/Date/Date", "Date");
 }
 
 addDateNavigation() {
-    removeNavigationButton("save");
-    removeNavigationButton("save_and_new");
+    removeNavigationButton("duplicate");
+    removeNavigationButton("new");
+    removeNavigationButton("close");
     removeNavigationButton("delete");
 
-    addNavigationButton("save", new ActionButtonCallback() {
+    addNavigationButton("duplicate", new ActionButtonCallback() {
         actionOnLabel() {
-            "Save {Date}";
+            "Duplicate {Date}";
         }
         actionOn() {
-            saveDate(null);
+            showTabGroup("Date", date_id, new FetchCallback() {
+                onFetch(result) {
+                    date_id = null;
+                    setTimestamp("Date/hidden/timestamp");
+                    saveTabGroup("Date", date_id, null, null, new SaveCallback() {
+                        onSave(uuid, newRecord) {
+                            date_id = uuid;
+                            if(newRecord) {
+                                saveEntitiesToRel("BuildingDate", building_id, uuid);    
+                            }
+                            saveTabGroup("Date", date_id, null, null, new SaveCallback() {
+                                onSave(uuid, newRecord) {
+                                    date_id = uuid;
+                                }
+                            }, true);
+                        }
+                    });
+                }
+            });
         }
     }, "success");
 
-    addNavigationButton("save_and_new", new ActionButtonCallback() {
+    addNavigationButton("new", new ActionButtonCallback() {
         actionOnLabel() {
-            "Save and New {Date}";
+            "New {Date}";
         }
         actionOn() {
-            saveDate(new Callable() {
-                call() {
-                    newDate();
-                }
-            });
+            newDate();
+        }
+    }, "success");
+
+    addNavigationButton("close", new ActionButtonCallback() {
+        actionOnLabel() {
+            "Close {Date}";
+        }
+        actionOn() {
+            cancelTabGroup("Date", false);
+            showTab("Building/Dates");
         }
     }, "success");
 
@@ -628,7 +667,7 @@ addDateNavigation() {
 }
 
 generateDates() {
-    if(isNull(building_id)){
+    if(isNull(building_id)) {
         showWarning("Warning", "Please fill in the Street Address.");
         return;
     }
@@ -672,7 +711,6 @@ reallyGenerateDates() {
 
 }
 
-
 createDate(String path, String date_string) {
     fetchOne("select vocabname from vocabulary where vocabid = '" + getFieldValue(path) + "';", new FetchCallback() {
         onFetch(result) {
@@ -683,7 +721,7 @@ createDate(String path, String date_string) {
             Matcher m = r.matcher(vocabname);
             int count = 0;
             while(m.find()) count++;
-            if(count == 1){
+            if(count == 1) {
                 m = r.matcher(vocabname);
                 m.find();
                 low_date = m.group();
@@ -729,18 +767,7 @@ saveEntitiesToRel(String type, String entity1, String entity2) {
     });
 }
 
-saveEntitiesToRel(String type, String entity1, String entity2, Callable callback) {
-    if (isNull(entity1) || isNull(entity2)) return;
-    saveRel(null, type, null, null, new SaveCallback() {
-        onSave(rel_id, newRecord) {
-            addReln(entity1, rel_id, null);
-            addReln(entity2, rel_id, null);
-            if(callback != null) callback.call();
-        }
-    });
-}
-
-makeVocab(String type, String path, String attrib){
+makeVocab(String type, String path, String attrib) {
     fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' order by vocabcountorder",
         new FetchCallback() {
             onFetch(result) {
@@ -757,39 +784,8 @@ makeVocab(String type, String path, String attrib){
         });
 }
 
-matchVocab(String path, String vocabName, Callable callbackIfTrue, Callable callbackIfFalse) {
-    fetchOne("select vocabname from vocabulary where vocabname = '" + vocabName + "' and vocabid = '" + getFieldValue(path) + "';",
-        new FetchCallback() {
-            onFetch(result) {
-                if (!isNull(result)){
-                    if(callbackIfTrue != null) callbackIfTrue.call();
-                } else {
-                    if(callbackIfFalse != null) callbackIfFalse.call();
-                }
-            }
-        });
-}
-
-matchVocabID(String vocabid, String vocabName, Callable callbackIfTrue, Callable callbackIfFalse){
-    fetchOne("select vocabname from vocabulary where vocabname = '" + vocabName + "' and vocabid = '" + vocabid + "';",
-        new FetchCallback() {
-            onFetch(result) {
-                if (!isNull(result)){
-                    if(callbackIfTrue != null) callbackIfTrue.call();
-                } else {
-                    if(callbackIfFalse != null) callbackIfFalse.call();
-                }
-            }
-        });
-}
-
-setVocab(String path, String attribName, String vocabName){
-    fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributeName = '" + attribName + "' and vocabname = '" + vocabName + "';",
-        new FetchCallback() {
-            onFetch(result) {
-                setFieldValue(path, result.get(0));
-            }
-        });
+matchVocab(String path, String vocabName, FetchCallback callback) {
+    fetchOne("select vocabname from vocabulary where vocabname = '" + vocabName + "' and vocabid = '" + getFieldValue(path) + "';", callback);
 }
 
 makePictureGallery(String path, String attrib) {
@@ -801,7 +797,11 @@ makePictureGallery(String path, String attrib) {
         });
 }
 
-doNotDelete(){
+setTimestamp(String path) {
+    setFieldValue(path, new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format(new Date()));
+}
+
+doNotDelete() {
     showToast("Delete Cancelled.");
 }
 

@@ -166,6 +166,9 @@
               <Alteration/>
               <Description/>
             </Alteration>
+            <hidden>
+              <timestamp/>
+            </hidden>
           </Alteration>
           <Date>
             <Date>
@@ -174,6 +177,9 @@
               <Min_date/>
               <Max_date/>
             </Date>
+            <hidden>
+              <timestamp/>
+            </hidden>
           </Date>
         </faims>
       </instance>
@@ -233,7 +239,7 @@
       <label>Historical Architectures</label>
       <group ref="building">
         <label>Buildings</label>
-        <trigger ref="newBuilding">
+        <trigger ref="newBuilding" faims_style_class="faims-blue">
           <label>New Building</label>
         </trigger>
         <select1 ref="BuildingList" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="menu_list">
@@ -269,7 +275,7 @@
             </input>
           </group>
         </group>
-        <input ref="Date" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="Date" faims_attribute_name="Date of Recording" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Date_of_Recording}</label>
         </input>
         <select1 ref="Original_purpose" faims_attribute_name="Original purpose" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -317,7 +323,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachPlan_sketch">
+        <trigger ref="attachPlan_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Plan</label>
         </trigger>
         <select1 ref="Orientation_of_facade" faims_attribute_name="Orientation of facade" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -341,7 +347,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachPhoto">
+        <trigger ref="attachPhoto" faims_style_class="faims-blue">
           <label>Take Picture</label>
         </trigger>
         <input ref="Comments" faims_attribute_name="Comments" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -385,7 +391,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="viewattached">
+        <trigger ref="viewattached" faims_style_class="faims-blue">
           <label>View Attached Files</label>
         </trigger>
       </group>
@@ -425,7 +431,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachFinial_sketch">
+        <trigger ref="attachFinial_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Finial</label>
         </trigger>
         <select1 ref="Gable_form" type="image" faims_attribute_name="Gable form" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -442,7 +448,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachGable_sketch">
+        <trigger ref="attachGable_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Gable Form</label>
         </trigger>
         <input ref="Number_of_chimneys" faims_attribute_name="Number of chimneys" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -469,7 +475,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="viewattached">
+        <trigger ref="viewattached" faims_style_class="faims-blue">
           <label>View Attached Files</label>
         </trigger>
       </group>
@@ -509,7 +515,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachVerandahRoof_sketch">
+        <trigger ref="attachVerandahRoof_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Verandah Roof</label>
         </trigger>
         <select1 ref="Verandah_decorative_detail" faims_attribute_name="Verandah decorative detail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -533,10 +539,10 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachVerandahPosts_sketch">
+        <trigger ref="attachVerandahPosts_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Verandah Posts</label>
         </trigger>
-        <trigger ref="viewattached">
+        <trigger ref="viewattached" faims_style_class="faims-blue">
           <label>View Attached Files</label>
         </trigger>
       </group>
@@ -556,7 +562,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachWindowOther_sketch">
+        <trigger ref="attachWindowOther_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Window Type</label>
         </trigger>
         <input ref="Number_of_sashes" faims_attribute_name="Number of sashes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -620,7 +626,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachWindowArch_sketch">
+        <trigger ref="attachWindowArch_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Window Arch/Lintel</label>
         </trigger>
         <select1 ref="Window_head" type="image" faims_attribute_name="Window head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -637,7 +643,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachWindowHead_sketch">
+        <trigger ref="attachWindowHead_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Window Head</label>
         </trigger>
         <select ref="Window_decorative_detail" faims_attribute_name="Window decorative detail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -698,7 +704,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="attachDoorForm_sketch">
+        <trigger ref="attachDoorForm_sketch" faims_style_class="faims-blue">
           <label>Attach Sketch of Door Form</label>
         </trigger>
         <select1 ref="Door_glazing" faims_attribute_name="Door glazing" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -715,7 +721,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="viewattached">
+        <trigger ref="viewattached" faims_style_class="faims-blue">
           <label>View Attached Files</label>
         </trigger>
       </group>
@@ -815,7 +821,7 @@
       </group>
       <group ref="Alterations" faims_hidden="true">
         <label>Alterations</label>
-        <trigger ref="newAlteration">
+        <trigger ref="newAlteration" faims_style_class="faims-blue">
           <label>New Alteration</label>
         </trigger>
         <select1 ref="AlterationList" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="menu_list">
@@ -834,10 +840,10 @@
         <input ref="Date_of_alterations" faims_attribute_name="Date of alterations" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Date_of_Alterations}</label>
         </input>
-        <trigger ref="generateDates">
+        <trigger ref="generateDates" faims_style_class="faims-blue">
           <label>Generate Dates</label>
         </trigger>
-        <trigger ref="newDate">
+        <trigger ref="newDate" faims_style_class="faims-blue">
           <label>New Date</label>
         </trigger>
         <select1 ref="DateList" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="date_list">
@@ -866,6 +872,12 @@
           <label>Description</label>
         </input>
       </group>
+      <group ref="hidden" faims_hidden="true">
+        <label/>
+        <input ref="timestamp" faims_attribute_name="Timestamp" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>Timestamp</label>
+        </input>
+      </group>
     </group>
 
     <!--DATE-->
@@ -888,6 +900,12 @@
         </input>
         <input ref="Max_date" faims_attribute_name="Max date" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Maximum Date</label>
+        </input>
+      </group>
+      <group ref="hidden" faims_hidden="true">
+        <label/>
+        <input ref="timestamp" faims_attribute_name="Timestamp" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>Timestamp</label>
         </input>
       </group>
     </group>
