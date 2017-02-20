@@ -224,7 +224,7 @@
     </group>
     <group ref="user">
       <label>{User_List}</label>
-      <group ref="usertab">
+      <group ref="usertab" faims_scrollable="false">
         <label>{User_List}</label>
         <select1 ref="users" appearance="compact" faims_certainty="false" faims_annotation="false" faims_style_class="user_list">
           <label>{Users}:</label>
