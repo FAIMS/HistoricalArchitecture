@@ -38,3 +38,20 @@ If you have any questions about the module, please contact the FAIMS team at **e
 
 ## Screenshots:
 
+<p align="left">
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215620.png" width="250"/>
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215740.png" width="250"/>
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215749.png" width="250"/>
+</p>
+
+<p align="left">
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215803.png" width="250"/>
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215810.png" width="250"/>
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215816.png" width="250"/>
+</p>
+
+<p align="left">
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215847.png" width="250"/>
+  <img src="https://github.com/FAIMS/HistoricalArchitecture/blob/master/screenshots/Screenshot_20170913-215923.png" width="250"/>
+</p>
+
